@@ -66,7 +66,7 @@
                             <div class="form-group">
                                 <label>Jam Pinjam :</label>
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                    <input type="time" name="jam_pinjam" class="form-control datetimepicker-input"
+                                    <input type="datetime-local" name="jam_pinjam" class="form-control datetimepicker-input"
                                         data-target="#reservationdatetime" />
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
@@ -78,7 +78,7 @@
                             <div class="form-group">
                                 <label>Jam Kembali :</label>
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                    <input type="time" name="jam_kembali" class="form-control datetimepicker-input"
+                                    <input type="datetime-local" name="jam_kembali" class="form-control datetimepicker-input"
                                         data-target="#reservationdatetime" />
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">

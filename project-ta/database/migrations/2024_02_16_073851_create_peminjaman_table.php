@@ -21,9 +21,10 @@ class CreatePeminjamanTable extends Migration
             $table->string('name'); 
             $table->string('kelas'); 
             $table->string('jml_buku'); 
-            $table->time('jam_pinjam');
-            $table->time('jam_kembali');
+            $table->dateTime('jam_pinjam');
+            $table->datetime('jam_kembali');
             $table->text('description');
+            $table->integer('status')->default(1); // 0: disable, 1: enable
             $table->timestamps();
         });
     }

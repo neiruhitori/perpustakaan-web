@@ -88,4 +88,12 @@ class PengembalianController extends Controller
   
         return redirect()->route('pengembalian')->with('success', 'peminjaman deleted successfully');
     }
+
+    public function status($id)
+    {
+        $pengembalian = Peminjaman::where('id', $id)->update([
+            'status'=>0
+        ]);
+        return redirect()->route('pengembalian', compact('pengembalian'))->with('success', 'Peminjaman selesai successfully');
+    }
 }

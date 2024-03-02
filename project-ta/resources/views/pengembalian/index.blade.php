@@ -69,6 +69,7 @@
                         <th>Jumlah Buku</th>
                         <th>Jam Pinjam</th>
                         <th>Jam Kembali</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -84,7 +85,18 @@
                                     <td>{{ $k->jam_pinjam }}</td>
                                     <td>{{ $k->jam_kembali }}</td>
                                     <td>
-                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                        <label class="label {{ ($k->status == 1) ? 'label-danger' : 'label-success' }}">{{ ($k->status == 1) ? 'Sedang Meminjam' : 'Selesai' }}</label>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="close">
+                                        @if ($k->status == 1)
+                                            <a href="{{ route('pengembalian.status', $k->id) }}" class="btn btn-sm btn-danger">Selesai</a>
+                                            @else
+                                            {{-- <a href="" class="btn btn-sm btn-success">Meminjam</a> --}}
+                                            @endif
+                                        </div>
+                                        
+                                        {{-- <div class="btn-group" role="group" aria-label="Basic example">
                                             <form action="{{ route('pengembalian.destroy', $k->id) }}" method="POST"
                                                 type="button" class="btn btn-danger p-0"
                                                 onsubmit="return confirm('Delete?')">
@@ -92,7 +104,7 @@
                                                 @method('DELETE')
                                                 <button class="btn btn-danger m-0"><i class="fas fa-trash"></i></button>
                                             </form>
-                                        </div>
+                                        </div> --}}
 
                                     </td>
                                 </tr>

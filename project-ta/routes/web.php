@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(PengembalianController::class)->prefix('pengembalian')->group(function () {
         Route::get('', 'index')->name('pengembalian');
         Route::delete('destroy/{id}', 'destroy')->name('pengembalian.destroy');
+        Route::get('status/{id}', 'status')->name('pengembalian.status');
     });
 
     Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
