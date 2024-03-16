@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Peminjaman;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class PengembalianController extends Controller
@@ -95,5 +96,13 @@ class PengembalianController extends Controller
             'status'=>0
         ]);
         return redirect()->route('pengembalian', compact('pengembalian'))->with('success', 'Peminjaman selesai successfully');
+    }
+
+    
+    public function view_pdf()
+    {
+        $pengembalian = Peminjaman::orderBy('name', 'ASC')->get();
+        $pdf = Pdf::loadView('pengembalian.pdf', ['pengembalian' => $pengembalian]);
+        return $pdf->stream('data-perpustakaan.pdf');
     }
 }

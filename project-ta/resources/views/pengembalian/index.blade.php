@@ -52,6 +52,8 @@
                             {{ Session::get('success') }}
                         </div>
                     @endif
+                    <a href="{{ route('pengembalian.pdf') }}" class="btn btn-danger mb-3 breadcrumb float-sm-right">Export
+                        Pengembalian</a>
                 </div>
 
             </div>
