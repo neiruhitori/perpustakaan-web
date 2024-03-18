@@ -37,7 +37,7 @@
                         </div>
                     @endif
                     <div class="input-group mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Email">
+                        <input type="text" name="nis" class="form-control" placeholder="Username" autocomplete="off">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="Password" id="MyPass" autocomplete="off">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -55,9 +55,9 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
+                                <input type="checkbox" id="remember" onclick="ShowHidden()">
                                 <label for="remember">
-                                    Remember Me
+                                    Show Password
                                 </label>
                             </div>
                         </div>
@@ -72,15 +72,15 @@
                     {{-- <a href="#" class="btn btn-block btn-primary">
                       <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
                     </a> --}}
-                    <a href="{{ '/auth/redirect' }}}" class="btn btn-block btn-danger">
+                    {{-- <a href="{{ '/auth/redirect' }}}" class="btn btn-block btn-danger">
                         <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-                    </a>
+                    </a> --}}
                 </div>
                 <!-- /.social-auth-links -->
 
-                <p class="mb-1">
+                {{-- <p class="mb-1">
                     <a href="forgot-password.html">I forgot my password</a>
-                </p>
+                </p> --}}
                 <p class="mb-0">
                     <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
                 </p>
@@ -97,6 +97,17 @@
     <script src="{{ asset('AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('AdminLTE-3.2.0/dist/js/adminlte.min.js') }}"></script>
+
+    <script>
+        function ShowHidden() {
+            var x = document.getElementById("MyPass");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 </body>
 
 </html>

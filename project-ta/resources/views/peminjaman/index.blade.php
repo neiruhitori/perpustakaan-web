@@ -65,9 +65,9 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <tr>
                         <th>No</th>
-                        <th>Buku</th>
                         <th>Nama</th>
                         <th>Kelas</th>
+                        <th>Buku</th>
                         <th>Jumlah Buku</th>
                         <th>Jam Pinjam</th>
                         <th>Jam Kembali</th>
@@ -76,13 +76,12 @@
                     </thead>
                     <tbody>
                         @if ($peminjaman->count() > 0)
-                            @forelse ($peminjaman as $p)
+                            @forelse ($peminjaman as $key => $p)
                                 <tr>
-                                    <td scope="row">{{ $loop->iteration }}</td>
-                                    {{-- <td>{{ $p->buku->name }}</td> --}}
-                                    <td>{{ $p->buku }}</td>
+                                    <td scope="row">{{ $peminjaman->firstItem() + $key }}</td>
                                     <td>{{ $p->name }}</td>
                                     <td>{{ $p->kelas }}</td>
+                                    <td>{{ $p->buku }}</td>
                                     <td>{{ $p->jml_buku }}</td>
                                     <td>{{ $p->jam_pinjam }}</td>
                                     <td>{{ $p->jam_kembali }}</td>
@@ -112,6 +111,18 @@
                         @endif
                     </tbody>
                 </table>
+                <div class="float-sm-left">
+                    Showing
+                    {{ $peminjaman->firstItem() }}
+                    to
+                    {{ $peminjaman->lastItem() }}
+                    of
+                    {{ $peminjaman->total() }}
+                    entries
+                </div>
+                <div class="float-sm-right">
+                    {{ $peminjaman->links() }}
+                </div>
             @endsection
         </div>
 

@@ -8,6 +8,8 @@ use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +36,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'login')->name('login');
     Route::post('login', 'loginAction')->name('login.action');
 
+    Route::get('profile', 'profile')->name('profile');
+    Route::put('profile/{id}', 'updateProfile')->name('profile.update');
+
     Route::post('logout', 'logout')->middleware('auth')->name('logout');
 });
 
@@ -59,33 +64,11 @@ Route::middleware('auth')->group(function () {
         Route::get('status/{id}', 'status')->name('pengembalian.status');
     });
 
-    // Route::get('pengembalian/view/pdf', [PengembalianController::class, 'view_pdf']);
-    Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
+    // Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
+
+    // Route::controller(ProfileController::class)->prefix('profile')->group(function () {
+    //     Route::get('', 'index')->name('profile');
+    //     Route::get('edit/{id}', 'edit')->name('profile.edit');
+    //     Route::put('edit/{id}', 'update')->name('profile.update');
+    // });
 });
-
-// Route::get('/', function () {
-//     return view('komponen-admin.master');
-// })->middleware('auth');
-
-// // Halaman Login
-// Route::get('/login', [LoginControllerr::class, 'login'])->name('login');
-// Route::post('/loginuser', [LoginControllerr::class, 'loginuser'])->name('loginuser');
-
-// Route::get('/auth/redirect', 'Auth\LoginController@redirectToProvider');
-// Route::get('/auth/callback', 'Auth\LoginController@handleProviderCallback');
-
-// // Halaman Register
-// Route::get('/register', [LoginControllerr::class, 'register'])->name('register');
-// Route::POST('/registeruser', [LoginControllerr::class, 'registeruser'])->name('registeruser');
-
-// // Logout
-// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-// // Peminjaman
-// Route::get('/peminjaman', [PeminjamanController::class, 'peminjaman'])->name('peminjaman');
-// Route::post('/createpeminjaman', [PeminjamanController::class, 'createpeminjaman'])->name('createpeminjaman');
-
-// Route::get('/editpeminjaman/{id}', [PeminjamanController::class, 'edistpeminjaman'])->name('editpeminjaman');
-// Route::put('/updatepeminjaman/{id}', [PeminjamanController::class, 'updatepeminjaman'])->name('updatepeminjaman');
-
-// Route::get('/delete/{id}', [PeminjamanController::class, 'destroy']);

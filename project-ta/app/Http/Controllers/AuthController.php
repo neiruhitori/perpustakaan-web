@@ -24,6 +24,7 @@ class AuthController extends Controller
             'nis' => $request->nis,
             'name' => $request->name,
             'email' => $request->email,
+            // 'password' => $request->password,
             'password' => bcrypt($request->password),
         ]);
   
@@ -37,11 +38,10 @@ class AuthController extends Controller
 
     public function loginAction(Request $request)
     {
-  
-        if (Auth::attempt($request->only('email', 'password'))) {
+        if (Auth::attempt($request->only('nis', 'password'))) {
             return redirect('/dashboard');
         }
-        return redirect('/login')->with('error', 'Email atau password yang anda masukkan salah');
+        return redirect('/login')->with('error', 'Username atau password yang anda masukkan salah');
     }
 
     public function logout(Request $request)
@@ -55,6 +55,16 @@ class AuthController extends Controller
  
     public function profile()
     {
-        return view('profile');
+        $user = Auth::user();
+        return view('profile', compact('user'));
     }
+
+    public function updateProfile($id, Request $request) {
+
+        $user = User::findOrFail($id);
+
+        $user->update($request->all());
+
+          return redirect()->route('profile', $user->id)->with('success', 'profile updated successfully');
+      }
 }

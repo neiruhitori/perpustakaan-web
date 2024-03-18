@@ -42,29 +42,43 @@
                                 </select>
                             </div> --}}
                             <div class="col-md-6">
-                                <label>Buku :</label>
-                                <input type="text" class="form-control" id="buku" name="buku"
-                                    placeholder=" Masukkan Nama Siswa" />
-                            </div>
-                            <div class="col-md-6">
                                 <label>Nama :</label>
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <input type="text" class="form-control" id="name" name="name"
                                     placeholder=" Masukkan Nama Siswa" />
                             </div>
-
                             <div class="col-md-6">
                                 <label>Kelas :</label>
+                                @error('kelas')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <input type="text" class="form-control" id="kelas" name="kelas"
                                     placeholder=" Masukkan Kelas" />
                             </div>
                             <div class="col-md-6">
+                                <label>Buku :</label>
+                                @error('buku')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <input type="text" class="form-control" id="buku" name="buku"
+                                    placeholder=" Masukkan Nama Buku" />
+                            </div>
+                            <div class="col-md-6">
                                 <label>Jumlah Buku :</label>
+                                @error('jml_buku')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <input type="text" class="form-control" id="jml_buku" name="jml_buku"
                                     placeholder=" Masukkan Jumlah Buku yang di Pinjam" />
                             </div>
                             <!-- Date and time -->
                             <div class="form-group">
                                 <label>Jam Pinjam :</label>
+                                @error('jam_pinjam')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="datetime-local" name="jam_pinjam" class="form-control datetimepicker-input"
                                         data-target="#reservationdatetime" />
@@ -77,6 +91,9 @@
                             <!-- Date and time -->
                             <div class="form-group">
                                 <label>Jam Kembali :</label>
+                                @error('jam_kembali')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="datetime-local" name="jam_kembali" class="form-control datetimepicker-input"
                                         data-target="#reservationdatetime" />
@@ -88,6 +105,9 @@
                             <!-- /.form group -->
                             <div class="col-md-6">
                                 <label>Description :</label>
+                                @error('description')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <textarea type="text" class="form-control" id="description" name="description"
                                     placeholder="Silahkan Masukkan Deskripsi Peminjaman"></textarea>
                             </div>

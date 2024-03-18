@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Peminjaman;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
-
-class PengembalianController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class PengembalianController extends Controller
      */
     public function index()
     {
-        $pengembalian = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
-        return view('pengembalian.index', compact('pengembalian'));
+        $profile = User::orderBy('id', 'DESC')->get();
+        return view('profile.index', compact('profile'));
     }
 
     /**
@@ -60,7 +59,8 @@ class PengembalianController extends Controller
      */
     public function edit($id)
     {
-        //
+        $profile = User::findOrFail($id);
+        return view('profile.edit', compact('profile'));
     }
 
     /**
@@ -72,7 +72,10 @@ class PengembalianController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $profile = User::findOrFail($id);
+        $profile->update($request->all());
+
+        return redirect()->route('profile')->with('success', 'profile updated successfully');
     }
 
     /**
@@ -83,26 +86,6 @@ class PengembalianController extends Controller
      */
     public function destroy($id)
     {
-        $pengembalian = Peminjaman::findOrFail($id);
-  
-        $pengembalian->delete();
-  
-        return redirect()->route('pengembalian')->with('success', 'peminjaman deleted successfully');
-    }
-
-    public function status($id)
-    {
-        $pengembalian = Peminjaman::where('id', $id)->update([
-            'status'=>0
-        ]);
-        return redirect()->route('pengembalian', compact('pengembalian'))->with('success', 'Peminjaman selesai successfully');
-    }
-
-    
-    public function view_pdf()
-    {
-        $pengembalian = Peminjaman::orderBy('name', 'ASC')->get();
-        $pdf = Pdf::loadView('pengembalian.pdf', ['pengembalian' => $pengembalian]);
-        return $pdf->stream('data-perpustakaan.pdf');
+        //
     }
 }

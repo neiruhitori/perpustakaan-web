@@ -21,19 +21,27 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <form method="POST" enctype="multipart/form-data" id="profile_setup_frm" action="">
+        <form method="POST" enctype="multipart/form-data" id="profile_setup_frm"
+            action="{{ route('profile.update', $user->id) }}">
+            @csrf
+            @method('PUT')
             <div class="row">
                 <div class="col-md-12 border-right">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="text-right">Profile Settings</h4>
                         </div>
+                        @if (Session::has('success'))
+                            <div class="btn btn-success toastrDefaultSuccess" role="alert">
+                                {{ Session::get('success') }}
+                            </div>
+                        @endif
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
 
                             <div class="col-md-6">
                                 <label class="labels">NIS</label>
-                                <input type="text" name="nis" class="form-control" placeholder="NIS"
+                                <input type="text" name="nis" disabled class="form-control" placeholder="NIS"
                                     value="{{ auth()->user()->nis }}">
                             </div>
                             <div class="col-md-6">
@@ -43,19 +51,20 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="labels">Email</label>
-                                <input type="text" name="email" disabled class="form-control"
+                                <input type="text" name="email" class="form-control"
                                     value="{{ auth()->user()->email }}" placeholder="Email">
                             </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label class="labels">Changes Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="password"
-                                    value="{{ auth()->user()->password }}">
+                                <input type="password" name="password" class="form-control"
+                                    value="{{ auth()->user()->password }}" placeholder="password" id="MyPass">
+                                <input type="checkbox" onclick="ShowHidden()">Show Password
                             </div>
 
                             <div class="mt-5 text-center"><button id="btn" class="btn btn-primary profile-button"
-                                    type="submit">Save Profile</button></div>
+                                    type="submit" hidden>Save Profile</button></div>
                         </div>
                     </div>
 
@@ -63,4 +72,15 @@
             </div>
 
         </form>
+
+        <script>
+            function ShowHidden() {
+                var x = document.getElementById("MyPass");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+        </script>
     @endsection

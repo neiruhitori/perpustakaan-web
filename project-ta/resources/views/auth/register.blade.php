@@ -30,7 +30,7 @@
                 <form action="{{ route('register.save') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="number" name="nis" id="nis" class="form-control from-control-user @error('nis')is-invalid @enderror" placeholder="NIS">
+                        <input type="number" name="nis" id="nis" class="form-control from-control-user @error('nis')is-invalid @enderror" placeholder="NIS" autocomplete="off">
                         @error('nis')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="name" id="username" class="form-control from-control-user @error('name')is-invalid @enderror" placeholder="Nama">
+                        <input type="text" name="name" id="username" class="form-control from-control-user @error('name')is-invalid @enderror" placeholder="Nama" autocomplete="off">
                         @error('name')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" name="email" id="emailaddress" class="form-control from-control-user @error('email')is-invalid @enderror" placeholder="Email">
+                        <input type="email" name="email" id="emailaddress" class="form-control from-control-user @error('email')is-invalid @enderror" placeholder="Email" autocomplete="off">
                         @error('email')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
@@ -64,7 +64,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" name="password" id="password" class="form-control from-control-user @error('password')is-invalid @enderror"
-                            placeholder="Password">
+                            placeholder="Password" autocomplete="off">
                         @error('password')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
@@ -75,17 +75,17 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-8">
+                        {{-- <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree" onclick="ShowSub()">
                                 <label for="agreeTerms">
                                     I agree to the <a href="#">terms</a>
                                 </label>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            <button type="submit" class="btn btn-primary btn-block" id="MySub">Register</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -103,6 +103,17 @@
     <script src="{{ asset('AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('AdminLTE-3.2.0/dist/js/adminlte.min.js') }}"></script>
+
+    <script>
+        function ShowSub() {
+            var x = document.getElementById("MySub");
+            if (x.type === "submit") {
+                x.type = "submit";
+            } else {
+                x.type = "false";
+            }
+        }
+    </script>
 </body>
 
 </html>

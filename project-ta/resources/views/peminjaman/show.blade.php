@@ -33,11 +33,6 @@
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
                             <div class="col-md-6">
-                                <label>Buku :</label>
-                                <input type="text" class="form-control" id="buku" name="buku"
-                                    value="{{ $peminjaman->buku }}" readonly/>
-                            </div>
-                            <div class="col-md-6">
                                 <label>Nama :</label>
                                 <input type="text" class="form-control" id="name" name="name"
                                 value="{{ $peminjaman->name }}" readonly />
@@ -47,6 +42,11 @@
                                 <label>Kelas :</label>
                                 <input type="text" class="form-control" id="kelas" name="kelas"
                                 value="{{ $peminjaman->kelas }}" readonly />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Buku :</label>
+                                <input type="text" class="form-control" id="buku" name="buku"
+                                    value="{{ $peminjaman->buku }}" readonly/>
                             </div>
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>

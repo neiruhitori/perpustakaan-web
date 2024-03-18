@@ -15,11 +15,9 @@ class CreatePeminjamanTable extends Migration
     {
         Schema::create('peminjaman', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('buku');
-            // $table->integer('buku_id')->unsigned();
-            // $table->foreign('buku_id')->references('id')->on('bukus');
             $table->string('name'); 
             $table->string('kelas'); 
+            $table->string('buku');
             $table->string('jml_buku'); 
             $table->dateTime('jam_pinjam');
             $table->datetime('jam_kembali');

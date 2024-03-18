@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Peminjaman;
-use App\Models\Buku;
 
 class PeminjamanController extends Controller
 {
@@ -15,9 +14,8 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        $peminjaman = Peminjaman::orderBy('created_at', 'DESC')->get();
-        $buku = Buku::all();
-        return view('peminjaman.index', compact('peminjaman', 'buku'));
+        $peminjaman = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
+        return view('peminjaman.index', compact('peminjaman'));
     }
 
     /**
@@ -28,8 +26,7 @@ class PeminjamanController extends Controller
     public function create()
     {
         $peminjaman = Peminjaman::all();
-        $buku = Buku::all();
-        return view('peminjaman.create', compact('peminjaman', 'buku'));
+        return view('peminjaman.create', compact('peminjaman'));
     }
 
     /**
@@ -40,6 +37,16 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'buku' => 'required|min:1|max:50',
+            'name' => 'required|min:1|max:50',
+            'kelas' => 'required|min:1|max:50',
+            'jml_buku' => 'required|min:1|max:50',
+            'jam_pinjam' => 'required:true',
+            'jam_kembali' => 'required:true',
+            'description' => 'required|min:1|max:1000',
+        ]);
+        
         Peminjaman::create([
                     'buku' => $request->buku,
                     'name' => $request->name,
@@ -105,52 +112,4 @@ class PeminjamanController extends Controller
   
         return redirect()->route('peminjaman')->with('success', 'peminjaman deleted successfully');
     }
-    
-    // public function peminjaman()
-    // {
-    //     $buku = Buku::all();
-    //     $peminjaman = Peminjaman::all();
-    //     return view('data-master.peminjaman', compact('buku', 'peminjaman'));
-    // }
-
-    // public function createpeminjaman(Request $request)
-    // {
-    //     Peminjaman::create([
-    //         'buku_id' => $request->buku_id,
-    //         'name' => $request->name,
-    //         'kelas' => $request->kelas,
-    //         'jml_buku' => $request->jml_buku,
-    //         'tgl_pinjam' => $request->tgl_pinjam,
-    //         'tgl_kembali' => $request->tgl_kembali,
-    //     ]);
-    //     return redirect('/peminjaman')->with('success', 'Data Berhasil di Tambahkan');
-    // }
-
-    // public function editpeminjaman($id)
-    // {
-    //     $editpeminjaman = Peminjaman::find($id);
-    //     $editbuku = Buku::find($id);
-    //     return view('data-master.editpeminjaman', compact('editpeminjaman', 'editbuku'));
-    // }
-
-    // public function updatepeminjaman(Request $request, $id)
-    // {
-    //     $editpeminjaman = Peminjaman::find($id);
-    //     $editpeminjaman->buku_id = $request->input('buku_id');
-    //     $editpeminjaman->name = $request->input('name');
-    //     $editpeminjaman->kelas = $request->input('kelas');
-    //     $editpeminjaman->jml_buku = $request->input('jml_buku');
-    //     $editpeminjaman->tgl_pinjam = $request->input('tgl_pinjam');
-    //     $editpeminjaman->tgl_kembali = $request->input('tgl_kembali');
-    //     $editpeminjaman->update();
-    //     return redirect('/peminjaman')->with('status', 'Student Updated Successfully');
-    // }
-
-    // public function destroy($id)
-    // {
-    //     $dpeminjaman   = Peminjaman::find($id);
-    //     $dpeminjaman->forceDelete();
-
-    //     return redirect()->back()->with('status', 'Student Deleted Successfully');
-    // }
 }

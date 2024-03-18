@@ -3,6 +3,10 @@
 
 <head>
     <meta charset="utf-8">
+
+
+   
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Perpustakaan SMP 02 KLAKAH</title>
     <link rel="shortcut icon" href="{{ asset('AdminLTE-3.2.0/dist/img/smp2.png') }}">
@@ -65,9 +69,9 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <tr>
                         <th>No</th>
-                        <th>Buku</th>
                         <th>Nama</th>
                         <th>Kelas</th>
+                        <th>Buku</th>
                         <th>Jumlah Buku</th>
                         <th>Jam Pinjam</th>
                         <th>Jam Kembali</th>
@@ -77,12 +81,12 @@
                     </thead>
                     <tbody>
                         @if ($pengembalian->count() > 0)
-                            @forelse ($pengembalian as $k)
+                            @forelse ($pengembalian as $key => $k)
                                 <tr>
-                                    <td scope="row">{{ $loop->iteration }}</td>
-                                    <td>{{ $k->buku }}</td>
+                                    <td scope="row">{{ $pengembalian->firstItem() + $key }}</td>
                                     <td>{{ $k->name }}</td>
                                     <td>{{ $k->kelas }}</td>
+                                    <td>{{ $k->buku }}</td>
                                     <td>{{ $k->jml_buku }}</td>
                                     <td>{{ $k->jam_pinjam }}</td>
                                     <td>{{ $k->jam_kembali }}</td>
@@ -119,9 +123,22 @@
                         @endif
                     </tbody>
                 </table>
+                <div class="float-sm-left">
+                    Showing
+                    {{ $pengembalian->firstItem() }}
+                    to
+                    {{ $pengembalian->lastItem() }}
+                    of
+                    {{ $pengembalian->total() }}
+                    entries
+                </div>
+                <div class="float-sm-right">
+                    {{ $pengembalian->links() }}
+                </div>
             @endsection
         </div>
 
 </body>
+
 
 </html>
