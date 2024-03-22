@@ -1,14 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginControllerr;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengembalianController;
-use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +42,10 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+/* Route dashboard dibawah ini adalah untuk untuk connecting ke controller untuk buat Count() di dashboard. */
+    Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+/*--------------------------------------------------------------------------------------------------------- */
 
     Route::controller(PeminjamanController::class)->prefix('peminjaman')->group(function () {
         Route::get('', 'index')->name('peminjaman');
