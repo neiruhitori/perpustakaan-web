@@ -21,7 +21,7 @@ class CreatePeminjamanTable extends Migration
             $table->string('jml_buku'); 
             $table->dateTime('jam_pinjam');
             $table->datetime('jam_kembali');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('status')->default(1); // 0: disable, 1: enable
             $table->timestamps();
         });

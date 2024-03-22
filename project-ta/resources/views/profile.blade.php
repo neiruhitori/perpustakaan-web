@@ -22,9 +22,9 @@
         </div>
         <!-- /.content-header -->
         <form method="POST" enctype="multipart/form-data" id="profile_setup_frm"
-            action="{{ route('profile.update', $user->id) }}">
+            action="{{ route('profile.update') }}">
             @csrf
-            @method('PUT')
+            @method('POST')
             <div class="row">
                 <div class="col-md-12 border-right">
                     <div class="p-3 py-5">
@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="labels">Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="first name"
+                                <input type="text" name="name" class="form-control" placeholder="Masukan Nama Baru"
                                     value="{{ auth()->user()->name }}">
                             </div>
                             <div class="col-md-6">
@@ -59,13 +59,16 @@
                             <div class="col-md-6">
                                 <label class="labels">Changes Password</label>
                                 <input type="password" name="password" class="form-control"
-                                    value="{{ auth()->user()->password }}" placeholder="password" id="MyPass">
+                                    value="" placeholder="Password baru" id="MyPass">
                                 <input type="checkbox" onclick="ShowHidden()">Show Password
                             </div>
-
-                            <div class="mt-5 text-center"><button id="btn" class="btn btn-primary profile-button"
-                                    type="submit" hidden>Save Profile</button></div>
                         </div>
+                        <center>
+                        <p>Peringatan jika Anda ingin mengubah Nama, Email dan Password.<br>
+                        Anda perlu memasukan Password lama atau Password baru anda terlebih dahulu di Changes Password!</p>
+                        </center>
+                        <div class="mt-5 text-center"><button id="btn" class="btn btn-primary profile-button"
+                                type="submit">Save Profile</button></div>
                     </div>
 
                 </div>

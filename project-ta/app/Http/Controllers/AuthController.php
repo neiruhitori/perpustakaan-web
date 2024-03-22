@@ -59,12 +59,19 @@ class AuthController extends Controller
         return view('profile', compact('user'));
     }
 
-    public function updateProfile($id, Request $request) {
+    public function updateProfile(Request $request) {
 
-        $user = User::findOrFail($id);
+        $user = Auth::user();
 
-        $user->update($request->all());
+        if ($request->has('name', 'email', 'password')) {           
+            $user->name = ($request->input('name'));
+            $user->email = ($request->input('email'));
+            $user->password = bcrypt($request->input('password'));
+        } else {
 
-          return redirect()->route('profile', $user->id)->with('success', 'profile updated successfully');
-      }
+        }
+        $user->save();
+    
+        return redirect('/dashboard')->with('success', 'Password berhasil diubah.');
+    }
 }

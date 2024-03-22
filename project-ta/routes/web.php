@@ -21,14 +21,12 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
+/* Dibawah ini adalah route untuk redirect waktu pertama kali PHP artisan serve */
 Route::get('/', function () {
         return view('dashboard');
     })->middleware('auth');
-
+/*------------------------------------------------------------------------- */
 Route::controller(AuthController::class)->group(function () {
     Route::get('register', 'register')->name('register');
     Route::post('register', 'registerSave')->name('register.save');
@@ -37,7 +35,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'loginAction')->name('login.action');
 
     Route::get('profile', 'profile')->name('profile');
-    Route::put('profile/{id}', 'updateProfile')->name('profile.update');
+    Route::post('profile', 'updateProfile')->name('profile.update');
 
     Route::post('logout', 'logout')->middleware('auth')->name('logout');
 });
@@ -63,12 +61,4 @@ Route::middleware('auth')->group(function () {
         Route::delete('destroy/{id}', 'destroy')->name('pengembalian.destroy');
         Route::get('status/{id}', 'status')->name('pengembalian.status');
     });
-
-    // Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
-
-    // Route::controller(ProfileController::class)->prefix('profile')->group(function () {
-    //     Route::get('', 'index')->name('profile');
-    //     Route::get('edit/{id}', 'edit')->name('profile.edit');
-    //     Route::put('edit/{id}', 'update')->name('profile.update');
-    // });
 });

@@ -12,10 +12,18 @@ class PeminjamanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $peminjaman = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
+        if ($request->has('search')) {
+            $peminjaman = Peminjaman::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
+        } else {
+            $peminjaman = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
+        }
         return view('peminjaman.index', compact('peminjaman'));
+        
+        /* -------dibawah ini adalah sebelum adanya fitur search-------*/
+        // $peminjaman = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
+        // return view('peminjaman.index', compact('peminjaman'));
     }
 
     /**
@@ -44,7 +52,6 @@ class PeminjamanController extends Controller
             'jml_buku' => 'required|min:1|max:50',
             'jam_pinjam' => 'required:true',
             'jam_kembali' => 'required:true',
-            'description' => 'required|min:1|max:1000',
         ]);
         
         Peminjaman::create([

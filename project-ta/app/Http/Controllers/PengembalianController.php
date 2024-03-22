@@ -14,10 +14,18 @@ class PengembalianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pengembalian = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
+        if ($request->has('search')) {
+            $pengembalian = Peminjaman::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
+        } else {
+            $pengembalian = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
+        }
         return view('pengembalian.index', compact('pengembalian'));
+        
+        /* -------dibawah ini adalah sebelum adanya fitur search-------*/
+        // $pengembalian = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
+        // return view('pengembalian.index', compact('pengembalian'));
     }
 
     /**

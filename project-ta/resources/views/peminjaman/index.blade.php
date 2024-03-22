@@ -40,13 +40,22 @@
 
 
         <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+      <div class="content-header">
+          <div class="container-fluid">
+              <div class="row mb-2">
+                  <div class="col-sm-6">
+                      <h1 class="m-0">Peminjaman</h1>
+                  </div><!-- /.col -->
+                  <div class="col-sm-6">
+                      <ol class="breadcrumb float-sm-right">
+                          <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                          <li class="breadcrumb-item active">Peminjaman</li>
+                      </ol>
+                  </div><!-- /.col -->
+              </div><!-- /.row -->
 
-            <!-- Content Header (Page header) -->
-
-            <div class="container-fluid">
-                <div class="card-header">
-                    <!-- /.content-header -->
-                    <h1 class="mb-0">List Peminjaman</h1>
+      <!-- /.content-header -->
                     @if (Session::has('success'))
                         <div class="btn btn-success swalDefaultSuccess" role="alert">
                             {{ Session::get('success') }}
@@ -54,12 +63,22 @@
                     @endif
                     <a href="{{ route('peminjaman.create') }}" class="btn btn-primary breadcrumb float-sm-right">Add
                         Peminjaman</a>
-                </div>
 
+                    <form action="/peminjaman" method="GET">
+                        <div class="input-group">
+                            <div class="form-outline" data-mdb-input-init>
+                                <input type="search" name="search" id="form1" class="form-control" />
+                            </div>
+                            <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div><!-- /.container-fluid -->
             </div>
             <!-- /.row -->
             <!-- /.container-fluid -->
-            <hr />
+
 
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">

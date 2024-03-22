@@ -5,7 +5,7 @@
     <meta charset="utf-8">
 
 
-   
+
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Perpustakaan SMP 02 KLAKAH</title>
@@ -44,13 +44,20 @@
 
 
         <div class="content-wrapper">
-
-            <!-- Content Header (Page header) -->
-
-            <div class="container-fluid">
-                <div class="card-header">
-                    <!-- /.content-header -->
-                    <h1 class="mb-0">List Pengembalian</h1>
+       <!-- Content Header (Page header) -->
+       <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Pengembalian</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item active">Pengembalian</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
                     @if (Session::has('success'))
                         <div class="btn btn-success swalDefaultSuccess" role="alert">
                             {{ Session::get('success') }}
@@ -58,13 +65,19 @@
                     @endif
                     <a href="{{ route('pengembalian.pdf') }}" class="btn btn-danger mb-3 breadcrumb float-sm-right">Export
                         Pengembalian</a>
+
+                    <form action="/pengembalian" method="GET">
+                        <div class="input-group">
+                            <div class="form-outline" data-mdb-input-init>
+                                <input type="search" name="search" id="form1" class="form-control" />
+                            </div>
+                            <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
             </div>
-            <!-- /.row -->
-            <!-- /.container-fluid -->
-            <hr />
-
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <tr>
@@ -91,17 +104,19 @@
                                     <td>{{ $k->jam_pinjam }}</td>
                                     <td>{{ $k->jam_kembali }}</td>
                                     <td>
-                                        <label class="label {{ ($k->status == 1) ? 'label-danger' : 'label-success' }}">{{ ($k->status == 1) ? 'Sedang Meminjam' : 'Selesai' }}</label>
+                                        <label
+                                            class="label {{ $k->status == 1 ? 'label-danger' : 'label-success' }}">{{ $k->status == 1 ? 'Sedang Meminjam' : 'Selesai' }}</label>
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="close">
-                                        @if ($k->status == 1)
-                                            <a href="{{ route('pengembalian.status', $k->id) }}" class="btn btn-sm btn-danger">Selesai</a>
+                                            @if ($k->status == 1)
+                                                <a href="{{ route('pengembalian.status', $k->id) }}"
+                                                    class="btn btn-sm btn-danger">Selesai</a>
                                             @else
-                                            {{-- <a href="" class="btn btn-sm btn-success">Meminjam</a> --}}
+                                                {{-- <a href="" class="btn btn-sm btn-success">Meminjam</a> --}}
                                             @endif
                                         </div>
-                                        
+
                                         {{-- <div class="btn-group" role="group" aria-label="Basic example">
                                             <form action="{{ route('pengembalian.destroy', $k->id) }}" method="POST"
                                                 type="button" class="btn btn-danger p-0"

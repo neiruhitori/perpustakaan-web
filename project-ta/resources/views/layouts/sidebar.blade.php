@@ -37,7 +37,7 @@
             <!-- Add icons to the links using the .nav-icon class
    with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
-                <a href="/" class="nav-link active">
+                <a href="/dashboard" class="nav-link {{ Request::is('/')? 'active' : '' }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
                         Dashboard
@@ -54,7 +54,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="/peminjaman" class="nav-link">
+                        <a href="/peminjaman" class="nav-link {{ Request::is('peminjaman')? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Data Peminjaman</p>
                         </a>
@@ -62,7 +62,7 @@
                 </ul>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="/pengembalian" class="nav-link">
+                        <a href="/pengembalian" class="nav-link {{ Request::is('pengembalian')? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Data Pengembalian</p>
                         </a>
