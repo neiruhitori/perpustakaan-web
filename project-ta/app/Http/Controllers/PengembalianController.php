@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Peminjaman;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Illuminate\Support\Facades\Auth;
 
 class PengembalianController extends Controller
 {
@@ -16,12 +17,15 @@ class PengembalianController extends Controller
      */
     public function index(Request $request)
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         if ($request->has('search')) {
             $pengembalian = Peminjaman::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
         } else {
             $pengembalian = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
         }
-        return view('pengembalian.index', compact('pengembalian'));
+        return view('pengembalian.index', compact('pengembalian', 'profile'));
         
         /* -------dibawah ini adalah sebelum adanya fitur search-------*/
         // $pengembalian = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);

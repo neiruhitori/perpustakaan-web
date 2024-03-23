@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Peminjaman;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class PeminjamanController extends Controller
 {
@@ -14,12 +16,15 @@ class PeminjamanController extends Controller
      */
     public function index(Request $request)
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         if ($request->has('search')) {
             $peminjaman = Peminjaman::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
         } else {
             $peminjaman = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
         }
-        return view('peminjaman.index', compact('peminjaman'));
+        return view('peminjaman.index', compact('peminjaman', 'profile'));
         
         /* -------dibawah ini adalah sebelum adanya fitur search-------*/
         // $peminjaman = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
@@ -33,8 +38,11 @@ class PeminjamanController extends Controller
      */
     public function create()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+
         $peminjaman = Peminjaman::all();
-        return view('peminjaman.create', compact('peminjaman'));
+        return view('peminjaman.create', compact('peminjaman', 'profile'));
     }
 
     /**
@@ -74,8 +82,11 @@ class PeminjamanController extends Controller
      */
     public function show(string $id)
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $peminjaman = Peminjaman::findOrFail($id);
-        return view('peminjaman.show', compact('peminjaman'));
+        return view('peminjaman.show', compact('peminjaman', 'profile'));
     }
 
     /**
@@ -86,8 +97,11 @@ class PeminjamanController extends Controller
      */
     public function edit($id)
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $peminjaman = Peminjaman::findOrFail($id);
-        return view('peminjaman.edit', compact('peminjaman'));
+        return view('peminjaman.edit', compact('peminjaman', 'profile'));
     }
 
     /**

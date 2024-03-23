@@ -54,6 +54,13 @@
                                 <input type="text" name="email" class="form-control"
                                     value="{{ auth()->user()->email }}" placeholder="Email">
                             </div>
+                            <div class="form-group mx-4 my-2">
+                                <label for="photoProfile" class="text-md text-primary font-weight-bold">Tambah Photo Profile</label>
+                                <div class="custom-file">
+                                    <input type="file" name="photoProfile" id="photoProfile"
+                                        value="{{ old('photoProfile', $profile->photoProfile) }}">
+                                </div>
+                            </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-6">

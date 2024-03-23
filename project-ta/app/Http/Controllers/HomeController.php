@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Peminjaman;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -16,11 +17,13 @@ class HomeController extends Controller
     public function index()
     {
        
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
         $user = User::count();
         $siswa = Peminjaman::count();
-        $pengembalian = Peminjaman::select('status')->where('status', 0)->count();
+        $pengembalian = Peminjaman::select('status')->where('status', 1)->count();
 
-        return view('/dashboard',['siswa' => $siswa, 'user' => $user, 'pengembalian' => $pengembalian] );
+        return view('/dashboard',['siswa' => $siswa, 'user' => $user, 'pengembalian' => $pengembalian], compact('profile') );
     }
 
     /**

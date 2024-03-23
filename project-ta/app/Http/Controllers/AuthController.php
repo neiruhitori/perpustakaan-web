@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 // use illuminate\Support\Facades\Hash;
 use illuminate\Validation\ValidationException;
 
+
 class AuthController extends Controller
 {
     public function register()
@@ -55,18 +56,28 @@ class AuthController extends Controller
  
     public function profile()
     {
-        $user = Auth::user();
-        return view('profile', compact('user'));
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        return view('profile', compact('profile'));
     }
 
     public function updateProfile(Request $request) {
 
         $user = Auth::user();
 
-        if ($request->has('name', 'email', 'password')) {           
+        if ($request->has('name', 'email', 'password', 'photoProfile')) {           
             $user->name = ($request->input('name'));
             $user->email = ($request->input('email'));
             $user->password = bcrypt($request->input('password'));
+
+            $user->photoProfile = ($request->input('photoProfile'));
+   
+            $namaGambar = time().'.'.$request->photoProfile->extension();
+   
+            $request->photoProfile->move(public_path('AdminLTE-3.2.0/dist/img/photoProfile'),$namaGambar);
+   
+            $user->photoProfile =$namaGambar;
+
         } else {
 
         }

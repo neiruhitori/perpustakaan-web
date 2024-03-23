@@ -3,8 +3,17 @@
         aria-expanded="false">
         <div>
             <div class="image">
-                <img src="{{ asset('AdminLTE-3.2.0/dist/img/pp.png') }}" alt="user-image"
-                    class="rounded-circle">
+                {{-- <img src="{{ asset('AdminLTE-3.2.0/dist/img/pp.png') }}" alt="user-image"
+                    class="rounded-circle"> --}}
+
+                @if ($profile->photoProfile != null)
+                    <img src="{{ asset('/AdminLTE-3.2.0/dist/img/photoProfile/' . $profile->photoProfile) }}"
+                        alt="user-image" class="rounded-circle">
+                @else
+                    <img src="{{ asset('AdminLTE-3.2.0/dist/img/pp.png') }}" alt="user-image" class="rounded-circle">
+                @endif
+
+
                 <span class="pro-user-name ml-1">
                     {{ auth()->user()->name }} <i class="mdi mdi-chevron-down"></i>
                 </span>
@@ -24,7 +33,8 @@
             </button>
         </form>
         <!-- item-->
-        <form id="logout-form" action="{{ url('/logout') }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin Logout?')">
+        <form id="logout-form" action="{{ url('/logout') }}" method="POST"
+            onsubmit="return confirm('Apakah Anda yakin ingin Logout?')">
             @csrf
             <button type="submit" class="dropdown-item notify-item" onclick="confirmLogout()">
                 <i class="fe-log-out"></i> <span>Logout</span>
@@ -37,7 +47,7 @@
             <!-- Add icons to the links using the .nav-icon class
    with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
-                <a href="/dashboard" class="nav-link {{ Request::is('/')? 'active' : '' }}">
+                <a href="/dashboard" class="nav-link {{ Request::is('/') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
                         Dashboard
@@ -54,7 +64,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="/peminjaman" class="nav-link {{ Request::is('peminjaman')? 'active' : '' }}">
+                        <a href="/peminjaman" class="nav-link {{ Request::is('peminjaman') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Data Peminjaman</p>
                         </a>
@@ -62,7 +72,7 @@
                 </ul>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="/pengembalian" class="nav-link {{ Request::is('pengembalian')? 'active' : '' }}">
+                        <a href="/pengembalian" class="nav-link {{ Request::is('pengembalian') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Data Pengembalian</p>
                         </a>
