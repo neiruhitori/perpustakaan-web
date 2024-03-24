@@ -54,8 +54,8 @@
                                 <input type="text" name="email" class="form-control"
                                     value="{{ auth()->user()->email }}" placeholder="Email">
                             </div>
-                            <div class="form-group mx-4 my-2">
-                                <label for="photoProfile" class="text-md text-primary font-weight-bold">Tambah Photo Profile</label>
+                            <div class="col-md-6">
+                                <label for="photoProfile" class="">Tambah Foto Profile</label>
                                 <div class="custom-file">
                                     <input type="file" name="photoProfile" id="photoProfile"
                                         value="{{ old('photoProfile', $profile->photoProfile) }}">
@@ -71,8 +71,8 @@
                             </div>
                         </div>
                         <center>
-                        <p>Peringatan jika Anda ingin mengubah Nama, Email dan Password.<br>
-                        Anda perlu memasukan Password lama atau Password baru anda terlebih dahulu di Changes Password!</p>
+                        <p>Peringatan setiap Anda mengubah <b>Nama</b>, <b>Email</b>, <b>Password</b> dan <b>Foto Profile</b>.<br>
+                        Anda perlu memasukan <b>Password lama</b> atau <b>Password baru</b> anda terlebih dahulu di <b>Changes Password!</b></p>
                         </center>
                         <div class="mt-5 text-center"><button id="btn" class="btn btn-primary profile-button"
                                 type="submit">Save Profile</button></div>

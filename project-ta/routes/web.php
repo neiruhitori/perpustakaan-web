@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SedangMeminjamController;
+use App\Http\Controllers\SelesaiMeminjamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,5 +64,15 @@ Route::middleware('auth')->group(function () {
         Route::get('', 'index')->name('pengembalian');
         Route::delete('destroy/{id}', 'destroy')->name('pengembalian.destroy');
         Route::get('status/{id}', 'status')->name('pengembalian.status');
+    });
+
+    Route::controller(SedangMeminjamController::class)->prefix('sedangmeminjam')->group(function () {
+        Route::get('', 'index')->name('sedangmeminjam');
+        Route::get('pdf', 'view_pdf')->name('sedangmeminjam.pdf');
+    });
+
+    Route::controller(SelesaiMeminjamController::class)->prefix('selesaimeminjam')->group(function () {
+        Route::get('', 'index')->name('selesaimeminjam');
+        Route::get('pdf', 'view_pdf')->name('selesaimeminjam.pdf');
     });
 });

@@ -2,29 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Peminjaman;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class SelesaiMeminjamController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-       
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();
-        $user = User::count();
-        $siswa = Peminjaman::count();
-        $pengembalian = Peminjaman::select('status')->where('status', 1)->count();
-        $selesai = Peminjaman::select('status')->where('status', 0)->count();
+        
 
-        return view('/dashboard',['siswa' => $siswa, 'user' => $user, 'pengembalian' => $pengembalian, 'selesai' => $selesai], compact('profile') );
+            $selesaimeminjam = Peminjaman::where('status', 0)->get();
+
+        return view('selesaimeminjam.index', compact('selesaimeminjam', 'profile'));
+    }
+
+    public function view_pdf()
+    {
+        $selesaimeminjam = Peminjaman::where('status', 0)->get();
+        $pdf = Pdf::loadView('selesaimeminjam.pdf', ['selesaimeminjam' => $selesaimeminjam]);
+        return $pdf->stream('data-perpustakaan.pdf');
     }
 
     /**

@@ -7,10 +7,9 @@
                     class="rounded-circle"> --}}
 
                 @if ($profile->photoProfile != null)
-                    <img src="{{ asset('/AdminLTE-3.2.0/dist/img/photoProfile/' . $profile->photoProfile) }}"
-                        alt="user-image" class="rounded-circle">
+                    <img src="{{ asset('/AdminLTE-3.2.0/dist/img/photoProfile/' . $profile->photoProfile) }}" alt="user-image" class="rounded-circle" style="width:40px;height:40px;border-radius:100px">
                 @else
-                    <img src="{{ asset('AdminLTE-3.2.0/dist/img/pp.png') }}" alt="user-image" class="rounded-circle">
+                    <img src="{{ asset('AdminLTE-3.2.0/dist/img/pp.png') }}" alt="user-image" class="rounded-circle" style="width:40px;height:40px;border-radius:100px">
                 @endif
 
 
@@ -84,8 +83,25 @@
                     <i class="nav-icon fas fa-info"></i>
                     <p>
                         Laporan Perpustakaan
+                        <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/sedangmeminjam" class="nav-link {{ Request::is('sedangmeminjam') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sedang Meminjam</p>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/selesaimeminjam" class="nav-link {{ Request::is('selesaimeminjam') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Selesai Meminjam</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </nav>

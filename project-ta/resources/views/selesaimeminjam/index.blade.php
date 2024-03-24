@@ -49,34 +49,19 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Pengembalian</h1>
+                    <h1 class="m-0">Selesai Meminjam</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Pengembalian</li>
+                        <li class="breadcrumb-item active">Selesai Meminjam</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
-                    @if (Session::has('success'))
-                        <div class="btn btn-success swalDefaultSuccess" role="alert">
-                            {{ Session::get('success') }}
-                        </div>
-                    @endif
-                    <a href="{{ route('pengembalian.pdf') }}" class="btn btn-danger mb-3 breadcrumb float-sm-right" hidden>Export
-                        Pengembalian</a>
-
-                    <form action="/pengembalian" method="GET">
-                        <div class="input-group">
-                            <div class="form-outline" data-mdb-input-init>
-                                <input type="search" name="search" id="form1" class="form-control" />
-                            </div>
-                            <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    <a href="{{ route('selesaimeminjam.pdf') }}" class="btn btn-danger mb-3 breadcrumb float-sm-right">
+                        <i class="fa fa-download mb-3 breadcrumb float-sm-right"></i>
+                        <p>Cetak PDF</p>
+                    </a>
             </div>
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
@@ -89,14 +74,13 @@
                         <th>Jam Pinjam</th>
                         <th>Jam Kembali</th>
                         <th>Status</th>
-                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($pengembalian->count() > 0)
-                            @forelse ($pengembalian as $key => $k)
+                        @if ($selesaimeminjam->count() > 0)
+                            @forelse ($selesaimeminjam as $key => $k)
                                 <tr>
-                                    <td scope="row">{{ $pengembalian->firstItem() + $key }}</td>
+                                    <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ $k->name }}</td>
                                     <td>{{ $k->kelas }}</td>
                                     <td>{{ $k->buku }}</td>
@@ -107,27 +91,7 @@
                                         <label
                                             class="label {{ $k->status == 1 ? 'label-danger' : 'label-success' }}">{{ $k->status == 1 ? 'Sedang Meminjam' : 'Selesai' }}</label>
                                     </td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="close">
-                                            @if ($k->status == 1)
-                                                <a href="{{ route('pengembalian.status', $k->id) }}"
-                                                    class="btn btn-sm btn-danger">Selesai</a>
-                                            @else
-                                                {{-- <a href="" class="btn btn-sm btn-success">Meminjam</a> --}}
-                                            @endif
-                                        </div>
-
-                                        {{-- <div class="btn-group" role="group" aria-label="Basic example">
-                                            <form action="{{ route('pengembalian.destroy', $k->id) }}" method="POST"
-                                                type="button" class="btn btn-danger p-0"
-                                                onsubmit="return confirm('Delete?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger m-0"><i class="fas fa-trash"></i></button>
-                                            </form>
-                                        </div> --}}
-
-                                    </td>
+                                    
                                 </tr>
 
                             @empty
@@ -138,18 +102,7 @@
                         @endif
                     </tbody>
                 </table>
-                <div class="float-sm-left">
-                    Showing
-                    {{ $pengembalian->firstItem() }}
-                    to
-                    {{ $pengembalian->lastItem() }}
-                    of
-                    {{ $pengembalian->total() }}
-                    entries
-                </div>
-                <div class="float-sm-right">
-                    {{ $pengembalian->links() }}
-                </div>
+                
             @endsection
         </div>
 

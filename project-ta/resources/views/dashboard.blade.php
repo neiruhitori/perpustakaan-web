@@ -45,7 +45,7 @@
                           <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-cog"></i></span>
                           <div class="info-box-content">
                               <span class="info-box-text">Laporan Perpustakaan</span>
-                              <span class="info-box-number">0</span>
+                              <span class="info-box-number">{{ $selesai }}</span>
                           </div>
                           <!-- /.info-box-content -->
                       </div>
