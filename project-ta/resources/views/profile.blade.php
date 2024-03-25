@@ -1,3 +1,10 @@
+<head>
+    <!-- Modal -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+</head>
+
 @extends('layouts.app')
 
 @section('title', 'Profile')
@@ -21,8 +28,7 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <form method="POST" enctype="multipart/form-data" id="profile_setup_frm"
-            action="{{ route('profile.update') }}">
+        <form method="POST" enctype="multipart/form-data" id="profile_setup_frm" action="{{ route('profile.update') }}">
             @csrf
             @method('POST')
             <div class="row">
@@ -65,32 +71,66 @@
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label class="labels">Changes Password</label>
-                                <input type="password" name="password" class="form-control"
-                                    value="" placeholder="Password baru" id="MyPass">
+                                <input type="password" name="password" class="form-control" value=""
+                                    placeholder="Password baru" id="MyPass">
                                 <input type="checkbox" onclick="ShowHidden()">Show Password
                             </div>
                         </div>
                         <center>
-                        <p>Peringatan setiap Anda mengubah <b>Nama</b>, <b>Email</b>, <b>Password</b> dan <b>Foto Profile</b>.<br>
-                        Anda perlu memasukan <b>Password lama</b> atau <b>Password baru</b> anda terlebih dahulu di <b>Changes Password!</b></p>
+                            <p>Peringatan setiap Anda mengubah <b>Nama</b>, <b>Email</b>, <b>Password</b> dan <b>Foto
+                                    Profile</b>.<br>
+                                Anda perlu memasukan <b>Password lama</b> atau <b>Password baru</b> anda terlebih dahulu di
+                                <b>Changes Password!</b>
+                            </p>
                         </center>
-                        <div class="mt-5 text-center"><button id="btn" class="btn btn-primary profile-button"
-                                type="submit">Save Profile</button></div>
+                        <div class="mt-5 text-center">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                Save Profil
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Simpan Perubahan?</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah anda sudah memasukan <b>password</b> anda di <b>Changes Password</b>?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+
+                                            <button id="btn" class="btn btn-primary profile-button"
+                                                type="submit">Save Profile</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
+
             </div>
+    </div>
 
-        </form>
+    </form>
 
-        <script>
-            function ShowHidden() {
-                var x = document.getElementById("MyPass");
-                if (x.type === "password") {
-                    x.type = "text";
-                } else {
-                    x.type = "password";
-                }
+    <script>
+        function ShowHidden() {
+            var x = document.getElementById("MyPass");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
             }
-        </script>
-    @endsection
+        }
+    </script>
+@endsection

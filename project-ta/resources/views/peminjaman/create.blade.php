@@ -1,3 +1,10 @@
+<head>
+    <!-- Modal -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+</head>
+
 @extends('layouts.app')
 
 @section('title', 'Profile')
@@ -95,8 +102,8 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                    <input type="datetime-local" name="jam_kembali" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" />
+                                    <input type="datetime-local" name="jam_kembali"
+                                        class="form-control datetimepicker-input" data-target="#reservationdatetime" />
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -113,7 +120,39 @@
                             </div>
 
                             <div class="col-md-6">
-                                <button id="btn" class="btn btn-primary profile-button" type="submit">Save Peminjaman</button></div>
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    Tambah Siswa
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Siswa</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Pastikan data siswa sudah benar!
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close
+                                                </button>
+
+                                                    <button id="btn" class="btn btn-primary profile-button" type="submit">
+                                                        Tambah
+                                                    </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
