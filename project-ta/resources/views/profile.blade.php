@@ -45,7 +45,7 @@
                                     value="{{ auth()->user()->nis }}">
                             </div>
                             <div class="col-md-6">
-                                <label class="labels">Name</label>
+                                <label class="labels">Nama</label>
                                 <input type="text" name="name" class="form-control" placeholder="Masukan Nama Baru"
                                     value="{{ auth()->user()->name }}">
                             </div>

@@ -32,6 +32,11 @@
     <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/dist/css/adminlte.min.css') }}">
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/plugins/daterangepicker/daterangepicker.css') }}">
+
+    <!-- Modal -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -44,28 +49,28 @@
 
 
         <div class="content-wrapper">
-       <!-- Content Header (Page header) -->
-       <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Pengembalian</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Pengembalian</li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Pengembalian</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item active">Pengembalian</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
                     @if (Session::has('success'))
                         <div class="btn btn-success swalDefaultSuccess" role="alert">
                             {{ Session::get('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('pengembalian.pdf') }}" class="btn btn-danger mb-3 breadcrumb float-sm-right" hidden>Export
+                    <a href="{{ route('pengembalian.pdf') }}" class="btn btn-danger mb-3 breadcrumb float-sm-right"
+                        hidden>Export
                         Pengembalian</a>
-
                     <form action="/pengembalian" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
@@ -110,13 +115,43 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="close">
                                             @if ($k->status == 1)
-                                                <a href="{{ route('pengembalian.status', $k->id) }}"
-                                                    class="btn btn-sm btn-danger">Selesai</a>
+                                            <!-- Tanpa Modal -->
+                                                {{-- <a href="{{ route('pengembalian.status', $k->id) }}"
+                                                    class="btn btn-sm btn-danger">Selesai</a> --}}
+                                            <!-- Tanpa Modal End -->
+
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal">
+                                                    Selesai
+                                                </button>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Selesaikan Peminjaman?</h1>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Harap periksa terlebih dahulu <b>kelengkapan buku</b> dan <b>kondisi buku</b> sebelum proses pengembalian selesai!
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                    <a href="{{ route('pengembalian.status', $k->id) }}"
+                                                                        class="btn btn-primary">Selesai</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             @else
                                                 {{-- <a href="" class="btn btn-sm btn-success">Meminjam</a> --}}
                                             @endif
                                         </div>
-
                                         {{-- <div class="btn-group" role="group" aria-label="Basic example">
                                             <form action="{{ route('pengembalian.destroy', $k->id) }}" method="POST"
                                                 type="button" class="btn btn-danger p-0"
@@ -126,7 +161,6 @@
                                                 <button class="btn btn-danger m-0"><i class="fas fa-trash"></i></button>
                                             </form>
                                         </div> --}}
-
                                     </td>
                                 </tr>
 
