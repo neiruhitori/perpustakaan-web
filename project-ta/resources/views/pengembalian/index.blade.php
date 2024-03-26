@@ -116,38 +116,9 @@
                                         <div class="btn-group" role="group" aria-label="close">
                                             @if ($k->status == 1)
                                             <!-- Tanpa Modal -->
-                                                {{-- <a href="{{ route('pengembalian.status', $k->id) }}"
-                                                    class="btn btn-sm btn-danger">Selesai</a> --}}
+                                                <a href="{{ route('pengembalian.status', $k->id) }}"
+                                                    class="btn btn-sm btn-danger" onclick="return confirm('Harap periksa terlebih dahulu kelengkapan buku dan kondisi buku sebelum proses pengembalian selesai!')">Selesai</a>
                                             <!-- Tanpa Modal End -->
-
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal">
-                                                    Selesai
-                                                </button>
-
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Selesaikan Peminjaman?</h1>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                Harap periksa terlebih dahulu <b>kelengkapan buku</b> dan <b>kondisi buku</b> sebelum proses pengembalian selesai!
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                    <a href="{{ route('pengembalian.status', $k->id) }}"
-                                                                        class="btn btn-primary">Selesai</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             @else
                                                 {{-- <a href="" class="btn btn-sm btn-success">Meminjam</a> --}}
                                             @endif

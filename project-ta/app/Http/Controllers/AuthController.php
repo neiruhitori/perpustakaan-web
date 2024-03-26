@@ -21,6 +21,13 @@ class AuthController extends Controller
     public function registerSave( Request $request)
     {
 
+        $this->validate($request, [
+            'nis' => 'required|min:10|max:15',
+            'name' => 'required|min:1|max:50',
+            'email' => 'required|min:1|max:50',
+            'password' => 'required|min:5|max:50',
+        ]);
+        
         User::create([
             'nis' => $request->nis,
             'name' => $request->name,
@@ -65,18 +72,18 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        if ($request->has('name', 'email', 'password', 'photoProfile')) {           
+        if ($request->has('name', 'email', 'password')) {           
             $user->name = ($request->input('name'));
             $user->email = ($request->input('email'));
             $user->password = bcrypt($request->input('password'));
 
-            $user->photoProfile = ($request->input('photoProfile'));
+            // $user->photoProfile = ($request->input('photoProfile'));
    
-            $namaGambar = time().'.'.$request->photoProfile->extension();
+            // $namaGambar = time().'.'.$request->photoProfile->extension();
    
-            $request->photoProfile->move(public_path('AdminLTE-3.2.0/dist/img/photoProfile'),$namaGambar);
+            // $request->photoProfile->move(public_path('AdminLTE-3.2.0/dist/img/photoProfile'),$namaGambar);
    
-            $user->photoProfile =$namaGambar;
+            // $user->photoProfile =$namaGambar;
 
         } else {
 
