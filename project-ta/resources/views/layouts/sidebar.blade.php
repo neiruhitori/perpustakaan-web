@@ -3,14 +3,14 @@
         aria-expanded="false">
         <div>
             <div class="image">
-                {{-- <img src="{{ asset('AdminLTE-3.2.0/dist/img/pp.png') }}" alt="user-image"
-                    class="rounded-circle"> --}}
+                <img src="{{ asset('AdminLTE-3.2.0/dist/img/pp.png') }}" alt="user-image"
+                    class="rounded-circle">
 
-                @if ($profile->photoProfile != null)
+                {{-- @if ($profile->photoProfile != null)
                     <img src="{{ asset('/AdminLTE-3.2.0/dist/img/photoProfile/' . $profile->photoProfile) }}" alt="user-image" class="rounded-circle" style="width:40px;height:40px;border-radius:100px">
                 @else
                     <img src="{{ asset('AdminLTE-3.2.0/dist/img/pp.png') }}" alt="user-image" class="rounded-circle" style="width:40px;height:40px;border-radius:100px">
-                @endif
+                @endif --}}
 
 
                 <span class="pro-user-name ml-1">
