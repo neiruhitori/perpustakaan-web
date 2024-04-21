@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Data Pengembalian</title>
+    <title>Data Pengembalian Harian</title>
 
     <style>
         body {

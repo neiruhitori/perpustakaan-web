@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Detail Harian</h1>
+                        <h1 class="m-0">Detail Tahunan</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                            <li class="breadcrumb-item active"><a href="/peminjaman">Peminjaman</a></li>
+                            <li class="breadcrumb-item active"><a href="/peminjamantahunan">Peminjaman</a></li>
                             <li class="breadcrumb-item active">Detail</li>
                         </ol>
                     </div><!-- /.col -->
@@ -28,42 +28,42 @@
                 <div class="col-md-12 border-right">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Detail Peminjaman Harian</h4>
+                            <h4 class="text-right">Detail Peminjaman Tahunan</h4>
                         </div>
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label>Nama :</label>
                                 <input type="text" class="form-control" id="name" name="name"
-                                value="{{ $peminjaman->name }}" readonly />
+                                value="{{ $peminjamantahunan->name }}" readonly />
                             </div>
 
                             <div class="col-md-6">
                                 <label>Kelas :</label>
                                 <input type="text" class="form-control" id="kelas" name="kelas"
-                                value="{{ $peminjaman->kelas }}" readonly />
+                                value="{{ $peminjamantahunan->kelas }}" readonly />
                             </div>
                             <div class="col-md-6">
                                 <label>Buku :</label>
                                 <input type="text" class="form-control" id="buku" name="buku"
-                                    value="{{ $peminjaman->buku }}" readonly/>
+                                    value="{{ $peminjamantahunan->buku }}" readonly/>
                             </div>
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
                                 <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    value="{{ $peminjaman->kodebuku }}" readonly/>
+                                    value="{{ $peminjamantahunan->kodebuku }}" readonly/>
                             </div>
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>
                                 <input type="text" class="form-control" id="jml_buku" name="jml_buku"
-                                value="{{ $peminjaman->jml_buku }}" readonly />
+                                value="{{ $peminjamantahunan->jml_buku }}" readonly />
                             </div>
                             <!-- Date and time -->
                             <div class="form-group">
                                 <label>Jam Pinjam :</label>
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                    <input type="datetime-local" name="jam_pinjam" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" value="{{ $peminjaman->jam_pinjam }}" readonly/>
+                                    <input type="date" name="jam_pinjam" class="form-control datetimepicker-input"
+                                        data-target="#reservationdatetime" value="{{ $peminjamantahunan->jam_pinjam }}" readonly/>
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -74,8 +74,8 @@
                             <div class="form-group">
                                 <label>Jam Kembali :</label>
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                    <input type="datetime-local" name="jam_kembali" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" value="{{ $peminjaman->jam_kembali }}" readonly/>
+                                    <input type="date" name="jam_kembali" class="form-control datetimepicker-input"
+                                        data-target="#reservationdatetime" value="{{ $peminjamantahunan->jam_kembali }}" readonly/>
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -85,7 +85,7 @@
                             <div class="col-md-6">
                                 <label>Description :</label>
                                 <textarea class="form-control" id="description" name="description"
-                                 readonly >{{ $peminjaman->description }}</textarea>
+                                 readonly >{{ $peminjamantahunan->description }}</textarea>
                             </div>
                         </div>
                     </div>

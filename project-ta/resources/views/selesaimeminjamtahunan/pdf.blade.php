@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Data Selesai Meminjam Harian</title>
+    <title>Data Selesai Meminjam Tahunan</title>
 
     <style>
         body {
@@ -81,8 +81,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($selesaimeminjam->count() > 0)
-                                    @forelse ($selesaimeminjam as $k)
+                                @if ($selesaimeminjamtahunan->count() > 0)
+                                    @forelse ($selesaimeminjamtahunan as $k)
                                         <tr>
                                             <td scope="row" align=center>{{ $loop->iteration }}</td>
                                             <td align=center>{{ $k->name }}</td>

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Peminjaman;
+use App\Models\PeminjamanTahunan;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class PeminjamanController extends Controller
+class PeminjamanTahunanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,15 +20,11 @@ class PeminjamanController extends Controller
         $profile = User::where('id',$iduser)->first();
         
         if ($request->has('search')) {
-            $peminjaman = Peminjaman::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
+            $peminjamantahunan = PeminjamanTahunan::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
         } else {
-            $peminjaman = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
+            $peminjamantahunan = PeminjamanTahunan::orderBy('created_at', 'DESC')->paginate(10);
         }
-        return view('peminjaman.index', compact('peminjaman', 'profile'));
-        
-        /* -------dibawah ini adalah sebelum adanya fitur search-------*/
-        // $peminjaman = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
-        // return view('peminjaman.index', compact('peminjaman'));
+        return view('peminjamantahunan.index', compact('peminjamantahunan', 'profile'));
     }
 
     /**
@@ -41,8 +37,8 @@ class PeminjamanController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();
 
-        $peminjaman = Peminjaman::all();
-        return view('peminjaman.create', compact('peminjaman', 'profile'));
+        $peminjamantahunan = PeminjamanTahunan::all();
+        return view('peminjamantahunan.create', compact('peminjamantahunan', 'profile'));
     }
 
     /**
@@ -63,7 +59,7 @@ class PeminjamanController extends Controller
             'kodebuku' => 'required:true',
         ]);
         
-        Peminjaman::create([
+        PeminjamanTahunan::create([
                     'buku' => $request->buku,
                     'kodebuku' => $request->kodebuku,
                     'name' => $request->name,
@@ -73,7 +69,7 @@ class PeminjamanController extends Controller
                     'jam_kembali' => $request->jam_kembali,
                     'description' => $request->description
                 ]);
-                return redirect('/peminjaman')->with('success', 'Data Berhasil di Tambahkan');
+                return redirect('/peminjamantahunan')->with('success', 'Data Berhasil di Tambahkan');
     }
 
     /**
@@ -87,8 +83,8 @@ class PeminjamanController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();
         
-        $peminjaman = Peminjaman::findOrFail($id);
-        return view('peminjaman.show', compact('peminjaman', 'profile'));
+        $peminjamantahunan = PeminjamanTahunan::findOrFail($id);
+        return view('peminjamantahunan.show', compact('peminjamantahunan', 'profile'));
     }
 
     /**
@@ -102,8 +98,8 @@ class PeminjamanController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();
         
-        $peminjaman = Peminjaman::findOrFail($id);
-        return view('peminjaman.edit', compact('peminjaman', 'profile'));
+        $peminjamantahunan = PeminjamanTahunan::findOrFail($id);
+        return view('peminjamantahunan.edit', compact('peminjamantahunan', 'profile'));
     }
 
     /**
@@ -115,10 +111,10 @@ class PeminjamanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $peminjaman = Peminjaman::findOrFail($id);
-        $peminjaman->update($request->all());
+        $peminjamantahunan = PeminjamanTahunan::findOrFail($id);
+        $peminjamantahunan->update($request->all());
 
-        return redirect()->route('peminjaman')->with('success', 'peminjaman updated successfully');
+        return redirect()->route('peminjamantahunan')->with('success', 'peminjaman updated successfully');
     }
 
     /**
@@ -129,10 +125,10 @@ class PeminjamanController extends Controller
      */
     public function destroy($id)
     {
-        $peminjaman = Peminjaman::findOrFail($id);
+        $peminjamantahunan = PeminjamanTahunan::findOrFail($id);
   
-        $peminjaman->delete();
+        $peminjamantahunan->delete();
   
-        return redirect()->route('peminjaman')->with('success', 'peminjaman deleted successfully');
+        return redirect()->route('peminjamantahunan')->with('success', 'peminjaman deleted successfully');
     }
 }

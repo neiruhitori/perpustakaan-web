@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Data sedangmeminjam</title>
+    <title>Data Sedang Meminjam Harian</title>
 
     <style>
         body {
@@ -74,6 +74,7 @@
                                     <th>Kelas</th>
                                     <th>Buku</th>
                                     <th>Jumlah Buku</th>
+                                    <th>Kode Buku</th>
                                     <th>Jam Pinjam</th>
                                     <th>Jam Kembali</th>
                                     <th>Status</th>
@@ -88,6 +89,7 @@
                                             <td align=center>{{ $k->kelas }}</td>
                                             <td align=center>{{ $k->buku }}</td>
                                             <td align=center>{{ $k->jml_buku }}</td>
+                                            <td align=center>{{ $k->kodebuku }}</td>
                                             <td align=center>{{ $k->jam_pinjam }}</td>
                                             <td align=center>{{ $k->jam_kembali }}</td>
                                             <td align=center>

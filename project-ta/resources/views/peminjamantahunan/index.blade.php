@@ -45,7 +45,7 @@
           <div class="container-fluid">
               <div class="row mb-2">
                   <div class="col-sm-6">
-                      <h1 class="m-0">Peminjaman Harian</h1>
+                      <h1 class="m-0">Peminjaman Tahunan</h1>
                   </div><!-- /.col -->
                   <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
@@ -61,10 +61,10 @@
                             {{ Session::get('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('peminjaman.create') }}" class="btn btn-primary breadcrumb float-sm-right">Add
+                    <a href="{{ route('peminjamantahunan.create') }}" class="btn btn-primary breadcrumb float-sm-right">Add
                         Peminjaman</a>
 
-                    <form action="/peminjaman" method="GET">
+                    <form action="/peminjamantahunan" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
                                 <input type="search" name="search" id="form1" class="form-control" />
@@ -95,10 +95,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($peminjaman->count() > 0)
-                            @forelse ($peminjaman as $key => $p)
+                        @if ($peminjamantahunan->count() > 0)
+                            @forelse ($peminjamantahunan as $key => $p)
                                 <tr>
-                                    <td scope="row">{{ $peminjaman->firstItem() + $key }}</td>
+                                    <td scope="row">{{ $peminjamantahunan->firstItem() + $key }}</td>
                                     <td>{{ $p->name }}</td>
                                     <td>{{ $p->kelas }}</td>
                                     <td>{{ $p->buku }}</td>
@@ -108,11 +108,11 @@
                                     <td>{{ $p->jam_kembali }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route('peminjaman.show', $p->id) }}" type="button"
+                                            <a href="{{ route('peminjamantahunan.show', $p->id) }}" type="button"
                                                 class="btn btn-secondary"><i class="fas fa-clone"></i></a>
-                                            <a href="{{ route('peminjaman.edit', $p->id) }}" type="button"
+                                            <a href="{{ route('peminjamantahunan.edit', $p->id) }}" type="button"
                                                 class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                            <form action="{{ route('peminjaman.destroy', $p->id) }}" method="POST"
+                                            <form action="{{ route('peminjamantahunan.destroy', $p->id) }}" method="POST"
                                                 type="button" class="btn btn-danger p-0"
                                                 onsubmit="return confirm('Delete?')">
                                                 @csrf
@@ -134,15 +134,15 @@
                 </table>
                 <div class="float-sm-left">
                     Showing
-                    {{ $peminjaman->firstItem() }}
+                    {{ $peminjamantahunan->firstItem() }}
                     to
-                    {{ $peminjaman->lastItem() }}
+                    {{ $peminjamantahunan->lastItem() }}
                     of
-                    {{ $peminjaman->total() }}
+                    {{ $peminjamantahunan->total() }}
                     entries
                 </div>
                 <div class="float-sm-right">
-                    {{ $peminjaman->links() }}
+                    {{ $peminjamantahunan->links() }}
                 </div>
             @endsection
         </div>

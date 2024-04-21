@@ -44,8 +44,8 @@
                       <div class="info-box mb-3">
                           <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-cog"></i></span>
                           <div class="info-box-content">
-                              <span class="info-box-text">Laporan Perpustakaan</span>
-                              <span class="info-box-number">{{ $selesai }}</span>
+                              <span class="info-box-text">Laporan Harian</span>
+                              <span class="info-box-number">{{ $siswa }}</span>
                           </div>
                           <!-- /.info-box-content -->
                       </div>
@@ -62,7 +62,7 @@
   
                           <div class="info-box-content">
                               <span class="info-box-text">Peminjaman</span>
-                              <span class="info-box-number">{{ $siswa }}</span>
+                              <span class="info-box-number">{{ $pengembalian }}</span>
                           </div>
                           <!-- /.info-box-content -->
                       </div>
@@ -75,7 +75,7 @@
   
                           <div class="info-box-content">
                               <span class="info-box-text">Pengembalian</span>
-                              <span class="info-box-number">{{ $pengembalian }}</span>
+                              <span class="info-box-number">{{ $selesai }}</span>
                           </div>
                           <!-- /.info-box-content -->
                       </div>

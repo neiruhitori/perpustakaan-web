@@ -49,16 +49,16 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Selesai Meminjam Harian</h1>
+                    <h1 class="m-0">Sedang Meminjam Tahunan</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Selesai Meminjam</li>
+                        <li class="breadcrumb-item active">Sedang Meminjam</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
-                    <a href="{{ route('selesaimeminjam.pdf') }}" class="btn btn-danger mb-3 breadcrumb float-sm-right">
+                    <a href="{{ route('sedangmeminjamtahunan.pdf') }}" class="btn btn-danger mb-3 breadcrumb float-sm-right">
                         <i class="fa fa-download mb-3 breadcrumb float-sm-right"></i>
                         <p>Cetak PDF</p>
                     </a>
@@ -78,8 +78,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($selesaimeminjam->count() > 0)
-                            @forelse ($selesaimeminjam as $key => $k)
+                        @if ($sedangmeminjamtahunan->count() > 0)
+                            @forelse ($sedangmeminjamtahunan as $key => $k)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ $k->name }}</td>

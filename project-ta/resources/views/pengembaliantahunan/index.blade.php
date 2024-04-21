@@ -3,6 +3,10 @@
 
 <head>
     <meta charset="utf-8">
+
+
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Perpustakaan SMP 02 KLAKAH</title>
     <link rel="shortcut icon" href="{{ asset('AdminLTE-3.2.0/dist/img/smp2.png') }}">
@@ -28,6 +32,11 @@
     <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/dist/css/adminlte.min.css') }}">
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/plugins/daterangepicker/daterangepicker.css') }}">
+
+    <!-- Modal -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -40,31 +49,29 @@
 
 
         <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-      <div class="content-header">
-          <div class="container-fluid">
-              <div class="row mb-2">
-                  <div class="col-sm-6">
-                      <h1 class="m-0">Peminjaman Harian</h1>
-                  </div><!-- /.col -->
-                  <div class="col-sm-6">
-                      <ol class="breadcrumb float-sm-right">
-                          <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                          <li class="breadcrumb-item active">Peminjaman</li>
-                      </ol>
-                  </div><!-- /.col -->
-              </div><!-- /.row -->
-
-      <!-- /.content-header -->
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Pengembalian Tahunan</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item active">Pengembalian</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
                     @if (Session::has('success'))
                         <div class="btn btn-success swalDefaultSuccess" role="alert">
                             {{ Session::get('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('peminjaman.create') }}" class="btn btn-primary breadcrumb float-sm-right">Add
-                        Peminjaman</a>
-
-                    <form action="/peminjaman" method="GET">
+                    <a href="{{ route('pengembaliantahunan.pdf') }}" class="btn btn-danger mb-3 breadcrumb float-sm-right"
+                        hidden>Export
+                        Pengembalian</a>
+                    <form action="/pengembaliantahunan" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
                                 <input type="search" name="search" id="form1" class="form-control" />
@@ -74,12 +81,8 @@
                             </button>
                         </div>
                     </form>
-                </div><!-- /.container-fluid -->
+                </div>
             </div>
-            <!-- /.row -->
-            <!-- /.container-fluid -->
-
-
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <tr>
@@ -91,36 +94,46 @@
                         {{-- <th>Jam Pinjam</th> --}}
                         <th>Kode Buku</th>
                         <th>Jam Kembali</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($peminjaman->count() > 0)
-                            @forelse ($peminjaman as $key => $p)
+                        @if ($pengembaliantahunan->count() > 0)
+                            @forelse ($pengembaliantahunan as $key => $k)
                                 <tr>
-                                    <td scope="row">{{ $peminjaman->firstItem() + $key }}</td>
-                                    <td>{{ $p->name }}</td>
-                                    <td>{{ $p->kelas }}</td>
-                                    <td>{{ $p->buku }}</td>
-                                    <td>{{ $p->jml_buku }}</td>
-                                    {{-- <td>{{ $p->jam_pinjam }}</td> --}}
-                                    <td>{{ $p->kodebuku }}</td>
-                                    <td>{{ $p->jam_kembali }}</td>
+                                    <td scope="row">{{ $pengembaliantahunan->firstItem() + $key }}</td>
+                                    <td>{{ $k->name }}</td>
+                                    <td>{{ $k->kelas }}</td>
+                                    <td>{{ $k->buku }}</td>
+                                    <td>{{ $k->jml_buku }}</td>
+                                    {{-- <td>{{ $k->jam_pinjam }}</td> --}}
+                                    <td>{{ $k->kodebuku }}</td>
+                                    <td>{{ $k->jam_kembali }}</td>
                                     <td>
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route('peminjaman.show', $p->id) }}" type="button"
-                                                class="btn btn-secondary"><i class="fas fa-clone"></i></a>
-                                            <a href="{{ route('peminjaman.edit', $p->id) }}" type="button"
-                                                class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                            <form action="{{ route('peminjaman.destroy', $p->id) }}" method="POST"
+                                        <label
+                                            class="label {{ $k->status == 1 ? 'label-danger' : 'label-success' }}">{{ $k->status == 1 ? 'Sedang Meminjam' : 'Selesai' }}</label>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="close">
+                                            @if ($k->status == 1)
+                                            <!-- Tanpa Modal -->
+                                                <a href="{{ route('pengembaliantahunan.status', $k->id) }}"
+                                                    class="btn btn-sm btn-danger" onclick="return confirm('Harap periksa terlebih dahulu kelengkapan buku dan kondisi buku sebelum proses pengembalian selesai!')">Selesai</a>
+                                            <!-- Tanpa Modal End -->
+                                            @else
+                                                {{-- <a href="" class="btn btn-sm btn-success">Meminjam</a> --}}
+                                            @endif
+                                        </div>
+                                        {{-- <div class="btn-group" role="group" aria-label="Basic example">
+                                            <form action="{{ route('pengembaliantahunan.destroy', $k->id) }}" method="POST"
                                                 type="button" class="btn btn-danger p-0"
                                                 onsubmit="return confirm('Delete?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger m-0"><i class="fas fa-trash"></i></button>
                                             </form>
-                                        </div>
-
+                                        </div> --}}
                                     </td>
                                 </tr>
 
@@ -134,19 +147,20 @@
                 </table>
                 <div class="float-sm-left">
                     Showing
-                    {{ $peminjaman->firstItem() }}
+                    {{ $pengembaliantahunan->firstItem() }}
                     to
-                    {{ $peminjaman->lastItem() }}
+                    {{ $pengembaliantahunan->lastItem() }}
                     of
-                    {{ $peminjaman->total() }}
+                    {{ $pengembaliantahunan->total() }}
                     entries
                 </div>
                 <div class="float-sm-right">
-                    {{ $peminjaman->links() }}
+                    {{ $pengembaliantahunan->links() }}
                 </div>
             @endsection
         </div>
 
 </body>
+
 
 </html>

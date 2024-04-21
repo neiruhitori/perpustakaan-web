@@ -43,8 +43,6 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-   with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
                 <a href="/dashboard" class="nav-link {{ Request::is('/') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -57,7 +55,7 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>
-                        Data Master
+                        Data Harian
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
@@ -82,7 +80,7 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-info"></i>
                     <p>
-                        Laporan Perpustakaan
+                        Laporan Harian
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
@@ -97,6 +95,57 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="/selesaimeminjam" class="nav-link {{ Request::is('selesaimeminjam') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Selesai Meminjam</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <div class="user-panel mt-1 pb-1 mb-1 d-flex"></div>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-table"></i>
+                    <p>
+                        Data Tahunan
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/peminjamantahunan" class="nav-link {{ Request::is('peminjamantahunan') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Data Peminjaman</p>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/pengembaliantahunan" class="nav-link {{ Request::is('pengembaliantahunan') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Data Pengembalian</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-info"></i>
+                    <p>
+                        Laporan Tahunan
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/sedangmeminjamtahunan" class="nav-link {{ Request::is('sedangmeminjamtahunan') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sedang Meminjam</p>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/selesaimeminjamtahunan" class="nav-link {{ Request::is('selesaimeminjamtahunan') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Selesai Meminjam</p>
                         </a>

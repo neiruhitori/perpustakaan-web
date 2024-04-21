@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Data Selesai Meminjam Harian</title>
+    <title>Data Pengembalian Tahunan</title>
 
     <style>
         body {
@@ -42,14 +42,14 @@
 </head>
 
 <body>
+
     <table class="table-kop">
         <tr>
             <td width="25" align="center"><img src="AdminLTE-3.2.0/dist/img/smp2.png" width="60%"></td>
             <td width="30" align="center">
-                <h3 style="line-height: 0.20em;">PEMERINTAH KABUPATEN LUMAJANG</h3>
-                <h3 style="line-height: 0.20em;">DINAS PENDIDIKAN</h3>
-                <h2 style="line-height: 0.20em;">SMP NEGERI 02 KLAKAH</h2>
-                <b style="line-height: 0.20em;">Jl. Ranu No.23, Linuboyo, Klakah, Kec. Klakah, Kabupaten Lumajang, Jawa Timur 67356</b>
+                <h2>SMP NEGERI 02 KLAKAH</h2>
+                <br>
+                <h3>Lumajang</h3>
             </td>
             <td width="25" align="center"><img src="AdminLTE-3.2.0/dist/img/lumajang.png" width="60%"></td>
         </tr>
@@ -74,22 +74,20 @@
                                     <th>Kelas</th>
                                     <th>Buku</th>
                                     <th>Jumlah Buku</th>
-                                    <th>Kode Buku</th>
                                     <th>Jam Pinjam</th>
                                     <th>Jam Kembali</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($selesaimeminjam->count() > 0)
-                                    @forelse ($selesaimeminjam as $k)
+                                @if ($pengembaliantahunan->count() > 0)
+                                    @forelse ($pengembaliantahunan as $k)
                                         <tr>
                                             <td scope="row" align=center>{{ $loop->iteration }}</td>
                                             <td align=center>{{ $k->name }}</td>
                                             <td align=center>{{ $k->kelas }}</td>
                                             <td align=center>{{ $k->buku }}</td>
                                             <td align=center>{{ $k->jml_buku }}</td>
-                                            <td align=center>{{ $k->kodebuku }}</td>
                                             <td align=center>{{ $k->jam_pinjam }}</td>
                                             <td align=center>{{ $k->jam_kembali }}</td>
                                             <td align=center>

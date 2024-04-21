@@ -16,12 +16,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Create Harian</h1>
+                        <h1 class="m-0">Create Tahunan</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                            <li class="breadcrumb-item active"><a href="/peminjaman">Peminjaman</a></li>
+                            <li class="breadcrumb-item active"><a href="/peminjamantahunan">Peminjaman</a></li>
                             <li class="breadcrumb-item active">Create</li>
                         </ol>
                     </div><!-- /.col -->
@@ -29,13 +29,13 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <form method="post" enctype="multipart/form-data" id="profile_setup_frm" action="{{ route('peminjaman.store') }}">
+        <form method="post" enctype="multipart/form-data" id="profile_setup_frm" action="{{ route('peminjamantahunan.store') }}">
             @csrf
             <div class="row">
                 <div class="col-md-12 border-right">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Create Peminjaman Harian</h4>
+                            <h4 class="text-right">Create Peminjaman Tahunan</h4>
                         </div>
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
@@ -95,7 +95,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                    <input type="datetime-local" name="jam_pinjam" class="form-control datetimepicker-input"
+                                    <input type="date" name="jam_pinjam" class="form-control datetimepicker-input"
                                         data-target="#reservationdatetime" />
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
@@ -110,7 +110,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                    <input type="datetime-local" name="jam_kembali"
+                                    <input type="date" name="jam_kembali"
                                         class="form-control datetimepicker-input" data-target="#reservationdatetime" />
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">

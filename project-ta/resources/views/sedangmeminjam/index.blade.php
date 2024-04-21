@@ -49,7 +49,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Sedang Meminjam</h1>
+                    <h1 class="m-0">Sedang Meminjam Harian</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -71,6 +71,7 @@
                         <th>Kelas</th>
                         <th>Buku</th>
                         <th>Jumlah Buku</th>
+                        <th>Kode Buku</th>
                         <th>Jam Pinjam</th>
                         <th>Jam Kembali</th>
                         <th>Status</th>
@@ -85,6 +86,7 @@
                                     <td>{{ $k->kelas }}</td>
                                     <td>{{ $k->buku }}</td>
                                     <td>{{ $k->jml_buku }}</td>
+                                    <td>{{ $k->kodebuku }}</td>
                                     <td>{{ $k->jam_pinjam }}</td>
                                     <td>{{ $k->jam_kembali }}</td>
                                     <td>

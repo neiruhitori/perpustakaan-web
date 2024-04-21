@@ -2,13 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PeminjamanTahunanController;
 use App\Http\Controllers\PengembalianController;
+use App\Http\Controllers\PengembalianTahunanController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SedangMeminjamController;
+use App\Http\Controllers\SedangMeminjamTahunanController;
 use App\Http\Controllers\SelesaiMeminjamController;
+use App\Http\Controllers\SelesaiMeminjamTahunanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +53,8 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
 /*--------------------------------------------------------------------------------------------------------- */
 
+    // Harian
+
     Route::controller(PeminjamanController::class)->prefix('peminjaman')->group(function () {
         Route::get('', 'index')->name('peminjaman');
         Route::get('create', 'create')->name('peminjaman.create');
@@ -74,5 +80,35 @@ Route::middleware('auth')->group(function () {
     Route::controller(SelesaiMeminjamController::class)->prefix('selesaimeminjam')->group(function () {
         Route::get('', 'index')->name('selesaimeminjam');
         Route::get('pdf', 'view_pdf')->name('selesaimeminjam.pdf');
+    });
+
+    /*--------------------------------------------------------------------------------------------------------- */
+
+    // Tahunan
+    Route::controller(PeminjamanTahunanController::class)->prefix('peminjamantahunan')->group(function () {
+        Route::get('', 'index')->name('peminjamantahunan');
+        Route::get('create', 'create')->name('peminjamantahunan.create');
+        Route::post('store', 'store')->name('peminjamantahunan.store');
+        Route::get('show/{id}', 'show')->name('peminjamantahunan.show');
+        Route::get('edit/{id}', 'edit')->name('peminjamantahunan.edit');
+        Route::put('edit/{id}', 'update')->name('peminjamantahunan.update');
+        Route::delete('destroy/{id}', 'destroy')->name('peminjamantahunan.destroy');
+    });
+
+    Route::controller(PengembalianTahunanController::class)->prefix('pengembaliantahunan')->group(function () {
+        Route::get('pdf', 'view_pdf')->name('pengembaliantahunan.pdf');
+        Route::get('', 'index')->name('pengembaliantahunan');
+        Route::delete('destroy/{id}', 'destroy')->name('pengembaliantahunan.destroy');
+        Route::get('status/{id}', 'status')->name('pengembaliantahunan.status');
+    });
+
+    Route::controller(SedangMeminjamTahunanController::class)->prefix('sedangmeminjamtahunan')->group(function () {
+        Route::get('', 'index')->name('sedangmeminjamtahunan');
+        Route::get('pdf', 'view_pdf')->name('sedangmeminjamtahunan.pdf');
+    });
+
+    Route::controller(SelesaiMeminjamTahunanController::class)->prefix('selesaimeminjamtahunan')->group(function () {
+        Route::get('', 'index')->name('selesaimeminjamtahunan');
+        Route::get('pdf', 'view_pdf')->name('selesaimeminjamtahunan.pdf');
     });
 });
