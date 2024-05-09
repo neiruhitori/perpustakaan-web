@@ -92,7 +92,7 @@
               </div>
               <br>
               <h2 class="text-center" style="font-family: Quicksand, sans-serif;">Perpustakaan SMPN 02 Klakah</h2>
-              <p class="text-center">Alamat : Jl. Ranu No.23, Linuboyo, Klakah, Kec. Klakah, Kabupaten Lumajang, Jawa
+              <p class="text-center">Alamat : Jl. Ranu No.23, Linduboyo, Klakah, Kec. Klakah, Kabupaten Lumajang, Jawa
                   Timur</p>
               <!-- /.row -->
   

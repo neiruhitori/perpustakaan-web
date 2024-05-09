@@ -46,8 +46,8 @@
                         <div class="row mt-2">
 
                             <div class="col-md-6">
-                                <label class="labels">NIS</label>
-                                <input type="text" name="nis" disabled class="form-control" placeholder="NIS"
+                                <label class="labels">ID Perpustakaan</label>
+                                <input type="text" name="nis" disabled class="form-control" placeholder="ID Perpustakaan"
                                     value="{{ auth()->user()->nis }}">
                             </div>
                             <div class="col-md-6">
@@ -58,7 +58,7 @@
                             <div class="col-md-6">
                                 <label class="labels">Email</label>
                                 <input type="text" name="email" class="form-control"
-                                    value="{{ auth()->user()->email }}" placeholder="Email">
+                                    value="{{ auth()->user()->email }}" placeholder="Email tidak wajib diisi">
                             </div>
                             {{-- <div class="col-md-6">
                                 <label for="photoProfile" class="">Tambah Foto Profile</label>

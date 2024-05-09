@@ -30,7 +30,7 @@
                 <form action="{{ route('register.save') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="number" name="nis" id="nis" class="form-control from-control-user @error('nis')is-invalid @enderror" placeholder="NIS" autocomplete="off">
+                        <input type="number" name="nis" id="nis" class="form-control from-control-user @error('nis')is-invalid @enderror" placeholder="ID Perpustakaan" autocomplete="off">
                         @error('nis')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
+                    {{-- <div class="input-group mb-3">
                         <input type="email" name="email" id="emailaddress" class="form-control from-control-user @error('email')is-invalid @enderror" placeholder="Email" autocomplete="off">
                         @error('email')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -61,7 +61,7 @@
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="input-group mb-3">
                         <input type="password" name="password" id="password" class="form-control from-control-user @error('password')is-invalid @enderror"
                             placeholder="Password" autocomplete="off">

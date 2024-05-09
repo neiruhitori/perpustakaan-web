@@ -24,14 +24,14 @@ class AuthController extends Controller
         $this->validate($request, [
             'nis' => 'required|min:10|max:15',
             'name' => 'required|min:1|max:50',
-            'email' => 'required|min:1|max:50',
+            // 'email' => 'required|min:1|max:50',
             'password' => 'required|min:5|max:50',
         ]);
         
         User::create([
             'nis' => $request->nis,
             'name' => $request->name,
-            'email' => $request->email,
+            // 'email' => $request->email,
             // 'password' => $request->password,
             'password' => bcrypt($request->password),
         ]);

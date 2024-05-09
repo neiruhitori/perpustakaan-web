@@ -126,13 +126,13 @@
 
             <tr>
                 <td width="85" align="center">
-                    <span>Sekertaris,</span>
+                    {{-- <span>Sekertaris,</span> --}}
                     <br />
                     <br />
                     <br />
                     <br />
                     <br />
-                    <span>Nama Sekretaris S.Pd</span>
+                    {{-- <span>Nama Sekretaris S.Pd</span> --}}
                 </td>
 
                 <td></td>

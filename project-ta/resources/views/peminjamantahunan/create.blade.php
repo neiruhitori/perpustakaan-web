@@ -29,7 +29,8 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <form method="post" enctype="multipart/form-data" id="profile_setup_frm" action="{{ route('peminjamantahunan.store') }}">
+        <form method="post" enctype="multipart/form-data" id="profile_setup_frm"
+            action="{{ route('peminjamantahunan.store') }}">
             @csrf
             <div class="row">
                 <div class="col-md-12 border-right">
@@ -39,15 +40,6 @@
                         </div>
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
-
-                            {{-- <div class="col-md-6">
-                                <label>Buku :</label>
-                                <select class="form-control" id="buku_id" name="buku_id">
-                                    @foreach ($buku as $p)
-                                        <option value="{{ $p->id }}">{{ $p->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div> --}}
                             <div class="col-md-6">
                                 <label>Nama :</label>
                                 @error('name')
@@ -64,33 +56,9 @@
                                 <input type="text" class="form-control" id="kelas" name="kelas"
                                     placeholder=" Masukkan Kelas" />
                             </div>
-                            <div class="col-md-6">
-                                <label>Buku :</label>
-                                @error('buku')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                                <input type="text" class="form-control" id="buku" name="buku"
-                                    placeholder=" Masukkan Nama Buku" />
-                            </div>
-                            <div class="col-md-6">
-                                <label>Kode Buku :</label>
-                                @error('kodebuku')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                                <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    placeholder=" Masukkan Nama Kode Buku" />
-                            </div>
-                            <div class="col-md-6">
-                                <label>Jumlah Buku :</label>
-                                @error('jml_buku')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                                <input type="text" class="form-control" id="jml_buku" name="jml_buku"
-                                    placeholder=" Masukkan Jumlah Buku yang di Pinjam" />
-                            </div>
                             <!-- Date and time -->
                             <div class="form-group">
-                                <label>Jam Pinjam :</label>
+                                <label>Tanggal Pinjam :</label>
                                 @error('jam_pinjam')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -105,17 +73,37 @@
                             <!-- /.form group -->
                             <!-- Date and time -->
                             <div class="form-group">
-                                <label>Jam Kembali :</label>
+                                <label>Tanggal Kembali :</label>
                                 @error('jam_kembali')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                    <input type="date" name="jam_kembali"
-                                        class="form-control datetimepicker-input" data-target="#reservationdatetime" />
+                                    <input type="date" name="jam_kembali" class="form-control datetimepicker-input"
+                                        data-target="#reservationdatetime" />
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="input-group mb-3"  id="table">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Buku</th>
+                                        <th>Kode Buku</th>
+                                        <th>Jumlah Buku</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" name="buku[]" id="buku" class="form-control"
+                                                placeholder="Masukkan Nama Buku"></td>
+                                        <td><input type="text" class="form-control" id="kodebuku" name="kodebuku[]"
+                                                placeholder=" Masukkan Kode Buku" /></td>
+                                        <td><input type="text" class="form-control" id="jml_buku" name="jml_buku[]"
+                                                placeholder=" Masukkan Jumlah Buku yang di Pinjam" /></td>
+                                        <td><button class="btn btn-success add_buku" type="button" name="add"
+                                                id="add">Add More</button></td>
+                                    </tr>
+                                </table>
                             </div>
                             <!-- /.form group -->
                             <div class="col-md-6">
@@ -126,9 +114,7 @@
                                 <textarea type="text" class="form-control" id="description" name="description"
                                     placeholder="Silahkan Masukkan Deskripsi Peminjaman"></textarea>
                             </div>
-
                             <div class="col-md-6">
-
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
@@ -136,8 +122,8 @@
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -153,9 +139,10 @@
                                                     data-bs-dismiss="modal">Close
                                                 </button>
 
-                                                    <button id="btn" class="btn btn-primary profile-button" type="submit">
-                                                        Tambah
-                                                    </button>
+                                                <button id="btn" class="btn btn-primary profile-button"
+                                                    type="submit">
+                                                    Tambah
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -168,4 +155,34 @@
             </div>
 
         </form>
+        <script>
+            const add = document.querySelectorAll(".input-group .add_buku")
+            add.forEach(function(e) {
+                e.addEventListener('click', function() {
+                    let element = this.parentElement
+                    // console.log(element);
+                    let newElement = document.createElement('div')
+                    newElement.classList.add('input-group', 'mb-3')
+                    newElement.innerHTML = `
+                <tr>
+                    <td><input type="text" name="buku[]" id="buku" class="form-control" placeholder="Masukkan Nama Buku"></td>
+                    <td><input type="text" class="form-control" id="kodebuku" name="kodebuku[]" placeholder=" Masukkan Kode Buku" /></td>
+                    <td><input type="text" class="form-control" id="jml_buku" name="jml_buku[]" placeholder=" Masukkan Jumlah Buku yang di Pinjam" /></td>
+                    <td><button class="btn btn-danger remove_buku" type="button" name="add" id="add">Remove</button></td>
+                </tr>`
+                    document.getElementById('table').appendChild(newElement)
+                    callEvent()
+                })
+            })
+            callEvent()
+
+            function callEvent() {
+                // Dibawah ini adalah untuk Hapus Input yang ditambahkan
+                document.querySelector('div').querySelectorAll('.remove_buku').forEach(function(remove) {
+                    remove.addEventListener('click', function(elmClick) {
+                        elmClick.target.parentElement.remove()
+                    })
+                })
+            }
+        </script>
     @endsection

@@ -43,16 +43,18 @@
 
 <body>
     <table class="table-kop">
-        <tr>
-            <td width="25" align="center"><img src="AdminLTE-3.2.0/dist/img/smp2.png" width="60%"></td>
-            <td width="30" align="center">
-                <h3 style="line-height: 0.20em;">PEMERINTAH KABUPATEN LUMAJANG</h3>
-                <h3 style="line-height: 0.20em;">DINAS PENDIDIKAN</h3>
-                <h2 style="line-height: 0.20em;">SMP NEGERI 02 KLAKAH</h2>
-                <b style="line-height: 0.20em;">Jl. Ranu No.23, Linuboyo, Klakah, Kec. Klakah, Kabupaten Lumajang, Jawa Timur 67356</b>
-            </td>
-            <td width="25" align="center"><img src="AdminLTE-3.2.0/dist/img/lumajang.png" width="60%"></td>
-        </tr>
+        <thead>
+            <tr>
+                <td width="25" align="center"><img src="AdminLTE-3.2.0/dist/img/smp2.png" width="60%"></td>
+                <td width="30" align="center">
+                    <h3 style="line-height: 0.20em;">PEMERINTAH KABUPATEN LUMAJANG</h3>
+                    <h3 style="line-height: 0.20em;">DINAS PENDIDIKAN</h3>
+                    <h2 style="line-height: 0.20em;">SMP NEGERI 02 KLAKAH</h2>
+                    <b style="line-height: 0.20em;">Jl. Ranu No.23, Linduboyo, Klakah, Kec. Klakah, Kabupaten Lumajang, Jawa Timur 67356</b>
+                </td>
+                <td width="25" align="center"><img src="AdminLTE-3.2.0/dist/img/lumajang.png" width="60%"></td>
+            </tr>
+        </thead>
     </table>
 
     <hr />
@@ -117,7 +119,7 @@
     <br />
 
     <table class="table-ttd">
-        <tfoot>
+        <tfoot class="footer">
             <tr>
                 <td width="85" align="center"></td>
                 <td width="30" align="center">
@@ -125,20 +127,20 @@
                 </td>
                 <td width="85" align="center"></td>
             </tr>
-
+            
             <tr>
                 <td width="85" align="center">
-                    <span>Sekertaris,</span>
+                    {{-- <span>Sekertaris,</span> --}}
                     <br />
                     <br />
                     <br />
                     <br />
                     <br />
-                    <span>Nama Sekretaris S.Pd</span>
+                    {{-- <span>Nama Sekretaris S.Pd</span> --}}
                 </td>
-
+            
                 <td></td>
-
+            
                 <td width="85" align="center">
                     <span>Kepala Sekolah, </span>
                     <br />
@@ -147,7 +149,7 @@
                     <br />
                     <br />
                     <span>Nama Kepala Sekolah S.Kom</span>
-
+            
                 </td>
             </tr>
         </tfoot>

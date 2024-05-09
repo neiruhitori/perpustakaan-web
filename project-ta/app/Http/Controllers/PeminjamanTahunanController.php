@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use App\Models\PeminjamanTahunan;
 use App\Models\User;
@@ -58,18 +59,25 @@ class PeminjamanTahunanController extends Controller
             'jam_kembali' => 'required:true',
             'kodebuku' => 'required:true',
         ]);
-        
-        PeminjamanTahunan::create([
-                    'buku' => $request->buku,
-                    'kodebuku' => $request->kodebuku,
-                    'name' => $request->name,
-                    'kelas' => $request->kelas,
-                    'jml_buku' => $request->jml_buku,
-                    'jam_pinjam' => $request->jam_pinjam,
-                    'jam_kembali' => $request->jam_kembali,
-                    'description' => $request->description
-                ]);
-                return redirect('/peminjamantahunan')->with('success', 'Data Berhasil di Tambahkan');
+
+        $buku = $request->buku;
+        $kodebuku = $request->kodebuku;
+        $jml_buku = $request->jml_buku;
+
+        for ($i=0; $i < count($buku); $i++) { 
+            $datasave = [
+                'name' => $request->name,
+                'buku' => $buku[$i],
+                'kodebuku' => $kodebuku[$i],
+                'jml_buku' => $jml_buku[$i],
+                'kelas' => $request->kelas,
+                'jam_pinjam' => $request->jam_pinjam,
+                'jam_kembali' => $request->jam_kembali,
+                'description' => $request->description,
+            ];
+            PeminjamanTahunan::insert($datasave);
+        }
+        return redirect('/peminjamantahunan')->with('success', 'Data Berhasil di Tambahkan');
     }
 
     /**
