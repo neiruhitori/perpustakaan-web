@@ -42,7 +42,7 @@
 </head>
 
 <body>
-    <table class="table-kop">
+    {{-- <table class="table-kop">
         <tr>
             <td width="25" align="center"><img src="AdminLTE-3.2.0/dist/img/smp2.png" width="80%"></td>
             <td width="30" align="center">
@@ -57,7 +57,7 @@
 
     <hr />
     <br />
-    <br />
+    <br /> --}}
 
     <!-- Main content -->
     <section class="content">
@@ -140,13 +140,13 @@
                 <td></td>
 
                 <td width="85" align="center">
-                    <span>Kepala Sekolah, </span>
+                    {{-- <span>Kepala Sekolah, </span>
                     <br />
                     <br />
                     <br />
                     <br />
                     <br />
-                    <span>Nama Kepala Sekolah S.Kom</span>
+                    <span>Nama Kepala Sekolah S.Kom</span> --}}
 
                 </td>
             </tr>
