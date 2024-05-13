@@ -22,7 +22,7 @@ class AuthController extends Controller
     {
 
         $this->validate($request, [
-            'nis' => 'required|min:10|max:15',
+            'nis' => 'required|min:10|max:10',
             'name' => 'required|min:1|max:50',
             // 'email' => 'required|min:1|max:50',
             'password' => 'required|min:5|max:50',

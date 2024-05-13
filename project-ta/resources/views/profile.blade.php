@@ -77,8 +77,7 @@
                             </div>
                         </div>
                         <center>
-                            <p>Peringatan setiap Anda mengubah <b>Nama</b>, <b>Email</b>, <b>Password</b> dan <b>Foto
-                                    Profile</b>.<br>
+                            <p>Peringatan setiap Anda mengubah <b>Nama</b>, <b>Email</b> dan <b>Password</b>.<br>
                                 Anda perlu memasukan <b>Password lama</b> atau <b>Password baru</b> anda terlebih dahulu di
                                 <b>Changes Password!</b>
                             </p>

@@ -51,6 +51,7 @@
                     </p>
                 </a>
             </li>
+            <div class="user-panel d-flex"></div>
             <li class="nav-item">
                 <a href="#" class="nav-link {{ Request::is('peminjaman') ? 'active' : '' }} {{ Request::is('pengembalian') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-table"></i>
