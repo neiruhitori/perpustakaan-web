@@ -36,15 +36,15 @@
             onsubmit="return confirm('Apakah Anda yakin ingin Logout?')">
             @csrf
             <button type="submit" class="dropdown-item notify-item" onclick="confirmLogout()">
-                <i class="fe-log-out"></i> <span>Logout</span>
+                <span>Logout <i class="fas fa-sign-out-alt"></i> </span>
             </button>
         </form>
     </div>
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item menu-open">
-                <a href="/dashboard" class="nav-link {{ Request::is('/') ? 'active' : '' }}">
+            <li class="nav-item">
+                <a href="/dashboard" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
                         Dashboard
@@ -52,7 +52,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link {{ Request::is('peminjaman') ? 'active' : '' }} {{ Request::is('pengembalian') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-table"></i>
                     <p>
                         Data Harian
@@ -77,7 +77,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link {{ Request::is('sedangmeminjam') ? 'active' : '' }} {{ Request::is('selesaimeminjam') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-info"></i>
                     <p>
                         Laporan Harian
@@ -103,8 +103,8 @@
             </li>
             <div class="user-panel mt-1 pb-1 mb-1 d-flex"></div>
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-table"></i>
+                <a href="#" class="nav-link {{ Request::is('peminjamantahunan') ? 'active' : '' }} {{ Request::is('pengembaliantahunan') ? 'active' : '' }}">
+                    <i class="nav-icon far fa-calendar"></i>
                     <p>
                         Data Tahunan
                         <i class="fas fa-angle-left right"></i>
@@ -128,8 +128,8 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-info"></i>
+                <a href="#" class="nav-link {{ Request::is('sedangmeminjamtahunan') ? 'active' : '' }} {{ Request::is('selesaimeminjamtahunan') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-info-circle"></i>
                     <p>
                         Laporan Tahunan
                         <i class="fas fa-angle-left right"></i>

@@ -23,7 +23,7 @@ class PengembalianTahunanController extends Controller
         if ($request->has('search')) {
             $pengembaliantahunan = PeminjamanTahunan::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
         } else {
-            $pengembaliantahunan = PeminjamanTahunan::orderBy('created_at', 'DESC')->paginate(10);
+            $pengembaliantahunan = PeminjamanTahunan::orderBy('updated_at', 'DESC')->paginate(10);
         }
         return view('pengembaliantahunan.index', compact('pengembaliantahunan', 'profile'));
     }

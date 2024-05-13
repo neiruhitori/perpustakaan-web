@@ -23,7 +23,7 @@ class PeminjamanTahunanController extends Controller
         if ($request->has('search')) {
             $peminjamantahunan = PeminjamanTahunan::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
         } else {
-            $peminjamantahunan = PeminjamanTahunan::orderBy('created_at', 'DESC')->paginate(10);
+            $peminjamantahunan = PeminjamanTahunan::orderBy('updated_at', 'DESC')->paginate(10);
         }
         return view('peminjamantahunan.index', compact('peminjamantahunan', 'profile'));
     }
