@@ -45,27 +45,73 @@
                                 <input type="text" class="form-control" id="name" name="name"
                                     value="{{ $peminjamantahunan->name }}" />
                             </div>
-
                             <div class="col-md-6">
-                                <label>Kelas :</label>
-                                <input type="text" class="form-control" id="kelas" name="kelas"
-                                    value="{{ $peminjamantahunan->kelas }}" />
-                            </div>
-                            <div class="col-md-6">
-                                <label>Buku :</label>
-                                <input type="text" class="form-control" id="buku" name="buku"
-                                    value="{{ $peminjamantahunan->buku }}" />
-                            </div>
+                                <label for="inputStatus">Kelas :</label>
+                                @error('kelas')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <select id="kelas" name="kelas" class="form-control custom-select">
+                                  <option selected disabled>{{ $peminjamantahunan->kelas }}</option>
+                                  <option>VII A</option>
+                                  <option>VII B</option>
+                                  <option>VII C</option>
+                                  <option>VII D</option>
+                                  <option>VII E</option>
+                                  <option>VII F</option>
+                                  <option>VII G</option>
+                                  <option>VIII A</option>
+                                  <option>VIII B</option>
+                                  <option>VIII C</option>
+                                  <option>VIII D</option>
+                                  <option>VIII E</option>
+                                  <option>VIII F</option>
+                                  <option>VIII G</option>
+                                  <option>IX A</option>
+                                  <option>IX B</option>
+                                  <option>IX C</option>
+                                  <option>IX D</option>
+                                  <option>IX E</option>
+                                  <option>IX F</option>
+                                  <option>IX G</option>
+                                </select>
+                              </div>
+                            {{-- <div class="col-md-6">
+                                <label for="inputStatus">Buku :</label>
+                                @error('buku')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                @foreach ($peminjamantahunan->bukus()->get() as $b)
+                                <select id="buku" name="buku" class="form-control custom-select">
+                                  <option selected disabled value="{{ $b->peminjamantahunan_id }}">{{ $b->buku }}</option>
+                                  <option>PAI</option>
+                                  <option>PKn</option>
+                                  <option>BIN</option>
+                                  <option>BIG</option>
+                                  <option>MAT</option>
+                                  <option>IPA</option>
+                                  <option>IPS</option>
+                                  <option>TIK</option>
+                                  <option>PJOK</option>
+                                  <option>PRAKARYA (1)</option>
+                                  <option>PRAKARYA (2)</option>
+                                  <option>BAHASA JAWA</option>
+                                </select>
+                                @endforeach
+                              </div>
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
-                                <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    value="{{ $peminjamantahunan->kodebuku }}" />
+                                @foreach ($peminjamantahunan->bukus()->get() as $d)
+                                    <input type="text" class="form-control" id="kodebuku" name="kodebuku"
+                                    value="{{ $d->kodebuku }}" />
+                                @endforeach
                             </div>
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>
-                                <input type="text" class="form-control" id="jml_buku" name="jml_buku"
-                                    value="{{ $peminjamantahunan->jml_buku }}" />
-                            </div>
+                                @foreach ($peminjamantahunan->bukus()->get() as $c)
+                                    <input type="text" class="form-control" id="jml_buku" name="jml_buku"
+                                    value="{{ $c->jml_buku }}" />
+                                @endforeach
+                            </div> --}}
                             <!-- Date and time -->
                             <div class="form-group">
                                 <label>Jam Pinjam :</label>
@@ -133,9 +179,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </form>
     @endsection

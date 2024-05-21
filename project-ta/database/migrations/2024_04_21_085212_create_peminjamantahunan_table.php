@@ -14,17 +14,17 @@ class CreatePeminjamantahunanTable extends Migration
     public function up()
     {
         Schema::create('peminjamantahunan', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name'); 
             $table->string('kelas'); 
-            $table->string('buku');
-            $table->string('jml_buku'); 
-            $table->dateTime('jam_pinjam');
-            $table->datetime('jam_kembali');
+            // $table->string('buku');
+            // $table->string('jml_buku'); 
+            $table->date('jam_pinjam');
+            $table->date('jam_kembali');
             $table->text('description')->nullable();
             $table->integer('status')->default(1); // 0: disable, 1: enable
             $table->timestamps();
-            $table->string('kodebuku')->nullable();
+            // $table->string('kodebuku')->nullable();
         });
     }
 

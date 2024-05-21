@@ -67,7 +67,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <table id="example2" class="table-isi" style="width: 100%" cellpadding="8">
+                        <table id="example2" class="table-isi" style="width: 100%">
                             <thead>
 
                                 <tr>
@@ -86,12 +86,36 @@
                                 @if ($selesaimeminjamtahunan->count() > 0)
                                     @forelse ($selesaimeminjamtahunan as $k)
                                         <tr>
-                                            <td scope="row" align=center>{{ $loop->iteration }}</td>
-                                            <td align=center>{{ $k->name }}</td>
-                                            <td align=center>{{ $k->kelas }}</td>
-                                            <td align=center>{{ $k->buku }}</td>
-                                            <td align=center>{{ $k->jml_buku }}</td>
-                                            <td align=center>{{ $k->kodebuku }}</td>
+                                            <td scope="row" align="center">{{ $loop->iteration }}</td>
+                                            <td align="center">{{ $k->name }}</td>
+                                            <td align="center">{{ $k->kelas }}</td>
+                                            <td align="center">
+                                                @foreach ($k->bukus()->get() as $b)
+                                                
+                                                    <ul type=disc>
+                                                        <li>{{ $b->buku }}</li>
+                                                    </ul>
+                                                
+                                                @endforeach
+                                            </td>
+                                            <td align="center">
+                                                @foreach ($k->bukus()->get() as $c)
+                                                
+                                                    <ul type=circle>
+                                                        <li>{{ $c->jml_buku }}</li>
+                                                    </ul>
+                                                
+                                                @endforeach
+                                            </td>
+                                            <td align="center">
+                                                @foreach ($k->bukus()->get() as $d)
+                                                
+                                                    <ul type=circle>
+                                                        <li>{{ $d->kodebuku }}</li>
+                                                    </ul>
+                                                
+                                                @endforeach
+                                            </td>
                                             <td align=center>{{ $k->jam_pinjam }}</td>
                                             <td align=center>{{ $k->jam_kembali }}</td>
                                             <td align=center>

@@ -12,5 +12,10 @@ class PeminjamanTahunan extends Model
     protected $primaryKey = 'id';
     protected $fillable = [];
     protected $guarded = [];
+
+    public function bukus()
+    {
+        return $this->hasMany(Buku::class, 'peminjamantahunan_id');
+    }
 }
 

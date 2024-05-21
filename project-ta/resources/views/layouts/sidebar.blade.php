@@ -3,7 +3,7 @@
         aria-expanded="false">
         <div>
             <div class="image">
-                <img src="{{ asset('AdminLTE-3.2.0/dist/img/pp.png') }}" alt="user-image"
+                <img src="{{ asset('AdminLTE-3.2.0/dist/img/avatar02.png') }}" alt="user-image"
                     class="rounded-circle">
 
                 {{-- @if ($profile->photoProfile != null)
@@ -13,8 +13,8 @@
                 @endif --}}
 
 
-                <span class="pro-user-name ml-1">
-                    {{ auth()->user()->name }} <i class="mdi mdi-chevron-down"></i>
+                <span class="pro-user-name ml-2">
+                    {{ auth()->user()->name }}
                 </span>
             </div>
         </div>
@@ -45,15 +45,15 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
                 <a href="/dashboard" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <i class="nav-icon fas fa-home"></i>
                     <p>
                         Dashboard
                     </p>
                 </a>
             </li>
-            <div class="user-panel d-flex"></div>
-            <li class="nav-item">
-                <a href="#" class="nav-link {{ Request::is('peminjaman') ? 'active' : '' }} {{ Request::is('pengembalian') ? 'active' : '' }}">
+            {{-- <div class="user-panel d-flex"></div> --}}
+            <li class="nav-item  {{ Request::is('peminjaman') ? 'menu-open' : '' }} {{ Request::is('pengembalian') ? 'menu-open' : '' }} {{ Request::is('sedangmeminjam') ? 'menu-open' : '' }} {{ Request::is('selesaimeminjam') ? 'menu-open' : '' }}">
+                <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>
                         Data Harian
@@ -76,15 +76,6 @@
                         </a>
                     </li>
                 </ul>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link {{ Request::is('sedangmeminjam') ? 'active' : '' }} {{ Request::is('selesaimeminjam') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-info"></i>
-                    <p>
-                        Laporan Harian
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="/sedangmeminjam" class="nav-link {{ Request::is('sedangmeminjam') ? 'active' : '' }}">
@@ -102,9 +93,19 @@
                     </li>
                 </ul>
             </li>
-            <div class="user-panel mt-1 pb-1 mb-1 d-flex"></div>
-            <li class="nav-item">
-                <a href="#" class="nav-link {{ Request::is('peminjamantahunan') ? 'active' : '' }} {{ Request::is('pengembaliantahunan') ? 'active' : '' }}">
+            {{-- <li class="nav-item">
+                <a href="#" class="nav-link {{ Request::is('sedangmeminjam') ? 'active' : '' }} {{ Request::is('selesaimeminjam') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-info"></i>
+                    <p>
+                        Laporan Harian
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                
+            </li> --}}
+            {{-- <div class="user-panel mt-1 pb-1 mb-1 d-flex"></div> --}}
+            <li class="nav-item  {{ Request::is('peminjamantahunan') ? 'menu-open' : '' }} {{ Request::is('pengembaliantahunan') ? 'menu-open' : '' }} {{ Request::is('sedangmeminjamtahunan') ? 'menu-open' : '' }} {{ Request::is('selesaimeminjamtahunan') ? 'menu-open' : '' }}">
+                <a href="#" class="nav-link">
                     <i class="nav-icon far fa-calendar"></i>
                     <p>
                         Data Tahunan
@@ -127,15 +128,6 @@
                         </a>
                     </li>
                 </ul>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link {{ Request::is('sedangmeminjamtahunan') ? 'active' : '' }} {{ Request::is('selesaimeminjamtahunan') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-info-circle"></i>
-                    <p>
-                        Laporan Tahunan
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="/sedangmeminjamtahunan" class="nav-link {{ Request::is('sedangmeminjamtahunan') ? 'active' : '' }}">
@@ -149,6 +141,74 @@
                         <a href="/selesaimeminjamtahunan" class="nav-link {{ Request::is('selesaimeminjamtahunan') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Selesai Meminjam</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {{-- <li class="nav-item">
+                <a href="#" class="nav-link {{ Request::is('sedangmeminjamtahunan') ? 'active' : '' }} {{ Request::is('selesaimeminjamtahunan') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-info-circle"></i>
+                    <p>
+                        Laporan Tahunan
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+
+            </li> --}}
+            <li class="nav-item  {{ Request::is('kelasvii') ? 'menu-open' : '' }} {{ Request::is('kelasviii') ? 'menu-open' : '' }} {{ Request::is('kelasix') ? 'menu-open' : '' }}">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-school"></i>
+                    <p>
+                        Kelas
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/kelasvii" class="nav-link {{ Request::is('kelasvii') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>VII</p>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/kelasviii" class="nav-link {{ Request::is('kelasviii') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>VIII</p>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/kelasix" class="nav-link {{ Request::is('kelasix') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>IX</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item {{ Request::is('catatanharian') ? 'menu-open' : '' }} {{ Request::is('catatantahunan') ? 'menu-open' : '' }}">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-pencil-alt"></i>
+                    <p>
+                        Catatan
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/catatanharian" class="nav-link {{ Request::is('catatanharian') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Harian</p>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/catatantahunan" class="nav-link {{ Request::is('catatantahunan') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Tahunan</p>
                         </a>
                     </li>
                 </ul>

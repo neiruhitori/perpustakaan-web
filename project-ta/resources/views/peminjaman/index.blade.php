@@ -67,7 +67,7 @@
                     <form action="/peminjaman" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="search" name="search" id="form1" class="form-control" />
+                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama Peminjam"/>
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -109,7 +109,7 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('peminjaman.show', $p->id) }}" type="button"
-                                                class="btn btn-secondary"><i class="fas fa-clone"></i></a>
+                                                class="btn btn-secondary"><i class="fas fa-eye"></i></a>
                                             <a href="{{ route('peminjaman.edit', $p->id) }}" type="button"
                                                 class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                             <form action="{{ route('peminjaman.destroy', $p->id) }}" method="POST"

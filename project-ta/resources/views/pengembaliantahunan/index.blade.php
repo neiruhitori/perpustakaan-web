@@ -74,7 +74,7 @@
                     <form action="/pengembaliantahunan" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="search" name="search" id="form1" class="form-control" />
+                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama Peminjam"/>
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -91,7 +91,6 @@
                         <th>Kelas</th>
                         <th>Buku</th>
                         <th>Jumlah Buku</th>
-                        {{-- <th>Jam Pinjam</th> --}}
                         <th>Kode Buku</th>
                         <th>Jam Kembali</th>
                         <th>Status</th>
@@ -105,10 +104,33 @@
                                     <td scope="row">{{ $pengembaliantahunan->firstItem() + $key }}</td>
                                     <td>{{ $k->name }}</td>
                                     <td>{{ $k->kelas }}</td>
-                                    <td>{{ $k->buku }}</td>
-                                    <td>{{ $k->jml_buku }}</td>
-                                    {{-- <td>{{ $k->jam_pinjam }}</td> --}}
-                                    <td>{{ $k->kodebuku }}</td>
+                                    <td>
+                                        @foreach ($k->bukus()->get() as $b)
+                                        
+                                            <ul type=disc>
+                                                <li>{{ $b->buku }}</li>
+                                            </ul>
+                                        
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach ($k->bukus()->get() as $c)
+                                        
+                                            <ul type=circle>
+                                                <li>{{ $c->jml_buku }}</li>
+                                            </ul>
+                                        
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach ($k->bukus()->get() as $d)
+                                        
+                                            <ul type=circle>
+                                                <li>{{ $d->kodebuku }}</li>
+                                            </ul>
+                                        
+                                        @endforeach
+                                    </td>
                                     <td>{{ $k->jam_kembali }}</td>
                                     <td>
                                         <label

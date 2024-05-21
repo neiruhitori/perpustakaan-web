@@ -40,34 +40,40 @@
 
 
         <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-      <div class="content-header">
-          <div class="container-fluid">
-              <div class="row mb-2">
-                  <div class="col-sm-6">
-                      <h1 class="m-0">Peminjaman Tahunan</h1>
-                  </div><!-- /.col -->
-                  <div class="col-sm-6">
-                      <ol class="breadcrumb float-sm-right">
-                          <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                          <li class="breadcrumb-item active">Peminjaman</li>
-                      </ol>
-                  </div><!-- /.col -->
-              </div><!-- /.row -->
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Peminjaman Tahunan</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item active">Peminjaman</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
 
-      <!-- /.content-header -->
+                    <!-- /.content-header -->
                     @if (Session::has('success'))
                         <div class="btn btn-success swalDefaultSuccess" role="alert">
                             {{ Session::get('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('peminjamantahunan.create') }}" class="btn btn-primary breadcrumb float-sm-right">Add
-                        Peminjaman</a>
+                    <div class="btn-group breadcrumb float-sm-right" role="group" aria-label="Basic example">
+                    <a href="{{ route('peminjamantahunan.create') }}" class="btn btn-success  float-sm-right" type="button">
+                        <i class="fas fa-plus"></i> Peminjam
+                    </a>
+                    <a href="{{ route('peminjamantahunanbuku.create') }}" class="btn btn-primary  float-sm-right" type="button">
+                        <i class="fas fa-plus"></i> Buku
+                    </a>
+                    </div>
 
                     <form action="/peminjamantahunan" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="search" name="search" id="form1" class="form-control" />
+                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama Peminjam"/>
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -101,15 +107,38 @@
                                     <td scope="row">{{ $peminjamantahunan->firstItem() + $key }}</td>
                                     <td>{{ $p->name }}</td>
                                     <td>{{ $p->kelas }}</td>
-                                    <td>{{ $p->buku }}</td>
-                                    <td>{{ $p->jml_buku }}</td>
-                                    {{-- <td>{{ $p->jam_pinjam }}</td> --}}
-                                    <td>{{ $p->kodebuku }}</td>
+                                    <td>
+                                        @foreach ($p->bukus()->get() as $b)
+                                        
+                                            <ul type=disc>
+                                                <li>{{ $b->buku }}</li>
+                                            </ul>
+                                        
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach ($p->bukus()->get() as $c)
+                                        
+                                            <ul type=circle>
+                                                <li>{{ $c->jml_buku }}</li>
+                                            </ul>
+                                        
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach ($p->bukus()->get() as $d)
+                                        
+                                            <ul type=circle>
+                                                <li>{{ $d->kodebuku }}</li>
+                                            </ul>
+                                        
+                                        @endforeach
+                                    </td>
                                     <td>{{ $p->jam_kembali }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('peminjamantahunan.show', $p->id) }}" type="button"
-                                                class="btn btn-secondary"><i class="fas fa-clone"></i></a>
+                                                class="btn btn-secondary"><i class="fas fa-eye"></i></a>
                                             <a href="{{ route('peminjamantahunan.edit', $p->id) }}" type="button"
                                                 class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                             <form action="{{ route('peminjamantahunan.destroy', $p->id) }}" method="POST"

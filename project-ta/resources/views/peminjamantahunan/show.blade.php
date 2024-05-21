@@ -45,18 +45,24 @@
                             </div>
                             <div class="col-md-6">
                                 <label>Buku :</label>
-                                <input type="text" class="form-control" id="buku" name="buku"
-                                    value="{{ $peminjamantahunan->buku }}" readonly/>
+                                @foreach ($peminjamantahunan->bukus()->get() as $b)
+                                    <input type="text" class="form-control" id="buku" name="buku"
+                                    value="{{ $b->buku }}" readonly/>
+                                @endforeach
                             </div>
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
-                                <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    value="{{ $peminjamantahunan->kodebuku }}" readonly/>
+                                @foreach ($peminjamantahunan->bukus()->get() as $d)
+                                    <input type="text" class="form-control" id="kodebuku" name="kodebuku"
+                                    value="{{ $d->kodebuku }}" readonly/>
+                                @endforeach
                             </div>
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>
-                                <input type="text" class="form-control" id="jml_buku" name="jml_buku"
-                                value="{{ $peminjamantahunan->jml_buku }}" readonly />
+                                @foreach ($peminjamantahunan->bukus()->get() as $c)
+                                    <input type="text" class="form-control" id="jml_buku" name="jml_buku"
+                                    value="{{ $c->jml_buku }}" readonly />
+                                @endforeach
                             </div>
                             <!-- Date and time -->
                             <div class="form-group">

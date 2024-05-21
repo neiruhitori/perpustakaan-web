@@ -84,9 +84,33 @@
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ $k->name }}</td>
                                     <td>{{ $k->kelas }}</td>
-                                    <td>{{ $k->buku }}</td>
-                                    <td>{{ $k->jml_buku }}</td>
-                                    <td>{{ $k->kodebuku }}</td>
+                                    <td>
+                                        @foreach ($k->bukus()->get() as $b)
+                                        
+                                            <ul type=disc>
+                                                <li>{{ $b->buku }}</li>
+                                            </ul>
+                                        
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach ($k->bukus()->get() as $c)
+                                        
+                                            <ul type=circle>
+                                                <li>{{ $c->jml_buku }}</li>
+                                            </ul>
+                                        
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach ($k->bukus()->get() as $d)
+                                        
+                                            <ul type=circle>
+                                                <li>{{ $d->kodebuku }}</li>
+                                            </ul>
+                                        
+                                        @endforeach
+                                    </td>
                                     <td>{{ $k->jam_pinjam }}</td>
                                     <td>{{ $k->jam_kembali }}</td>
                                     <td>

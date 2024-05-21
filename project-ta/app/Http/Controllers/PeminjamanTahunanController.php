@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buku;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use App\Models\PeminjamanTahunan;
@@ -51,41 +52,65 @@ class PeminjamanTahunanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'buku' => 'required|min:1|max:50',
             'name' => 'required|min:1|max:50',
             'kelas' => 'required|min:1|max:50',
-            'jml_buku' => 'required|min:1|max:50',
             'jam_pinjam' => 'required:true',
             'jam_kembali' => 'required:true',
-            'kodebuku' => 'required:true',
+        ]);
+        PeminjamanTahunan::create([
+            'name' => $request->name,
+            'kelas' => $request->kelas,
+            'jam_pinjam' => $request->jam_pinjam,
+            'jam_kembali' => $request->jam_kembali,
+            'description' => $request->description
         ]);
 
-        $buku = $request->buku;
-        $kodebuku = $request->kodebuku;
-        $jml_buku = $request->jml_buku;
+        // $buku = $request->buku;
+        // $kodebuku = $request->kodebuku;
+        // $jml_buku = $request->jml_buku;
 
-        for ($i=0; $i < count($buku); $i++) { 
-            $datasave = [
-                'name' => $request->name,
-                'buku' => $buku[$i],
-                'kodebuku' => $kodebuku[$i],
-                'jml_buku' => $jml_buku[$i],
-                'kelas' => $request->kelas,
-                'jam_pinjam' => $request->jam_pinjam,
-                'jam_kembali' => $request->jam_kembali,
-                'description' => $request->description,
-            ];
-            PeminjamanTahunan::insert($datasave);
-        }
+        // for ($i=0; $i < count($buku); $i++) { 
+        //     $datasave = [
+        //         'name' => $request->name,
+        //         'buku' => $buku[$i],
+        //         'kodebuku' => $kodebuku[$i],
+        //         'jml_buku' => $jml_buku[$i],
+        //         'kelas' => $request->kelas,
+        //         'jam_pinjam' => $request->jam_pinjam,
+        //         'jam_kembali' => $request->jam_kembali,
+        //         'description' => $request->description,
+        //     ];
+        //     PeminjamanTahunan::insert($datasave);
+        // }
         return redirect('/peminjamantahunan')->with('success', 'Data Berhasil di Tambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function createbuku()
+    {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+
+        $peminjamantahunanbuku = PeminjamanTahunan::all();
+        return view('peminjamantahunan.createbuku', compact('peminjamantahunanbuku', 'profile'));
+    }
+
+    public function storebuku(Request $request)
+    {
+        $this->validate($request, [
+            'peminjamantahunan_id' => 'required|min:1|max:50',
+            'buku' => 'required|min:1|max:50',
+            'jml_buku' => 'required:true',
+            'kodebuku' => 'required:true',
+        ]);
+        Buku::create([
+            'peminjamantahunan_id' => $request->peminjamantahunan_id,
+            'buku' => $request->buku,
+            'jml_buku' => $request->jml_buku,
+            'kodebuku' => $request->kodebuku,
+        ]);
+        return redirect('/peminjamantahunan')->with('success', 'Data Berhasil di Tambahkan');
+    }
+
     public function show(string $id)
     {
         $iduser = Auth::id();
