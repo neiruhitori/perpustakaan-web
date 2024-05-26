@@ -134,161 +134,92 @@ Route::middleware('auth')->group(function () {
     // ===============================================================================================================
 
     // Route halaman kelas============================================================================================
-    Route::controller(KelasController::class)->prefix('kelasvii')->group(function () {
-        Route::get('', 'index_vii')->name('kelasvii');
+    Route::controller(KelasController::class)->group(function () {
+        Route::get('kelas/viia', 'kelas_viia')->name('viia');
+        Route::get('kelas/viia/search', 'search_viia')->name('viia.search');
+        Route::get('kelas/viia/pdf', 'pdf_viia')->name('viia.pdf');
+
+        Route::get('kelas/viib', 'kelas_viib')->name('viib');
+        Route::get('kelas/viib/search', 'search_viib')->name('viib.search');
+        Route::get('kelas/viib/pdf', 'pdf_viib')->name('viib.pdf');
+
+        Route::get('kelas/viic', 'kelas_viic')->name('viic');
+        Route::get('kelas/viic/search', 'search_viic')->name('viic.search');
+        Route::get('kelas/viic/pdf', 'pdf_viic')->name('viic.pdf');
+
+        Route::get('kelas/viid', 'kelas_viid')->name('viid');
+        Route::get('kelas/viid/search', 'search_viid')->name('viid.search');
+        Route::get('kelas/viid/pdf', 'pdf_viid')->name('viid.pdf');
+
+        Route::get('kelas/viie', 'kelas_viie')->name('viie');
+        Route::get('kelas/viie/search', 'search_viie')->name('viie.search');
+        Route::get('kelas/viie/pdf', 'pdf_viie')->name('viie.pdf');
+
+        Route::get('kelas/viif', 'kelas_viif')->name('viif');
+        Route::get('kelas/viif/search', 'search_viif')->name('viif.search');
+        Route::get('kelas/viif/pdf', 'pdf_viif')->name('viif.pdf');
+
+        Route::get('kelas/viig', 'kelas_viig')->name('viig');
+        Route::get('kelas/viig/search', 'search_viig')->name('viig.search');
+        Route::get('kelas/viig/pdf', 'pdf_viig')->name('viig.pdf');
     });
-    Route::controller(KelasController::class)->prefix('kelasviii')->group(function () {
-        Route::get('', 'index_viii')->name('kelasviii');
+    Route::controller(KelasController::class)->group(function () {
+        Route::get('kelas/viiia', 'kelas_viiia')->name('viiia');
+        Route::get('kelas/viiia/search', 'search_viiia')->name('viiia.search');
+        Route::get('kelas/viiia/pdf', 'pdf_viiia')->name('viiia.pdf');
+
+        Route::get('kelas/viiib', 'kelas_viiib')->name('viiib');
+        Route::get('kelas/viiib/search', 'search_viiib')->name('viiib.search');
+        Route::get('kelas/viiib/pdf', 'pdf_viiib')->name('viiib.pdf');
+
+        Route::get('kelas/viiic', 'kelas_viiic')->name('viiic');
+        Route::get('kelas/viiic/search', 'search_viiic')->name('viiic.search');
+        Route::get('kelas/viiic/pdf', 'pdf_viiic')->name('viiic.pdf');
+
+        Route::get('kelas/viiid', 'kelas_viiid')->name('viiid');
+        Route::get('kelas/viiid/search', 'search_viiid')->name('viiid.search');
+        Route::get('kelas/viiid/pdf', 'pdf_viiid')->name('viiid.pdf');
+
+        Route::get('kelas/viiie', 'kelas_viiie')->name('viiie');
+        Route::get('kelas/viiie/search', 'search_viiie')->name('viiie.search');
+        Route::get('kelas/viiie/pdf', 'pdf_viiie')->name('viiie.pdf');
+
+        Route::get('kelas/viiif', 'kelas_viiif')->name('viiif');
+        Route::get('kelas/viiif/search', 'search_viiif')->name('viiif.search');
+        Route::get('kelas/viiif/pdf', 'pdf_viiif')->name('viiif.pdf');
+
+        Route::get('kelas/viiig', 'kelas_viiig')->name('viiig');
+        Route::get('kelas/viiig/search', 'search_viiig')->name('viiig.search');
+        Route::get('kelas/viiig/pdf', 'pdf_viiig')->name('viiig.pdf');
     });
-    Route::controller(KelasController::class)->prefix('kelasix')->group(function () {
-        Route::get('', 'index_ix')->name('kelasix');
+    Route::controller(KelasController::class)->group(function () {
+        Route::get('kelas/ixa', 'kelas_ixa')->name('ixa');
+        Route::get('kelas/ixa/search', 'search_ixa')->name('ixa.search');
+        Route::get('kelas/ixa/pdf', 'pdf_ixa')->name('ixa.pdf');
+
+        Route::get('kelas/ixb', 'kelas_ixb')->name('ixb');
+        Route::get('kelas/ixb/search', 'search_ixb')->name('ixb.search');
+        Route::get('kelas/ixb/pdf', 'pdf_ixb')->name('ixb.pdf');
+
+        Route::get('kelas/ixc', 'kelas_ixc')->name('ixc');
+        Route::get('kelas/ixc/search', 'search_ixc')->name('ixc.search');
+        Route::get('kelas/ixc/pdf', 'pdf_ixc')->name('ixc.pdf');
+
+        Route::get('kelas/ixd', 'kelas_ixd')->name('ixd');
+        Route::get('kelas/ixd/search', 'search_ixd')->name('ixd.search');
+        Route::get('kelas/ixd/pdf', 'pdf_ixd')->name('ixd.pdf');
+
+        Route::get('kelas/ixe', 'kelas_ixe')->name('ixe');
+        Route::get('kelas/ixe/search', 'search_ixe')->name('ixe.search');
+        Route::get('kelas/ixe/pdf', 'pdf_ixe')->name('ixe.pdf');
+
+        Route::get('kelas/ixf', 'kelas_ixf')->name('ixf');
+        Route::get('kelas/ixf/search', 'search_ixf')->name('ixf.search');
+        Route::get('kelas/ixf/pdf', 'pdf_ixf')->name('ixf.pdf');
+
+        Route::get('kelas/ixg', 'kelas_ixg')->name('ixg');
+        Route::get('kelas/ixg/search', 'search_ixg')->name('ixg.search');
+        Route::get('kelas/ixg/pdf', 'pdf_ixg')->name('ixg.pdf');
     });
     // ===================================================================================================================
-    // Route halaman isi kelas VII A====================================================================================
-    Route::controller(KelasController::class)->prefix('a')->group(function () {
-        Route::get('kelas/viia', 'kelas_viia')->name('a');
-        Route::get('kelas/viia/search', 'search_viia')->name('a.search');
-        Route::get('kelas/viia/pdf', 'pdf_viia')->name('a.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas VII B====================================================================================
-    Route::controller(KelasController::class)->prefix('b')->group(function () {
-        Route::get('kelas/viib', 'kelas_viib')->name('b');
-        Route::get('kelas/viib/search', 'search_viib')->name('b.search');
-        Route::get('kelas/viib/pdf', 'pdf_viib')->name('b.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas VII C====================================================================================
-    Route::controller(KelasController::class)->prefix('c')->group(function () {
-        Route::get('kelas/viic', 'kelas_viic')->name('c');
-        Route::get('kelas/viic/search', 'search_viic')->name('c.search');
-        Route::get('kelas/viic/pdf', 'pdf_viic')->name('c.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas VII D====================================================================================
-    Route::controller(KelasController::class)->prefix('d')->group(function () {
-        Route::get('kelas/viid', 'kelas_viid')->name('d');
-        Route::get('kelas/viid/search', 'search_viid')->name('d.search');
-        Route::get('kelas/viid/pdf', 'pdf_viid')->name('d.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas VII E====================================================================================
-    Route::controller(KelasController::class)->prefix('e')->group(function () {
-        Route::get('kelas/viie', 'kelas_viie')->name('e');
-        Route::get('kelas/viie/search', 'search_viie')->name('e.search');
-        Route::get('kelas/viie/pdf', 'pdf_viie')->name('e.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas VII F====================================================================================
-    Route::controller(KelasController::class)->prefix('f')->group(function () {
-        Route::get('kelas/viif', 'kelas_viif')->name('f');
-        Route::get('kelas/viif/search', 'search_viif')->name('f.search');
-        Route::get('kelas/viif/pdf', 'pdf_viif')->name('f.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas VII G====================================================================================
-    Route::controller(KelasController::class)->prefix('g')->group(function () {
-        Route::get('kelas/viig', 'kelas_viig')->name('g');
-        Route::get('kelas/viig/search', 'search_viig')->name('g.search');
-        Route::get('kelas/viig/pdf', 'pdf_viig')->name('g.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas VIII A====================================================================================
-    Route::controller(KelasController::class)->prefix('a')->group(function () {
-        Route::get('kelas/viiia', 'kelas_viiia')->name('a');
-        Route::get('kelas/viiia/search', 'search_viiia')->name('a.search');
-        Route::get('kelas/viiia/pdf', 'pdf_viiia')->name('a.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas VIII B====================================================================================
-    Route::controller(KelasController::class)->prefix('b')->group(function () {
-        Route::get('kelas/viiib', 'kelas_viiib')->name('b');
-        Route::get('kelas/viiib/search', 'search_viiib')->name('b.search');
-        Route::get('kelas/viiib/pdf', 'pdf_viiib')->name('b.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas VIII C====================================================================================
-    Route::controller(KelasController::class)->prefix('c')->group(function () {
-        Route::get('kelas/viiic', 'kelas_viiic')->name('c');
-        Route::get('kelas/viiic/search', 'search_viiic')->name('c.search');
-        Route::get('kelas/viiic/pdf', 'pdf_viiic')->name('c.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas VIII D====================================================================================
-    Route::controller(KelasController::class)->prefix('d')->group(function () {
-        Route::get('kelas/viiid', 'kelas_viiid')->name('d');
-        Route::get('kelas/viiid/search', 'search_viiid')->name('d.search');
-        Route::get('kelas/viiid/pdf', 'pdf_viiid')->name('d.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas VIII E====================================================================================
-    Route::controller(KelasController::class)->prefix('e')->group(function () {
-        Route::get('kelas/viiie', 'kelas_viiie')->name('e');
-        Route::get('kelas/viiie/search', 'search_viiie')->name('e.search');
-        Route::get('kelas/viiie/pdf', 'pdf_viiie')->name('e.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas VIII F====================================================================================
-    Route::controller(KelasController::class)->prefix('f')->group(function () {
-        Route::get('kelas/viiif', 'kelas_viiif')->name('f');
-        Route::get('kelas/viiif/search', 'search_viiif')->name('f.search');
-        Route::get('kelas/viiif/pdf', 'pdf_viiif')->name('f.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas VIII G====================================================================================
-    Route::controller(KelasController::class)->prefix('g')->group(function () {
-        Route::get('kelas/viiig', 'kelas_viiig')->name('g');
-        Route::get('kelas/viiig/search', 'search_viiig')->name('g.search');
-        Route::get('kelas/viiig/pdf', 'pdf_viiig')->name('g.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas IX A====================================================================================
-    Route::controller(KelasController::class)->prefix('a')->group(function () {
-        Route::get('kelas/ixa', 'kelas_ixa')->name('a');
-        Route::get('kelas/ixa/search', 'search_ixa')->name('a.search');
-        Route::get('kelas/ixa/pdf', 'pdf_ixa')->name('a.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas IX B====================================================================================
-    Route::controller(KelasController::class)->prefix('b')->group(function () {
-        Route::get('kelas/ixb', 'kelas_ixb')->name('b');
-        Route::get('kelas/ixb/search', 'search_ixb')->name('b.search');
-        Route::get('kelas/ixb/pdf', 'pdf_ixb')->name('b.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas IX C====================================================================================
-    Route::controller(KelasController::class)->prefix('c')->group(function () {
-        Route::get('kelas/ixc', 'kelas_ixc')->name('c');
-        Route::get('kelas/ixc/search', 'search_ixc')->name('c.search');
-        Route::get('kelas/ixc/pdf', 'pdf_ixc')->name('c.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas IX D====================================================================================
-    Route::controller(KelasController::class)->prefix('d')->group(function () {
-        Route::get('kelas/ixd', 'kelas_ixd')->name('d');
-        Route::get('kelas/ixd/search', 'search_ixd')->name('d.search');
-        Route::get('kelas/ixd/pdf', 'pdf_ixd')->name('d.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas IX E====================================================================================
-    Route::controller(KelasController::class)->prefix('e')->group(function () {
-        Route::get('kelas/ixe', 'kelas_ixe')->name('e');
-        Route::get('kelas/ixe/search', 'search_ixe')->name('e.search');
-        Route::get('kelas/ixe/pdf', 'pdf_ixe')->name('e.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas IX F====================================================================================
-    Route::controller(KelasController::class)->prefix('f')->group(function () {
-        Route::get('kelas/ixf', 'kelas_ixf')->name('f');
-        Route::get('kelas/ixf/search', 'search_ixf')->name('f.search');
-        Route::get('kelas/ixf/pdf', 'pdf_ixf')->name('f.pdf');
-    });
-    // ====================================================================================================================
-    // Route halaman isi kelas IX G====================================================================================
-    Route::controller(KelasController::class)->prefix('g')->group(function () {
-        Route::get('kelas/ixg', 'kelas_ixg')->name('g');
-        Route::get('kelas/ixg/search', 'search_ixg')->name('g.search');
-        Route::get('kelas/ixg/pdf', 'pdf_ixg')->name('g.pdf');
-    });
-    // ====================================================================================================================
 });

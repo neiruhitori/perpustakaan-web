@@ -58,7 +58,7 @@
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
-                    <form action="{{ route('e.search') }}" method="GET">
+                    <form action="{{ route('viie.search') }}" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
                                 <input type="search" name="search" id="form1" class="form-control"
@@ -69,7 +69,7 @@
                             </button>
                         </div>
                     </form>
-                    <a href="{{ route('e.pdf') }}" class="btn btn-danger mb-3 breadcrumb float-sm-right">
+                    <a href="{{ route('viie.pdf') }}" class="btn btn-danger mb-3 breadcrumb float-sm-right">
                         <i class="fa fa-download mb-3 breadcrumb float-sm-right"></i>
                         <p>Cetak PDF</p>
                     </a>
@@ -94,29 +94,23 @@
                                         <td>{{ $k->kelas }}</td>
                                         <td>
                                             @foreach ($k->bukus()->get() as $b)
-                                            
                                                 <ul type=disc>
                                                     <li>{{ $b->buku }}</li>
                                                 </ul>
-                                            
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach ($k->bukus()->get() as $c)
-                                            
                                                 <ul type=circle>
                                                     <li>{{ $c->jml_buku }}</li>
                                                 </ul>
-                                            
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach ($k->bukus()->get() as $d)
-                                            
                                                 <ul type=circle>
                                                     <li>{{ $d->kodebuku }}</li>
                                                 </ul>
-                                            
                                             @endforeach
                                         </td>
                                     </tr>

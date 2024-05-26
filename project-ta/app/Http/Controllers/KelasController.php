@@ -12,33 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class KelasController extends Controller
 {
-    // Untuk Index Kelas =============================================================================
-    public function index_vii()
-    {
-        $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();
-
-        return view('kelas.vii', compact('profile'));
-    }
-
-    public function index_viii()
-    {
-        $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();     
-
-        return view('kelas.viii', compact('profile'));
-    }
-
-    public function index_ix()
-    {
-        $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();
-
-        return view('kelas.ix', compact('profile'));
-    }
-    //====================================================================================================
-
-
     // Untuk isi Kelas VII A ==============================================================================
     public function kelas_viia(Request $request)
     {

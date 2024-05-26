@@ -58,7 +58,7 @@
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
-                    <form action="{{ route('f.search') }}" method="GET">
+                    <form action="{{ route('ixf.search') }}" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
                                 <input type="search" name="search" id="form1" class="form-control"
@@ -69,7 +69,7 @@
                             </button>
                         </div>
                     </form>
-                    <a href="{{ route('f.pdf') }}" class="btn btn-danger mb-3 breadcrumb float-sm-right">
+                    <a href="{{ route('ixf.pdf') }}" class="btn btn-danger mb-3 breadcrumb float-sm-right">
                         <i class="fa fa-download mb-3 breadcrumb float-sm-right"></i>
                         <p>Cetak PDF</p>
                     </a>
