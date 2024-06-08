@@ -33,37 +33,48 @@
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
                             <div class="col-md-6">
+                                <label>Kode Pinjam :</label>
+                                    <input type="text" class="form-control"
+                                        value="{{ $catatan->kode_pinjam }}" disabled />
+                            </div>
+                            <div class="col-md-6">
                                 <label>Nama :</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                value="{{ $catatan->name }}" readonly />
+                                <input type="text" class="form-control"
+                                        value="{{ $catatan->name }}" disabled />
                             </div>
 
                             <div class="col-md-6">
                                 <label>Kelas :</label>
-                                <input type="text" class="form-control" id="kelas" name="kelas"
-                                value="{{ $catatan->kelas }}" readonly />
+                                <input type="text" class="form-control"
+                                        value="{{ $catatan->kelas }}" disabled />
                             </div>
                             <div class="col-md-6">
                                 <label>Buku :</label>
-                                <input type="text" class="form-control" id="buku" name="buku"
-                                    value="{{ $catatan->buku }}" readonly/>
+                                @foreach ($catatan->bukus()->get() as $b)
+                                    <input type="text" class="form-control"
+                                        value="{{ $b->buku }}" disabled />
+                                @endforeach
                             </div>
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
-                                <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    value="{{ $catatan->kodebuku }}" readonly/>
+                                @foreach ($catatan->bukus()->get() as $b)
+                                    <input type="text" class="form-control"
+                                        value="{{ $b->kodebuku }}" disabled />
+                                @endforeach
                             </div>
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>
-                                <input type="text" class="form-control" id="jml_buku" name="jml_buku"
-                                value="{{ $catatan->jml_buku }}" readonly />
+                                @foreach ($catatan->bukus()->get() as $b)
+                                    <input type="text" class="form-control"
+                                        value="{{ $b->jml_buku }}" disabled />
+                                @endforeach
                             </div>
                             <!-- Date and time -->
                             <div class="form-group">
-                                <label>Jam Pinjam :</label>
+                                <label>Tanggal Pinjam :</label>
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                    <input type="datetime-local" name="jam_pinjam" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" value="{{ $catatan->jam_pinjam }}" readonly/>
+                                    <input type="date-local" name="jam_pinjam" class="form-control datetimepicker-input"
+                                        data-target="#reservationdatetime" value="{{ $catatan->jam_pinjam }}" disabled />
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -72,10 +83,11 @@
                             <!-- /.form group -->
                             <!-- Date and time -->
                             <div class="form-group">
-                                <label>Jam Kembali :</label>
+                                <label>Tanggal Kembali :</label>
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                    <input type="datetime-local" name="jam_kembali" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" value="{{ $catatan->jam_kembali }}" readonly/>
+                                    <input type="date-local" name="jam_kembali"
+                                        class="form-control datetimepicker-input" data-target="#reservationdatetime"
+                                        value="{{ $catatan->jam_kembali }}" disabled />
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -84,8 +96,7 @@
                             <!-- /.form group -->
                             <div class="col-md-6">
                                 <label>Description :</label>
-                                <textarea class="form-control" id="description" name="description"
-                                 readonly >{{ $catatan->description }}</textarea>
+                                <textarea class="form-control" id="description" name="description" disabled>{{ $catatan->description }}</textarea>
                             </div>
                         </div>
                     </div>

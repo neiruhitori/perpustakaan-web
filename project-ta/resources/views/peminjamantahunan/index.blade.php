@@ -61,19 +61,22 @@
                             {{ Session::get('success') }}
                         </div>
                     @endif
-                    <div class="btn-group breadcrumb float-sm-right" role="group" aria-label="Basic example">
-                    <a href="{{ route('peminjamantahunan.create') }}" class="btn btn-success  float-sm-right" type="button">
-                        <i class="fas fa-plus"></i> Peminjam
-                    </a>
-                    <a href="{{ route('peminjamantahunanbuku.create') }}" class="btn btn-primary  float-sm-right" type="button">
-                        <i class="fas fa-plus"></i> Buku
-                    </a>
+                    <div class="breadcrumb float-sm-right" role="group" aria-label="Basic example">
+                        <a href="{{ route('peminjamantahunan.create') }}" class="btn btn-success  float-sm-right"
+                            type="button">
+                            <i class="fas fa-plus"></i> Buat Pinjaman
+                        </a>
+                        <a href="{{ route('peminjamantahunanbuku.create') }}" class="btn btn-primary  float-sm-right"
+                            type="button">
+                            <i class="fas fa-plus"></i> Add Buku
+                        </a>
                     </div>
 
                     <form action="/peminjamantahunan" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama Peminjam"/>
+                                <input type="search" name="search" id="form1" class="form-control"
+                                    placeholder="Cari Nama Peminjam" />
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -90,13 +93,13 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <tr>
                         <th>No</th>
+                        <th>Kode Pinjam</th>
                         <th>Nama</th>
                         <th>Kelas</th>
                         <th>Buku</th>
                         <th>Jumlah Buku</th>
-                        {{-- <th>Jam Pinjam</th> --}}
                         <th>Kode Buku</th>
-                        <th>Jam Kembali</th>
+                        <th>Tanggal Kembali</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -105,33 +108,32 @@
                             @forelse ($peminjamantahunan as $key => $p)
                                 <tr>
                                     <td scope="row">{{ $peminjamantahunan->firstItem() + $key }}</td>
-                                    <td>{{ $p->name }}</td>
-                                    <td>{{ $p->kelas }}</td>
+                                    <td>{{ $p->kode_pinjam }}</td>
+                                    <td>
+                                        {{ $p->name }}
+                                    </td>
+                                    <td>
+                                        {{ $p->kelas }}
+                                    </td>
                                     <td>
                                         @foreach ($p->bukus()->get() as $b)
-                                        
                                             <ul type=disc>
                                                 <li>{{ $b->buku }}</li>
                                             </ul>
-                                        
                                         @endforeach
                                     </td>
                                     <td>
                                         @foreach ($p->bukus()->get() as $c)
-                                        
                                             <ul type=circle>
                                                 <li>{{ $c->jml_buku }}</li>
                                             </ul>
-                                        
                                         @endforeach
                                     </td>
                                     <td>
                                         @foreach ($p->bukus()->get() as $d)
-                                        
                                             <ul type=circle>
                                                 <li>{{ $d->kodebuku }}</li>
                                             </ul>
-                                        
                                         @endforeach
                                     </td>
                                     <td>{{ $p->jam_kembali }}</td>

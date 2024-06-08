@@ -87,12 +87,13 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <tr>
                         <th>No</th>
+                        <th>Kode Pinjam</th>
                         <th>Nama</th>
                         <th>Kelas</th>
                         <th>Buku</th>
                         <th>Jumlah Buku</th>
                         <th>Kode Buku</th>
-                        <th>Jam Kembali</th>
+                        <th>Tanggal Kembali</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -102,6 +103,7 @@
                             @forelse ($pengembaliantahunan as $key => $k)
                                 <tr>
                                     <td scope="row">{{ $pengembaliantahunan->firstItem() + $key }}</td>
+                                    <td>{{ $k->kode_pinjam }}</td>
                                     <td>{{ $k->name }}</td>
                                     <td>{{ $k->kelas }}</td>
                                     <td>

@@ -16,7 +16,8 @@ class CreatePeminjamantahunanTable extends Migration
         Schema::create('peminjamantahunan', function (Blueprint $table) {
             $table->id();
             $table->string('name'); 
-            $table->string('kelas'); 
+            $table->string('kelas');
+            // $table->unsignedBigInteger('siswa_id');
             // $table->string('buku');
             // $table->string('jml_buku'); 
             $table->date('jam_pinjam');
@@ -25,6 +26,9 @@ class CreatePeminjamantahunanTable extends Migration
             $table->integer('status')->default(1); // 0: disable, 1: enable
             $table->timestamps();
             // $table->string('kodebuku')->nullable();
+
+            // $table->foreign('siswa_id')->references('id')->on('siswas')->onDelete('cascade');
+
         });
     }
 

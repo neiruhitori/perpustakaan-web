@@ -43,14 +43,14 @@
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
                             <div class="col-md-6">
-                                <label for="peminjamantahunan_id">Nama</label>
+                                <label for="peminjamantahunan_id">Kode Pinjam</label>
                                 @error('peminjamantahunan_id')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <select class="form-control" name="peminjamantahunan_id" id="peminjamantahunan_id">
-                                    <option selected disabled>Pilih Nama Peminjam</option>
+                                    <option selected disabled>Pilih Kode Pinjaman</option>
                                     @foreach ($peminjamantahunanbuku as $buku)
-                                        <option value="{{ $buku->id }}">{{ $buku->name }}</option>
+                                        <option scope="row" value="{{ $buku->id }}">{{ $buku->kode_pinjam }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -59,20 +59,11 @@
                                 @error('buku')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                                <select id="buku" name="buku" class="form-control custom-select">
+                                <select id="bukucrud" name="buku" class="form-control">
                                     <option selected disabled>Pilih buku</option>
-                                    <option>PAI</option>
-                                    <option>PKn</option>
-                                    <option>BIN</option>
-                                    <option>BIG</option>
-                                    <option>MAT</option>
-                                    <option>IPA</option>
-                                    <option>IPS</option>
-                                    <option>TIK</option>
-                                    <option>PJOK</option>
-                                    <option>PRAKARYA (1)</option>
-                                    <option>PRAKARYA (2)</option>
-                                    <option>BAHASA JAWA</option>
+                                    @foreach ($bukucrud as $buk)
+                                        <option value="{{ $buk->buku }}">{{ $buk->buku }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6">

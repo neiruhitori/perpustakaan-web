@@ -78,6 +78,7 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <tr>
                             <th>No</th>
+                            <th>Kode Pinjam</th>
                             <th>Nama</th>
                             <th>Kelas</th>
                             <th>Buku</th>
@@ -90,6 +91,7 @@
                                 @forelse ($viib as $key => $k)
                                     <tr>
                                         <td scope="row">{{ $loop->iteration }}</td>
+                                        <td>{{ $k->kode_pinjam }}</td>
                                         <td>{{ $k->name }}</td>
                                         <td>{{ $k->kelas }}</td>
                                         <td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Peminjaman;
+use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,7 +43,8 @@ class PeminjamanController extends Controller
         $profile = User::where('id',$iduser)->first();
 
         $peminjaman = Peminjaman::all();
-        return view('peminjaman.create', compact('peminjaman', 'profile'));
+        $siswa = Siswa::all();
+        return view('peminjaman.create', compact('peminjaman', 'siswa', 'profile'));
     }
 
     /**
@@ -54,9 +56,9 @@ class PeminjamanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'buku' => 'required|min:1|max:50',
             'name' => 'required|min:1|max:50',
-            'kelas' => 'required|min:1|max:50',
+            'kelas' => 'required:true',
+            'buku' => 'required|min:1|max:50',
             'jml_buku' => 'required|min:1|max:50',
             'jam_pinjam' => 'required:true',
             'jam_kembali' => 'required:true',
@@ -64,10 +66,10 @@ class PeminjamanController extends Controller
         ]);
         
         Peminjaman::create([
-                    'buku' => $request->buku,
-                    'kodebuku' => $request->kodebuku,
                     'name' => $request->name,
                     'kelas' => $request->kelas,
+                    'buku' => $request->buku,
+                    'kodebuku' => $request->kodebuku,
                     'jml_buku' => $request->jml_buku,
                     'jam_pinjam' => $request->jam_pinjam,
                     'jam_kembali' => $request->jam_kembali,
@@ -88,7 +90,8 @@ class PeminjamanController extends Controller
         $profile = User::where('id',$iduser)->first();
         
         $peminjaman = Peminjaman::findOrFail($id);
-        return view('peminjaman.show', compact('peminjaman', 'profile'));
+        $siswa = Siswa::all();
+        return view('peminjaman.show', compact('peminjaman', 'siswa', 'profile'));
     }
 
     /**
@@ -103,7 +106,8 @@ class PeminjamanController extends Controller
         $profile = User::where('id',$iduser)->first();
         
         $peminjaman = Peminjaman::findOrFail($id);
-        return view('peminjaman.edit', compact('peminjaman', 'profile'));
+        $siswa = Siswa::all();
+        return view('peminjaman.edit', compact('peminjaman', 'siswa', 'profile'));
     }
 
     /**

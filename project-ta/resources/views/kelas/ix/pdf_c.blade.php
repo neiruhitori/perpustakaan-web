@@ -70,6 +70,7 @@
 
                                 <tr>
                                     <th>No</th>
+                                    <th>Kode Pinjam</th>
                                     <th>Nama</th>
                                     <th>Kelas</th>
                                     <th>Buku</th>
@@ -82,7 +83,8 @@
                                     @forelse ($ixc as $a)
                                         <tr>
                                             <td scope="row" align=center>{{ $loop->iteration }}</td>
-                                            <td align=center>{{ $a->name }}</td>
+                                            <td>{{ $a->kode_pinjam }}</td>
+                                            <td>{{ $a->name }}</td>
                                             <td align=center>{{ $a->kelas }}</td>
                                             <td>
                                                 @foreach ($a->bukus()->get() as $b)

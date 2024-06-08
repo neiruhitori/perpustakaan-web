@@ -34,36 +34,36 @@
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label>Nama :</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                value="{{ $catatan->name }}" readonly />
+                                    <input type="text" class="form-control"
+                                        value="{{ $catatan->name }}" disabled />
                             </div>
 
                             <div class="col-md-6">
                                 <label>Kelas :</label>
-                                <input type="text" class="form-control" id="kelas" name="kelas"
-                                value="{{ $catatan->kelas }}" readonly />
+                                    <input type="text" class="form-control"
+                                        value="{{ $catatan->kelas }}" disabled />
                             </div>
                             <div class="col-md-6">
                                 <label>Buku :</label>
                                 <input type="text" class="form-control" id="buku" name="buku"
-                                    value="{{ $catatan->buku }}" readonly/>
+                                    value="{{ $catatan->buku }}" disabled/>
                             </div>
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
                                 <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    value="{{ $catatan->kodebuku }}" readonly/>
+                                    value="{{ $catatan->kodebuku }}" disabled/>
                             </div>
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>
                                 <input type="text" class="form-control" id="jml_buku" name="jml_buku"
-                                value="{{ $catatan->jml_buku }}" readonly />
+                                value="{{ $catatan->jml_buku }}" disabled />
                             </div>
                             <!-- Date and time -->
                             <div class="form-group">
                                 <label>Jam Pinjam :</label>
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="datetime-local" name="jam_pinjam" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" value="{{ $catatan->jam_pinjam }}" readonly/>
+                                        data-target="#reservationdatetime" value="{{ $catatan->jam_pinjam }}" disabled/>
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -75,7 +75,7 @@
                                 <label>Jam Kembali :</label>
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="datetime-local" name="jam_kembali" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" value="{{ $catatan->jam_kembali }}" readonly/>
+                                        data-target="#reservationdatetime" value="{{ $catatan->jam_kembali }}" disabled/>
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -85,7 +85,7 @@
                             <div class="col-md-6">
                                 <label>Description :</label>
                                 <textarea class="form-control" id="description" name="description"
-                                 readonly >{{ $catatan->description }}</textarea>
+                                 disabled >{{ $catatan->description }}</textarea>
                             </div>
                         </div>
                     </div>

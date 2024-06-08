@@ -40,14 +40,41 @@
         });
     });
 </script>
-    <!--Select2-->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#peminjamantahunan_id').select2()
+<!--Select2-->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#peminjamantahunan_id').select2()
 
-        })
-    </script>
+    })
+</script>
+<script>
+    $(document).ready(function() {
+        $('#siswa_id').select2()
+
+    })
+</script>
+<script>
+    $(document).ready(function() {
+        $('#name').select2()
+
+    })
+</script>
+<script>
+    $(document).ready(function() {
+        $('#bukucrud').select2()
+
+    })
+</script>
+{{-- auto fill --}}
+{{-- <script type="text/javascript">
+    $(document).ready(function() {
+        $('#name').on('change', function() {
+            $('#kelas').val($(this).val());
+        });
+    });
+</script> --}}
+{{-- ############ --}}

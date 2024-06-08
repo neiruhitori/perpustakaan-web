@@ -85,7 +85,7 @@
                                     @forelse ($selesaimeminjam as $k)
                                         <tr>
                                             <td scope="row" align=center>{{ $loop->iteration }}</td>
-                                            <td align=center>{{ $k->name }}</td>
+                                            <td>{{ $k->name }}</td>
                                             <td align=center>{{ $k->kelas }}</td>
                                             <td align=center>{{ $k->buku }}</td>
                                             <td align=center>{{ $k->jml_buku }}</td>

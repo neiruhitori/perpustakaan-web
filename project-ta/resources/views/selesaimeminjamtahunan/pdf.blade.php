@@ -72,13 +72,14 @@
 
                                 <tr>
                                     <th>No</th>
+                                    <th>Kode Pinjam</th>
                                     <th>Nama</th>
                                     <th>Kelas</th>
                                     <th>Buku</th>
                                     <th>Jumlah Buku</th>
                                     <th>Kode Buku</th>
-                                    <th>Jam Pinjam</th>
-                                    <th>Jam Kembali</th>
+                                    <th>Tanggal Pinjam</th>
+                                    <th>Tanggal Kembali</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -87,7 +88,8 @@
                                     @forelse ($selesaimeminjamtahunan as $k)
                                         <tr>
                                             <td scope="row" align="center">{{ $loop->iteration }}</td>
-                                            <td align="center">{{ $k->name }}</td>
+                                            <td>{{ $k->kode_pinjam }}</td>
+                                            <td>{{ $k->name }}</td>
                                             <td align="center">{{ $k->kelas }}</td>
                                             <td align="center">
                                                 @foreach ($k->bukus()->get() as $b)

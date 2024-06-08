@@ -13,10 +13,9 @@ class Peminjaman extends Model
     protected $fillable = [];
     protected $guarded = [];
 
-    public function buku()
-    {
-    	// return $this->belongsTo('App\Models\Buku');
-        return $this->belongsTo(buku::class, 'id');
-    }
+    // public function siswa()
+    // {
+    //     return $this->belongsTo(Siswa::class, 'siswa_id');
+    // }
 
 }

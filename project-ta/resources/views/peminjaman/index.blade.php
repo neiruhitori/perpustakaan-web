@@ -67,7 +67,7 @@
                     <form action="/peminjaman" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama Peminjam"/>
+                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama Siswa"/>
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -103,7 +103,6 @@
                                     <td>{{ $p->kelas }}</td>
                                     <td>{{ $p->buku }}</td>
                                     <td>{{ $p->jml_buku }}</td>
-                                    {{-- <td>{{ $p->jam_pinjam }}</td> --}}
                                     <td>{{ $p->kodebuku }}</td>
                                     <td>{{ $p->jam_kembali }}</td>
                                     <td>

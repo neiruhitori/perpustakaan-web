@@ -3,6 +3,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+    <!--Select2-->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 @extends('layouts.app')
 
@@ -41,98 +43,74 @@
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
                             <div class="col-md-6">
+                                <label>Kode Pinjam :</label>
+                                <input type="text" class="form-control" id="kode_pinjam" name="kode_pinjam" value="{{ $peminjamantahunan->kode_pinjam }}" disabled/>
+                            </div>
+                            <div class="col-md-6">
                                 <label>Nama :</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                    value="{{ $peminjamantahunan->name }}" />
+                                <select id="name" name="name" class="form-control">
+                                    <option selected disabled>{{ $peminjamantahunan->name }}</option>
+                                    @foreach ($siswa as $sw)
+                                        <option value="{{ $sw->name }}">{{ $sw->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputStatus">Kelas :</label>
                                 @error('kelas')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                                <select id="kelas" name="kelas" class="form-control custom-select">
-                                  <option selected disabled>{{ $peminjamantahunan->kelas }}</option>
-                                  <option>VII A</option>
-                                  <option>VII B</option>
-                                  <option>VII C</option>
-                                  <option>VII D</option>
-                                  <option>VII E</option>
-                                  <option>VII F</option>
-                                  <option>VII G</option>
-                                  <option>VIII A</option>
-                                  <option>VIII B</option>
-                                  <option>VIII C</option>
-                                  <option>VIII D</option>
-                                  <option>VIII E</option>
-                                  <option>VIII F</option>
-                                  <option>VIII G</option>
-                                  <option>IX A</option>
-                                  <option>IX B</option>
-                                  <option>IX C</option>
-                                  <option>IX D</option>
-                                  <option>IX E</option>
-                                  <option>IX F</option>
-                                  <option>IX G</option>
+                                <select id="kelas" name="kelas" class="form-control">
+                                    <option selected disabled>{{ $peminjamantahunan->kelas }}</option>
+                                    <option>VII A</option>
+                                    <option>VII B</option>
+                                    <option>VII C</option>
+                                    <option>VII D</option>
+                                    <option>VII E</option>
+                                    <option>VII F</option>
+                                    <option>VII G</option>
+                                    <option>VIII A</option>
+                                    <option>VIII B</option>
+                                    <option>VIII C</option>
+                                    <option>VIII D</option>
+                                    <option>VIII E</option>
+                                    <option>VIII F</option>
+                                    <option>VIII G</option>
+                                    <option>IX A</option>
+                                    <option>IX B</option>
+                                    <option>IX C</option>
+                                    <option>IX D</option>
+                                    <option>IX E</option>
+                                    <option>IX F</option>
+                                    <option>IX G</option>
                                 </select>
-                              </div>
-                            {{-- <div class="col-md-6">
-                                <label for="inputStatus">Buku :</label>
-                                @error('buku')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                                @foreach ($peminjamantahunan->bukus()->get() as $b)
-                                <select id="buku" name="buku" class="form-control custom-select">
-                                  <option selected disabled value="{{ $b->peminjamantahunan_id }}">{{ $b->buku }}</option>
-                                  <option>PAI</option>
-                                  <option>PKn</option>
-                                  <option>BIN</option>
-                                  <option>BIG</option>
-                                  <option>MAT</option>
-                                  <option>IPA</option>
-                                  <option>IPS</option>
-                                  <option>TIK</option>
-                                  <option>PJOK</option>
-                                  <option>PRAKARYA (1)</option>
-                                  <option>PRAKARYA (2)</option>
-                                  <option>BAHASA JAWA</option>
-                                </select>
-                                @endforeach
-                              </div>
-                            <div class="col-md-6">
-                                <label>Kode Buku :</label>
-                                @foreach ($peminjamantahunan->bukus()->get() as $d)
-                                    <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    value="{{ $d->kodebuku }}" />
-                                @endforeach
                             </div>
-                            <div class="col-md-6">
-                                <label>Jumlah Buku :</label>
-                                @foreach ($peminjamantahunan->bukus()->get() as $c)
-                                    <input type="text" class="form-control" id="jml_buku" name="jml_buku"
-                                    value="{{ $c->jml_buku }}" />
-                                @endforeach
-                            </div> --}}
                             <!-- Date and time -->
-                            <div class="form-group">
-                                <label>Jam Pinjam :</label>
-                                <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                    <input type="date" name="jam_pinjam" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" value="{{ $peminjamantahunan->jam_pinjam }}" />
-                                    <div class="input-group-append" data-target="#reservationdatetime"
-                                        data-toggle="datetimepicker">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tanggal Pinjam :</label>
+                                    <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+                                        <input type="date" name="jam_pinjam" class="form-control datetimepicker-input"
+                                            data-target="#reservationdatetime"
+                                            value="{{ $peminjamantahunan->jam_pinjam }}" />
+                                        <div class="input-group-append" data-target="#reservationdatetime"
+                                            data-toggle="datetimepicker">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- /.form group -->
                             <!-- Date and time -->
-                            <div class="form-group">
-                                <label>Jam Kembali :</label>
-                                <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                    <input type="date" name="jam_kembali"
-                                        class="form-control datetimepicker-input" data-target="#reservationdatetime"
-                                        value="{{ $peminjamantahunan->jam_kembali }}" />
-                                    <div class="input-group-append" data-target="#reservationdatetime"
-                                        data-toggle="datetimepicker">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tanggal Kembali :</label>
+                                    <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+                                        <input type="date" name="jam_kembali" class="form-control datetimepicker-input"
+                                            data-target="#reservationdatetime"
+                                            value="{{ $peminjamantahunan->jam_kembali }}" />
+                                        <div class="input-group-append" data-target="#reservationdatetime"
+                                            data-toggle="datetimepicker">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +146,8 @@
                                                         data-bs-dismiss="modal">Close
                                                     </button>
 
-                                                    <button type="submit" class="btn btn-primary waves-light waves-effect" id="update-modal">
+                                                    <button type="submit" class="btn btn-primary waves-light waves-effect"
+                                                        id="update-modal">
                                                         Update
                                                     </button>
                                                 </div>

@@ -32,8 +32,8 @@
                             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Anggota</span>
-                                <span class="info-box-number">{{ $user }} User</span>
+                                <span class="info-box-text">Jumlah Siswa</span>
+                                <span class="info-box-number">{{ $user }} Siswa</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -45,7 +45,7 @@
                             <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-cog"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Total Data Harian</span>
-                                <span class="info-box-number">{{ $siswa }} Anak</span>
+                                <span class="info-box-number">{{ $siswa }} Siswa</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -62,7 +62,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Sedang Meminjam</span>
-                                <span class="info-box-number">{{ $pengembalian }} Anak</span>
+                                <span class="info-box-number">{{ $pengembalian }} Siswa</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -75,7 +75,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Selesai Meminjam</span>
-                                <span class="info-box-number">{{ $selesai }} Anak</span>
+                                <span class="info-box-number">{{ $selesai }} Siswa</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>

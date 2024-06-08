@@ -34,42 +34,42 @@
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label>Nama :</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                value="{{ $peminjamantahunan->name }}" readonly />
+                                    <input type="text" class="form-control"
+                                        value="{{ $peminjamantahunan->name }}" disabled />
                             </div>
 
                             <div class="col-md-6">
                                 <label>Kelas :</label>
-                                <input type="text" class="form-control" id="kelas" name="kelas"
-                                value="{{ $peminjamantahunan->kelas }}" readonly />
+                                    <input type="text" class="form-control"
+                                        value="{{ $peminjamantahunan->kelas }}" disabled />
                             </div>
                             <div class="col-md-6">
                                 <label>Buku :</label>
                                 @foreach ($peminjamantahunan->bukus()->get() as $b)
                                     <input type="text" class="form-control" id="buku" name="buku"
-                                    value="{{ $b->buku }}" readonly/>
+                                    value="{{ $b->buku }}" disabled/>
                                 @endforeach
                             </div>
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
                                 @foreach ($peminjamantahunan->bukus()->get() as $d)
                                     <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    value="{{ $d->kodebuku }}" readonly/>
+                                    value="{{ $d->kodebuku }}" disabled/>
                                 @endforeach
                             </div>
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>
                                 @foreach ($peminjamantahunan->bukus()->get() as $c)
                                     <input type="text" class="form-control" id="jml_buku" name="jml_buku"
-                                    value="{{ $c->jml_buku }}" readonly />
+                                    value="{{ $c->jml_buku }}" disabled />
                                 @endforeach
                             </div>
                             <!-- Date and time -->
                             <div class="form-group">
-                                <label>Jam Pinjam :</label>
+                                <label>Tanggal Pinjam :</label>
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="date" name="jam_pinjam" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" value="{{ $peminjamantahunan->jam_pinjam }}" readonly/>
+                                        data-target="#reservationdatetime" value="{{ $peminjamantahunan->jam_pinjam }}" disabled/>
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -81,7 +81,7 @@
                                 <label>Jam Kembali :</label>
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="date" name="jam_kembali" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" value="{{ $peminjamantahunan->jam_kembali }}" readonly/>
+                                        data-target="#reservationdatetime" value="{{ $peminjamantahunan->jam_kembali }}" disabled/>
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -91,7 +91,7 @@
                             <div class="col-md-6">
                                 <label>Description :</label>
                                 <textarea class="form-control" id="description" name="description"
-                                 readonly >{{ $peminjamantahunan->description }}</textarea>
+                                 disabled >{{ $peminjamantahunan->description }}</textarea>
                             </div>
                         </div>
                     </div>

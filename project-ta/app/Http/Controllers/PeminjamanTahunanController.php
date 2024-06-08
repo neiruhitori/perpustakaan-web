@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Models\Bukucrud;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use App\Models\PeminjamanTahunan;
 use App\Models\User;
+use App\Models\Siswa;
 use Illuminate\Support\Facades\Auth;
 
 class PeminjamanTahunanController extends Controller
@@ -40,7 +42,8 @@ class PeminjamanTahunanController extends Controller
         $profile = User::where('id',$iduser)->first();
 
         $peminjamantahunan = PeminjamanTahunan::all();
-        return view('peminjamantahunan.create', compact('peminjamantahunan', 'profile'));
+        $siswa = Siswa::all();
+        return view('peminjamantahunan.create', compact('peminjamantahunan', 'siswa', 'profile'));
     }
 
     /**
@@ -52,12 +55,16 @@ class PeminjamanTahunanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:1|max:50',
-            'kelas' => 'required|min:1|max:50',
+            'kode_pinjam' => 'required:true',
+            'name' => 'required:true',
+            'kelas' => 'required:true',
             'jam_pinjam' => 'required:true',
             'jam_kembali' => 'required:true',
         ]);
+
+
         PeminjamanTahunan::create([
+            'kode_pinjam' => $request->kode_pinjam,
             'name' => $request->name,
             'kelas' => $request->kelas,
             'jam_pinjam' => $request->jam_pinjam,
@@ -91,7 +98,9 @@ class PeminjamanTahunanController extends Controller
         $profile = User::where('id',$iduser)->first();
 
         $peminjamantahunanbuku = PeminjamanTahunan::all();
-        return view('peminjamantahunan.createbuku', compact('peminjamantahunanbuku', 'profile'));
+        $siswa = Siswa::all();
+        $bukucrud = Bukucrud::all();
+        return view('peminjamantahunan.createbuku', compact('peminjamantahunanbuku', 'bukucrud', 'siswa', 'profile'));
     }
 
     public function storebuku(Request $request)
@@ -132,7 +141,8 @@ class PeminjamanTahunanController extends Controller
         $profile = User::where('id',$iduser)->first();
         
         $peminjamantahunan = PeminjamanTahunan::findOrFail($id);
-        return view('peminjamantahunan.edit', compact('peminjamantahunan', 'profile'));
+        $siswa = Siswa::all();
+        return view('peminjamantahunan.edit', compact('peminjamantahunan', 'siswa', 'profile'));
     }
 
     /**

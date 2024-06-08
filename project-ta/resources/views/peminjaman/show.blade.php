@@ -34,36 +34,36 @@
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label>Nama :</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                value="{{ $peminjaman->name }}" readonly />
+                                    <input type="text" class="form-control"
+                                        value="{{ $peminjaman->name }}" disabled />
                             </div>
 
                             <div class="col-md-6">
                                 <label>Kelas :</label>
-                                <input type="text" class="form-control" id="kelas" name="kelas"
-                                value="{{ $peminjaman->kelas }}" readonly />
+                                    <input type="text" class="form-control"
+                                        value="{{ $peminjaman->kelas }}" disabled />
                             </div>
                             <div class="col-md-6">
                                 <label>Buku :</label>
                                 <input type="text" class="form-control" id="buku" name="buku"
-                                    value="{{ $peminjaman->buku }}" readonly/>
+                                    value="{{ $peminjaman->buku }}" disabled/>
                             </div>
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
                                 <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    value="{{ $peminjaman->kodebuku }}" readonly/>
+                                    value="{{ $peminjaman->kodebuku }}" disabled/>
                             </div>
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>
                                 <input type="text" class="form-control" id="jml_buku" name="jml_buku"
-                                value="{{ $peminjaman->jml_buku }}" readonly />
+                                value="{{ $peminjaman->jml_buku }}" disabled />
                             </div>
                             <!-- Date and time -->
                             <div class="form-group">
                                 <label>Jam Pinjam :</label>
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="datetime-local" name="jam_pinjam" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" value="{{ $peminjaman->jam_pinjam }}" readonly/>
+                                        data-target="#reservationdatetime" value="{{ $peminjaman->jam_pinjam }}" disabled/>
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -75,7 +75,7 @@
                                 <label>Jam Kembali :</label>
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="datetime-local" name="jam_kembali" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" value="{{ $peminjaman->jam_kembali }}" readonly/>
+                                        data-target="#reservationdatetime" value="{{ $peminjaman->jam_kembali }}" disabled/>
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -85,7 +85,7 @@
                             <div class="col-md-6">
                                 <label>Description :</label>
                                 <textarea class="form-control" id="description" name="description"
-                                 readonly >{{ $peminjaman->description }}</textarea>
+                                 disabled >{{ $peminjaman->description }}</textarea>
                             </div>
                         </div>
                     </div>

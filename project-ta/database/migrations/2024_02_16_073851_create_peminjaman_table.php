@@ -16,7 +16,8 @@ class CreatePeminjamanTable extends Migration
         Schema::create('peminjaman', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name'); 
-            $table->string('kelas'); 
+            $table->string('kelas');
+            // $table->unsignedBigInteger('siswa_id'); 
             $table->string('buku');
             $table->string('jml_buku'); 
             $table->dateTime('jam_pinjam');
@@ -24,6 +25,8 @@ class CreatePeminjamanTable extends Migration
             $table->text('description')->nullable();
             $table->integer('status')->default(1); // 0: disable, 1: enable
             $table->timestamps();
+
+            // $table->foreign('siswa_id')->references('id')->on('siswas')->onDelete('cascade');
         });
     }
 

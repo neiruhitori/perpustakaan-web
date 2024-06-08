@@ -50,6 +50,22 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="/siswa" class="nav-link {{ Request::is('siswa') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>
+                        Siswa
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/buku" class="nav-link {{ Request::is('buku') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>
+                        Buku
+                    </p>
+                </a>
+            </li>
             {{-- <div class="user-panel d-flex"></div> --}}
             <li
                 class="nav-item {{ Request::is('peminjaman') ? 'menu-open' : '' }} {{ Request::is('pengembalian') ? 'menu-open' : '' }}">

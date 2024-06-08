@@ -3,6 +3,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+    <!--Select2-->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 @extends('layouts.app')
@@ -38,30 +40,35 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="text-right">Create Peminjaman Tahunan</h4>
                         </div>
-                        <div class="row" id="res"></div>
+                        <div class="row mt-2">
+                        <div class="col-md-3">
+                            <label>Kode Pinjam :</label>
+                            @error('kode_pinjam')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            <input type="text" class="form-control" id="kode_pinjam" name="kode_pinjam"
+                                placeholder="Contoh: VIIA01-01/01/2024"/>
+                        </div>
+                        </div> 
                         <div class="row mt-2">
                             <div class="col-md-6">
-                                <label>Nama :</label>
+                                <label for="inputStatus">Nama :</label>
                                 @error('name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                                <input type="text" class="form-control" id="name" name="name"
-                                    placeholder=" Masukkan Nama Siswa" />
+                                <select id="name" name="name" class="form-control">
+                                    <option selected disabled>Pilih Siswa</option>
+                                    @foreach ($siswa as $sw)
+                                        <option value="{{ $sw->name }}">{{ $sw->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            {{-- <div class="col-md-6">
-                                <label>Kelas :</label>
-                                @error('kelas')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                                <input type="text" class="form-control" id="kelas" name="kelas"
-                                    placeholder=" Masukkan Kelas" />
-                            </div> --}}
                             <div class="col-md-6">
                                 <label for="inputStatus">Kelas :</label>
                                 @error('kelas')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                                <select id="kelas" name="kelas" class="form-control custom-select">
+                                <select id="kelas" name="kelas" class="form-control">
                                   <option selected disabled>Pilih Kelas</option>
                                   <option>VII A</option>
                                   <option>VII B</option>
@@ -152,8 +159,8 @@
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">

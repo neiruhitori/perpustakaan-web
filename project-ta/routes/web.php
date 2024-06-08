@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BukucrudController;
 use App\Http\Controllers\CatatanHarianController;
 use App\Http\Controllers\CatatanTahunanController;
 use App\Http\Controllers\SedangMeminjamController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\SedangMeminjamTahunanController;
 use App\Http\Controllers\SelesaiMeminjamController;
 use App\Http\Controllers\SelesaiMeminjamTahunanController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\SiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +57,30 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard', [HomeController::class, 'index'], function () {
         return view('dashboard');
     })->name('dashboard');
+// =======================================================================================================
+
+// ================================= Siswa ===============================================================
+Route::controller(SiswaController::class)->prefix('siswa')->group(function () {
+    Route::get('', 'index')->name('siswa');
+    Route::get('create', 'create')->name('siswa.create');
+    Route::post('store', 'store')->name('siswa.store');
+    Route::get('show/{id}', 'show')->name('siswa.show');
+    Route::get('edit/{id}', 'edit')->name('siswa.edit');
+    Route::put('edit/{id}', 'update')->name('siswa.update');
+    Route::delete('destroy/{id}', 'destroy')->name('siswa.destroy');
+});
+// =======================================================================================================
+
+// ================================= Buku ===============================================================
+Route::controller(BukucrudController::class)->prefix('buku')->group(function () {
+    Route::get('', 'index')->name('buku');
+    Route::get('create', 'create')->name('buku.create');
+    Route::post('store', 'store')->name('buku.store');
+    Route::get('show/{id}', 'show')->name('buku.show');
+    Route::get('edit/{id}', 'edit')->name('buku.edit');
+    Route::put('edit/{id}', 'update')->name('buku.update');
+    Route::delete('destroy/{id}', 'destroy')->name('buku.destroy');
+});
 // =======================================================================================================
 
 // Harian================================================================================================
