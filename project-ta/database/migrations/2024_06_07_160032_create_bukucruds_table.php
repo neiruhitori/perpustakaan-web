@@ -15,7 +15,7 @@ class CreateBukucrudsTable extends Migration
     {
         Schema::create('bukucruds', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('buku');
             $table->timestamps();
         });
     }
