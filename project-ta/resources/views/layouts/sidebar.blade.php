@@ -58,13 +58,32 @@
                     </p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="/buku" class="nav-link {{ Request::is('buku') ? 'active' : '' }}">
+            <li
+                class="nav-item {{ Request::is('buku') ? 'menu-open' : '' }} {{ Request::is('bukuharian') ? 'menu-open' : '' }}">
+                <a href="#"
+                    class="nav-link {{ Request::is('buku') ? 'active' : '' }} {{ Request::is('bukuharian') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-book"></i>
                     <p>
                         Buku
+                        <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/bukuharian" class="nav-link {{ Request::is('bukuharian') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Buku Harian</p>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/buku" class="nav-link {{ Request::is('buku') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Buku Tahunan</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
             {{-- <div class="user-panel d-flex"></div> --}}
             <li

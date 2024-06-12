@@ -46,12 +46,12 @@
           <div class="container-fluid">
               <div class="row mb-2">
                   <div class="col-sm-6">
-                      <h1 class="m-0">Buku Tahunan</h1>
+                      <h1 class="m-0">Buku Harian</h1>
                   </div><!-- /.col -->
                   <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
                           <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                          <li class="breadcrumb-item active">Buku Tahunan</li>
+                          <li class="breadcrumb-item active">Buku Harian</li>
                       </ol>
                   </div><!-- /.col -->
               </div><!-- /.row -->
@@ -62,10 +62,10 @@
                             {{ Session::get('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('buku.create') }}" class="btn btn-primary breadcrumb float-sm-right">Add
+                    <a href="{{ route('bukuharian.create') }}" class="btn btn-primary breadcrumb float-sm-right">Add
                         Buku</a>
 
-                    <form action="/buku" method="GET">
+                    <form action="/bukuharian" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
                                 <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Buku"/>
@@ -90,18 +90,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($buku->count() > 0)
-                            @forelse ($buku as $key => $p)
+                        @if ($bukuharian->count() > 0)
+                            @forelse ($bukuharian as $key => $p)
                                 <tr>
-                                    <td scope="row">{{ $buku->firstItem() + $key }}</td>
+                                    <td scope="row">{{ $bukuharian->firstItem() + $key }}</td>
                                     <td>{{ $p->buku }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route('buku.show', $p->id) }}" type="button"
+                                            <a href="{{ route('bukuharian.show', $p->id) }}" type="button"
                                                 class="btn btn-secondary"><i class="fas fa-eye"></i></a>
-                                            <a href="{{ route('buku.edit', $p->id) }}" type="button"
+                                            <a href="{{ route('bukuharian.edit', $p->id) }}" type="button"
                                                 class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                            <form action="{{ route('buku.destroy', $p->id) }}" method="POST"
+                                            <form action="{{ route('bukuharian.destroy', $p->id) }}" method="POST"
                                                 type="button" class="btn btn-danger p-0"
                                                 onsubmit="return confirm('Delete?')">
                                                 @csrf
@@ -123,15 +123,15 @@
                 </table>
                 <div class="float-sm-left">
                     Showing
-                    {{ $buku->firstItem() }}
+                    {{ $bukuharian->firstItem() }}
                     to
-                    {{ $buku->lastItem() }}
+                    {{ $bukuharian->lastItem() }}
                     of
-                    {{ $buku->total() }}
+                    {{ $bukuharian->total() }}
                     entries
                 </div>
                 <div class="float-sm-right">
-                    {{ $buku->links() }}
+                    {{ $bukuharian->links() }}
                 </div>
             @endsection
         </div>

@@ -82,10 +82,22 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
+                                <label for="inputStatus">Buku :</label>
+                                @error('buku')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <select id="bukuharian" name="buku" class="form-control">
+                                    <option selected disabled>{{ $peminjaman->buku }}</option>
+                                    @foreach ($bukuharian as $sw)
+                                        <option value="{{ $sw->buku }}">{{ $sw->buku }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            {{-- <div class="col-md-6">
                                 <label>Buku :</label>
                                 <input type="text" class="form-control" id="buku" name="buku"
                                     value="{{ $peminjaman->buku }}" />
-                            </div>
+                            </div> --}}
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
                                 <input type="text" class="form-control" id="kodebuku" name="kodebuku"

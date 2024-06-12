@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BukucrudController;
+use App\Http\Controllers\BukuHarianController;
 use App\Http\Controllers\CatatanHarianController;
 use App\Http\Controllers\CatatanTahunanController;
 use App\Http\Controllers\SedangMeminjamController;
@@ -71,7 +72,7 @@ Route::controller(SiswaController::class)->prefix('siswa')->group(function () {
 });
 // =======================================================================================================
 
-// ================================= Buku ===============================================================
+// ================================= Buku Tahunan===============================================================
 Route::controller(BukucrudController::class)->prefix('buku')->group(function () {
     Route::get('', 'index')->name('buku');
     Route::get('create', 'create')->name('buku.create');
@@ -80,6 +81,18 @@ Route::controller(BukucrudController::class)->prefix('buku')->group(function () 
     Route::get('edit/{id}', 'edit')->name('buku.edit');
     Route::put('edit/{id}', 'update')->name('buku.update');
     Route::delete('destroy/{id}', 'destroy')->name('buku.destroy');
+});
+// =======================================================================================================
+
+// ================================= Buku Harian===============================================================
+Route::controller(BukuHarianController::class)->prefix('bukuharian')->group(function () {
+    Route::get('', 'index')->name('bukuharian');
+    Route::get('create', 'create')->name('bukuharian.create');
+    Route::post('store', 'store')->name('bukuharian.store');
+    Route::get('show/{id}', 'show')->name('bukuharian.show');
+    Route::get('edit/{id}', 'edit')->name('bukuharian.edit');
+    Route::put('edit/{id}', 'update')->name('bukuharian.update');
+    Route::delete('destroy/{id}', 'destroy')->name('bukuharian.destroy');
 });
 // =======================================================================================================
 

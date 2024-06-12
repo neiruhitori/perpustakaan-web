@@ -59,38 +59,50 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <select id="kelas" name="kelas" class="form-control">
-                                  <option selected disabled>Pilih Kelas</option>
-                                  <option>VII A</option>
-                                  <option>VII B</option>
-                                  <option>VII C</option>
-                                  <option>VII D</option>
-                                  <option>VII E</option>
-                                  <option>VII F</option>
-                                  <option>VII G</option>
-                                  <option>VIII A</option>
-                                  <option>VIII B</option>
-                                  <option>VIII C</option>
-                                  <option>VIII D</option>
-                                  <option>VIII E</option>
-                                  <option>VIII F</option>
-                                  <option>VIII G</option>
-                                  <option>IX A</option>
-                                  <option>IX B</option>
-                                  <option>IX C</option>
-                                  <option>IX D</option>
-                                  <option>IX E</option>
-                                  <option>IX F</option>
-                                  <option>IX G</option>
+                                    <option selected disabled>Pilih Kelas</option>
+                                    <option>VII A</option>
+                                    <option>VII B</option>
+                                    <option>VII C</option>
+                                    <option>VII D</option>
+                                    <option>VII E</option>
+                                    <option>VII F</option>
+                                    <option>VII G</option>
+                                    <option>VIII A</option>
+                                    <option>VIII B</option>
+                                    <option>VIII C</option>
+                                    <option>VIII D</option>
+                                    <option>VIII E</option>
+                                    <option>VIII F</option>
+                                    <option>VIII G</option>
+                                    <option>IX A</option>
+                                    <option>IX B</option>
+                                    <option>IX C</option>
+                                    <option>IX D</option>
+                                    <option>IX E</option>
+                                    <option>IX F</option>
+                                    <option>IX G</option>
                                 </select>
-                              </div>
+                            </div>
                             <div class="col-md-6">
+                                <label for="inputStatus">Buku :</label>
+                                @error('buku')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <select id="bukuharian" name="buku" class="form-control">
+                                    <option selected disabled>Pilih Buku</option>
+                                    @foreach ($bukuharian as $sw)
+                                        <option value="{{ $sw->buku }}">{{ $sw->buku }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            {{-- <div class="col-md-6">
                                 <label>Buku :</label>
                                 @error('buku')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <input type="text" class="form-control" id="buku" name="buku"
                                     placeholder=" Masukkan Nama Buku" />
-                            </div>
+                            </div> --}}
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
                                 @error('kodebuku')
@@ -155,8 +167,8 @@
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">

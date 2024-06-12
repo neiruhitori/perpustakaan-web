@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bukusharian;
 use Illuminate\Http\Request;
 use App\Models\Peminjaman;
 use App\Models\Siswa;
@@ -44,7 +45,8 @@ class PeminjamanController extends Controller
 
         $peminjaman = Peminjaman::all();
         $siswa = Siswa::all();
-        return view('peminjaman.create', compact('peminjaman', 'siswa', 'profile'));
+        $bukuharian = Bukusharian::all();
+        return view('peminjaman.create', compact('peminjaman', 'siswa', 'bukuharian', 'profile'));
     }
 
     /**
@@ -107,7 +109,8 @@ class PeminjamanController extends Controller
         
         $peminjaman = Peminjaman::findOrFail($id);
         $siswa = Siswa::all();
-        return view('peminjaman.edit', compact('peminjaman', 'siswa', 'profile'));
+        $bukuharian = Bukusharian::all();
+        return view('peminjaman.edit', compact('peminjaman', 'siswa', 'bukuharian', 'profile'));
     }
 
     /**

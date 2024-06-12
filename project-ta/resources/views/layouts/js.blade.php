@@ -69,6 +69,12 @@
 
     })
 </script>
+<script>
+    $(document).ready(function() {
+        $('#bukuharian').select2()
+
+    })
+</script>
 {{-- auto fill --}}
 {{-- <script type="text/javascript">
     $(document).ready(function() {
