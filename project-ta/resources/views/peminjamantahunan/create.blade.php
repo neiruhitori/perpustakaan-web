@@ -5,6 +5,30 @@
     </script>
     <!--Select2-->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Untuk Kode Pinjam CSS -->
+    <style>
+        .kode_pinjam {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .kode_pinjam label {
+            width: 100px;
+            /* Sesuaikan dengan kebutuhan */
+            margin-right: 10px;
+        }
+
+        .kode_pinjam input {
+            flex: 1;
+        }
+
+        .kode_pinjam button {
+            margin-left: 110px;
+            /* Sesuaikan dengan lebar label */
+        }
+    </style>
 </head>
 
 @extends('layouts.app')
@@ -40,16 +64,46 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="text-right">Create Peminjaman Tahunan</h4>
                         </div>
-                        <div class="row mt-2">
-                        <div class="col-md-3">
-                            <label>Kode Pinjam :</label>
-                            @error('kode_pinjam')
+                        <label>Kode Pinjam :</label>
+                        <br>
+                        <div class="kode_pinjam">
+                            @error('kls')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            <input type="text" class="form-control" id="kode_pinjam" name="kode_pinjam"
-                                placeholder="Contoh: VIIA01-01/01/2024"/>
+                            <select id="kls" name="kls" class="form-control col-md-2">
+                                <option selected disabled>Pilih Kelas</option>
+                                <option>VIIA</option>
+                                <option>VIIB</option>
+                                <option>VIIC</option>
+                                <option>VIID</option>
+                                <option>VIIE</option>
+                                <option>VIIF</option>
+                                <option>VIIG</option>
+                                <option>VIIIA</option>
+                                <option>VIIIB</option>
+                                <option>VIIIC</option>
+                                <option>VIIID</option>
+                                <option>VIIIE</option>
+                                <option>VIIIF</option>
+                                <option>VIIIG</option>
+                                <option>IXA</option>
+                                <option>IXB</option>
+                                <option>IXC</option>
+                                <option>IXD</option>
+                                <option>IXE</option>
+                                <option>IXF</option>
+                                <option>IXG</option>
+                            </select>
+                            @error('absen')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            <input type="text" class="form-control col-md-2" id="absen" name="absen"
+                                placeholder="No Absen" />
+                            @error('tgl')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            <input type="date" class="form-control col-md-2" id="tgl" name="tgl" />
                         </div>
-                        </div> 
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label for="inputStatus">Nama :</label>
@@ -69,32 +123,32 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <select id="kelas" name="kelas" class="form-control">
-                                  <option selected disabled>Pilih Kelas</option>
-                                  <option>VII A</option>
-                                  <option>VII B</option>
-                                  <option>VII C</option>
-                                  <option>VII D</option>
-                                  <option>VII E</option>
-                                  <option>VII F</option>
-                                  <option>VII G</option>
-                                  <option>VIII A</option>
-                                  <option>VIII B</option>
-                                  <option>VIII C</option>
-                                  <option>VIII D</option>
-                                  <option>VIII E</option>
-                                  <option>VIII F</option>
-                                  <option>VIII G</option>
-                                  <option>IX A</option>
-                                  <option>IX B</option>
-                                  <option>IX C</option>
-                                  <option>IX D</option>
-                                  <option>IX E</option>
-                                  <option>IX F</option>
-                                  <option>IX G</option>
+                                    <option selected disabled>Pilih Kelas</option>
+                                    <option>VII A</option>
+                                    <option>VII B</option>
+                                    <option>VII C</option>
+                                    <option>VII D</option>
+                                    <option>VII E</option>
+                                    <option>VII F</option>
+                                    <option>VII G</option>
+                                    <option>VIII A</option>
+                                    <option>VIII B</option>
+                                    <option>VIII C</option>
+                                    <option>VIII D</option>
+                                    <option>VIII E</option>
+                                    <option>VIII F</option>
+                                    <option>VIII G</option>
+                                    <option>IX A</option>
+                                    <option>IX B</option>
+                                    <option>IX C</option>
+                                    <option>IX D</option>
+                                    <option>IX E</option>
+                                    <option>IX F</option>
+                                    <option>IX G</option>
                                 </select>
-                              </div>
+                            </div>
                             <!-- Date and time -->
-                            <div class="form-group">
+                            <div class="form-group col-md-2">
                                 <label>Tanggal Pinjam :</label>
                                 @error('jam_pinjam')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -109,7 +163,7 @@
                             </div>
                             <!-- /.form group -->
                             <!-- Date and time -->
-                            <div class="form-group">
+                            <div class="form-group col-md-2">
                                 <label>Tanggal Kembali :</label>
                                 @error('jam_kembali')
                                     <div class="alert alert-danger">{{ $message }}</div>

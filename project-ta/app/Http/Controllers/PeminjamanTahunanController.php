@@ -21,10 +21,10 @@ class PeminjamanTahunanController extends Controller
     public function index(Request $request)
     {
         $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();
-        
+        $profile = User::where('id', $iduser)->first();
+
         if ($request->has('search')) {
-            $peminjamantahunan = PeminjamanTahunan::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
+            $peminjamantahunan = PeminjamanTahunan::where('name', 'LIKE', '%' . $request->search . '%')->paginate(5);
         } else {
             $peminjamantahunan = PeminjamanTahunan::orderBy('updated_at', 'DESC')->paginate(10);
         }
@@ -39,7 +39,7 @@ class PeminjamanTahunanController extends Controller
     public function create()
     {
         $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();
+        $profile = User::where('id', $iduser)->first();
 
         $peminjamantahunan = PeminjamanTahunan::all();
         $siswa = Siswa::all();
@@ -55,22 +55,42 @@ class PeminjamanTahunanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'kode_pinjam' => 'required:true',
+            'kls' => 'required:true',
+            'absen' => 'required:true',
+            'tgl' => 'required:true',
+            // 'kode_pinjam' => 'required:true',
             'name' => 'required:true',
             'kelas' => 'required:true',
             'jam_pinjam' => 'required:true',
             'jam_kembali' => 'required:true',
         ]);
 
+        $kode_pinjam = $request->kls . '' . $request->absen . '-' . $request->tgl;
+        $name = $request->name;
+        $kelas = $request->kelas;
+        $jam_pinjam = $request->jam_pinjam;
+        $jam_kembali = $request->jam_kembali;
+        $description = $request->description;
 
-        PeminjamanTahunan::create([
-            'kode_pinjam' => $request->kode_pinjam,
-            'name' => $request->name,
-            'kelas' => $request->kelas,
-            'jam_pinjam' => $request->jam_pinjam,
-            'jam_kembali' => $request->jam_kembali,
-            'description' => $request->description
-        ]);
+        // Simpan ke database
+        $yourModel = new PeminjamanTahunan();
+        $yourModel->kode_pinjam = $kode_pinjam;
+        $yourModel->name = $name;
+        $yourModel->kelas = $kelas;
+        $yourModel->jam_pinjam = $jam_pinjam;
+        $yourModel->jam_kembali = $jam_kembali;
+        $yourModel->description = $description;
+        $yourModel->save();
+
+
+        // PeminjamanTahunan::create([
+        //     'kode_pinjam' => $request->kode_pinjam,
+        //     'name' => $request->name,
+        //     'kelas' => $request->kelas,
+        //     'jam_pinjam' => $request->jam_pinjam,
+        //     'jam_kembali' => $request->jam_kembali,
+        //     'description' => $request->description
+        // ]);
 
         // $buku = $request->buku;
         // $kodebuku = $request->kodebuku;
@@ -95,7 +115,7 @@ class PeminjamanTahunanController extends Controller
     public function createbuku()
     {
         $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();
+        $profile = User::where('id', $iduser)->first();
 
         $peminjamantahunanbuku = PeminjamanTahunan::all();
         $siswa = Siswa::all();
@@ -123,8 +143,8 @@ class PeminjamanTahunanController extends Controller
     public function show(string $id)
     {
         $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();
-        
+        $profile = User::where('id', $iduser)->first();
+
         $peminjamantahunan = PeminjamanTahunan::findOrFail($id);
         return view('peminjamantahunan.show', compact('peminjamantahunan', 'profile'));
     }
@@ -138,8 +158,8 @@ class PeminjamanTahunanController extends Controller
     public function edit($id)
     {
         $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();
-        
+        $profile = User::where('id', $iduser)->first();
+
         $peminjamantahunan = PeminjamanTahunan::findOrFail($id);
         $siswa = Siswa::all();
         return view('peminjamantahunan.edit', compact('peminjamantahunan', 'siswa', 'profile'));
@@ -169,9 +189,9 @@ class PeminjamanTahunanController extends Controller
     public function destroy($id)
     {
         $peminjamantahunan = PeminjamanTahunan::findOrFail($id);
-  
+
         $peminjamantahunan->delete();
-  
+
         return redirect()->route('peminjamantahunan')->with('success', 'peminjaman deleted successfully');
     }
 }
