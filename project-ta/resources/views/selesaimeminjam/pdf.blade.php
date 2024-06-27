@@ -42,14 +42,15 @@
 </head>
 
 <body>
-    {{-- <table class="table-kop">
+    <table class="table-kop">
         <tr>
             <td width="25" align="center"><img src="AdminLTE-3.2.0/dist/img/smp2.png" width="60%"></td>
             <td width="30" align="center">
                 <h3 style="line-height: 0.20em;">PEMERINTAH KABUPATEN LUMAJANG</h3>
                 <h3 style="line-height: 0.20em;">DINAS PENDIDIKAN</h3>
                 <h2 style="line-height: 0.20em;">SMP NEGERI 02 KLAKAH</h2>
-                <b style="line-height: 0.20em;">Jl. Ranu No.23, Linduboyo, Klakah, Kec. Klakah, Kabupaten Lumajang, Jawa Timur 67356</b>
+                <b style="line-height: 0.20em;">Jl. Ranu No.23, Linduboyo, Klakah, Kec. Klakah, Kabupaten Lumajang, Jawa
+                    Timur 67356</b>
             </td>
             <td width="25" align="center"><img src="AdminLTE-3.2.0/dist/img/lumajang.png" width="60%"></td>
         </tr>
@@ -57,7 +58,7 @@
 
     <hr />
     <br />
-    <br /> --}}
+    <br />
 
     <!-- Main content -->
     <section class="content">
@@ -140,13 +141,17 @@
                 <td></td>
 
                 <td width="85" align="center">
-                    {{-- <span>Kepala Sekolah, </span>
+                    <span>Kepala Perpustakaan</span>
+                    <br />
+                    <span>SMPN 02 Klakah</span>
                     <br />
                     <br />
                     <br />
                     <br />
                     <br />
-                    <span>Nama Kepala Sekolah S.Kom</span> --}}
+                    <span>Umi Widarti, S.Pd.</span>
+                    <br />
+                    <span>NIP. 19680810 200801 2 028</span>
 
                 </td>
             </tr>

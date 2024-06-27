@@ -28,7 +28,7 @@ class SedangMeminjamController extends Controller
      public function view_pdf()
     {
         $sedangmeminjam = Peminjaman::where('status', 1)->get();
-        $pdf = Pdf::loadView('sedangmeminjam.pdf', ['sedangmeminjam' => $sedangmeminjam]);
+        $pdf = Pdf::loadView('sedangmeminjam.pdf', ['sedangmeminjam' => $sedangmeminjam])->setPaper('a4', 'landscape'); // atau 'portrait';
         return $pdf->stream('data-perpustakaan.pdf');
     }
 

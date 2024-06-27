@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="info-box">
-                            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
+                            <span class="info-box-icon bg-info elevation-1"><a href="/siswa" class="fas fa-users"></a></span>
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Jumlah Siswa</span>
@@ -42,7 +42,7 @@
                     <!-- /.col -->
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="info-box mb-3">
-                            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-cog"></i></span>
+                            <span class="info-box-icon bg-danger elevation-1"><a href="/pengembalian" class="fas fa-users-cog"></a></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Total Data Harian</span>
                                 <span class="info-box-number">{{ $siswa }} Siswa</span>
@@ -58,7 +58,7 @@
 
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="info-box mb-3">
-                            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user-plus"></i></span>
+                            <span class="info-box-icon bg-success elevation-1"><a href="/sedangmeminjam" class="fas fa-user-plus"></a></span>
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Sedang Meminjam</span>
@@ -71,11 +71,69 @@
                     <!-- /.col -->
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="info-box mb-3">
-                            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-user"></i></span>
+                            <span class="info-box-icon bg-warning elevation-1"><a href="/selesaimeminjam" class="fas fa-hand-holding-medical"></a></span>
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Selesai Meminjam</span>
                                 <span class="info-box-number">{{ $selesai }} Siswa</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-info elevation-1"><a href="/bukuharian" class="fas fa-book-open"></a></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Jumlah Buku</span>
+                                <span class="info-box-number">{{ $buku }} Buku</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box mb-3">
+                            <span class="info-box-icon bg-danger elevation-1"><a href="/pengembaliantahunan" class="fas fa-user-cog"></a></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total Data Tahunan</span>
+                                <span class="info-box-number">{{ $siswatahunan }} Siswa</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+
+                    <!-- fix for small devices only -->
+                    <div class="clearfix hidden-md-up"></div>
+
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box mb-3">
+                            <span class="info-box-icon bg-success elevation-1"><a href="/sedangmeminjamtahunan" class="fas fa-user-plus"></a></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Sedang Meminjam</span>
+                                <span class="info-box-number">{{ $pengembaliantahunan }} Siswa</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box mb-3">
+                            <span class="info-box-icon bg-warning elevation-1"><a href="/selesaimeminjamtahunan" class="fas fa-hand-holding-medical"></a></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Selesai Meminjam</span>
+                                <span class="info-box-number">{{ $selesaitahunan }} Siswa</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>

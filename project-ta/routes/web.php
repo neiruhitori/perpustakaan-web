@@ -69,6 +69,7 @@ Route::controller(SiswaController::class)->prefix('siswa')->group(function () {
     Route::get('edit/{id}', 'edit')->name('siswa.edit');
     Route::put('edit/{id}', 'update')->name('siswa.update');
     Route::delete('destroy/{id}', 'destroy')->name('siswa.destroy');
+    Route::get('removeAll', 'removeAll')->name('siswa.removeAll');
 });
 // =======================================================================================================
 
@@ -81,6 +82,7 @@ Route::controller(BukucrudController::class)->prefix('buku')->group(function () 
     Route::get('edit/{id}', 'edit')->name('buku.edit');
     Route::put('edit/{id}', 'update')->name('buku.update');
     Route::delete('destroy/{id}', 'destroy')->name('buku.destroy');
+    Route::get('removeAll', 'removeAll')->name('buku.removeAll');
 });
 // =======================================================================================================
 
@@ -93,6 +95,7 @@ Route::controller(BukuHarianController::class)->prefix('bukuharian')->group(func
     Route::get('edit/{id}', 'edit')->name('bukuharian.edit');
     Route::put('edit/{id}', 'update')->name('bukuharian.update');
     Route::delete('destroy/{id}', 'destroy')->name('bukuharian.destroy');
+    Route::get('removeAll', 'removeAll')->name('bukuharian.removeAll');
 });
 // =======================================================================================================
 
@@ -106,6 +109,7 @@ Route::controller(BukuHarianController::class)->prefix('bukuharian')->group(func
         Route::get('edit/{id}', 'edit')->name('peminjaman.edit');
         Route::put('edit/{id}', 'update')->name('peminjaman.update');
         Route::delete('destroy/{id}', 'destroy')->name('peminjaman.destroy');
+        Route::get('removeAll', 'removeAll')->name('peminjaman.removeAll');
     });
 
     Route::controller(PengembalianController::class)->prefix('pengembalian')->group(function () {
@@ -145,6 +149,7 @@ Route::controller(BukuHarianController::class)->prefix('bukuharian')->group(func
         Route::get('edit/{id}', 'edit')->name('peminjamantahunan.edit');
         Route::put('edit/{id}', 'update')->name('peminjamantahunan.update');
         Route::delete('destroy/{id}', 'destroy')->name('peminjamantahunan.destroy');
+        Route::get('removeAll', 'removeAll')->name('peminjamantahunan.removeAll');
     });
 
     Route::controller(PengembalianTahunanController::class)->prefix('pengembaliantahunan')->group(function () {

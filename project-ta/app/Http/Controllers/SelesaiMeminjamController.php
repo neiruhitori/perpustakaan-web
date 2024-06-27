@@ -29,7 +29,7 @@ class SelesaiMeminjamController extends Controller
     public function view_pdf()
     {
         $selesaimeminjam = Peminjaman::where('status', 0)->get();
-        $pdf = Pdf::loadView('selesaimeminjam.pdf', ['selesaimeminjam' => $selesaimeminjam]);
+        $pdf = Pdf::loadView('selesaimeminjam.pdf', ['selesaimeminjam' => $selesaimeminjam])->setPaper('a4', 'landscape'); // atau 'portrait';
         return $pdf->stream('data-perpustakaan.pdf');
     }
 

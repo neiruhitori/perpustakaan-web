@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bukusharian;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Peminjaman;
+use App\Models\PeminjamanTahunan;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,15 +19,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-       
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();
-        $user = Siswa::count();
-        $siswa = Peminjaman::count();
-        $pengembalian = Peminjaman::select('status')->where('status', 1)->count();
-        $selesai = Peminjaman::select('status')->where('status', 0)->count();
 
-        return view('/dashboard',['siswa' => $siswa, 'user' => $user, 'pengembalian' => $pengembalian, 'selesai' => $selesai], compact('profile') );
+        $user = Siswa::count();
+        $buku = Bukusharian::count();
+        $siswa = Peminjaman::count();
+        $siswatahunan = PeminjamanTahunan::count();
+        $pengembalian = Peminjaman::select('status')->where('status', 1)->count();
+        $pengembaliantahunan = PeminjamanTahunan::select('status')->where('status', 1)->count();
+        $selesai = Peminjaman::select('status')->where('status', 0)->count();
+        $selesaitahunan = PeminjamanTahunan::select('status')->where('status', 0)->count();
+
+        return view('/dashboard',['buku' => $buku, 'siswa' => $siswa, 'siswatahunan' => $siswatahunan, 'user' => $user, 'pengembalian' => $pengembalian, 'pengembaliantahunan' => $pengembaliantahunan, 'selesai' => $selesai, 'selesaitahunan' => $selesaitahunan], compact('profile') );
     }
 
     /**

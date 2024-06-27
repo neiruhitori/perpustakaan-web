@@ -110,4 +110,9 @@ class SiswaController extends Controller
   
         return redirect()->route('siswa')->with('success', 'Siswa deleted successfully');
     }
+
+    public function removeAll(){
+        Siswa::query()->forceDelete();
+        return redirect()->route('siswa')->with('removeAll', 'Reset data Siswa successfully');
+    }
 }

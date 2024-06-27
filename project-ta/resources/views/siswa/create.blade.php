@@ -53,30 +53,30 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <select name="kelas" class="form-control custom-select">
-                                  <option selected disabled>Pilih Kelas</option>
-                                  <option>VII A</option>
-                                  <option>VII B</option>
-                                  <option>VII C</option>
-                                  <option>VII D</option>
-                                  <option>VII E</option>
-                                  <option>VII F</option>
-                                  <option>VII G</option>
-                                  <option>VIII A</option>
-                                  <option>VIII B</option>
-                                  <option>VIII C</option>
-                                  <option>VIII D</option>
-                                  <option>VIII E</option>
-                                  <option>VIII F</option>
-                                  <option>VIII G</option>
-                                  <option>IX A</option>
-                                  <option>IX B</option>
-                                  <option>IX C</option>
-                                  <option>IX D</option>
-                                  <option>IX E</option>
-                                  <option>IX F</option>
-                                  <option>IX G</option>
+                                    <option selected disabled>Pilih Kelas</option>
+                                    <option>VII A</option>
+                                    <option>VII B</option>
+                                    <option>VII C</option>
+                                    <option>VII D</option>
+                                    <option>VII E</option>
+                                    <option>VII F</option>
+                                    <option>VII G</option>
+                                    <option>VIII A</option>
+                                    <option>VIII B</option>
+                                    <option>VIII C</option>
+                                    <option>VIII D</option>
+                                    <option>VIII E</option>
+                                    <option>VIII F</option>
+                                    <option>VIII G</option>
+                                    <option>IX A</option>
+                                    <option>IX B</option>
+                                    <option>IX C</option>
+                                    <option>IX D</option>
+                                    <option>IX E</option>
+                                    <option>IX F</option>
+                                    <option>IX G</option>
                                 </select>
-                              </div>
+                            </div>
                             <div class="col-md-6 mt-2">
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -102,9 +102,10 @@
                                                     data-bs-dismiss="modal">Close
                                                 </button>
 
-                                                    <button id="btn" class="btn btn-primary profile-button" type="submit">
-                                                        Tambah
-                                                    </button>
+                                                <button id="btn" class="btn btn-primary profile-button"
+                                                    type="submit">
+                                                    Tambah
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

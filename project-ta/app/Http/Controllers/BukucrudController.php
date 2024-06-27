@@ -118,4 +118,9 @@ class BukucrudController extends Controller
   
         return redirect()->route('buku')->with('success', 'buku deleted successfully');
     }
+
+    public function removeAll(){
+        Bukucrud::query()->forceDelete();
+        return redirect()->route('buku')->with('removeAll', 'Reset data Buku Tahunan successfully');
+    }
 }

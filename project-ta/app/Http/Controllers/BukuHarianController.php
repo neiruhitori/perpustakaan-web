@@ -118,4 +118,9 @@ class BukuHarianController extends Controller
   
         return redirect()->route('bukuharian')->with('success', 'buku deleted successfully');
     }
+
+    public function removeAll(){
+        Bukusharian::query()->forceDelete();
+        return redirect()->route('bukuharian')->with('removeAll', 'Reset data Buku Harian successfully');
+    }
 }

@@ -125,7 +125,7 @@ class PeminjamanController extends Controller
         $peminjaman = Peminjaman::findOrFail($id);
         $peminjaman->update($request->all());
 
-        return redirect()->route('peminjaman')->with('success', 'peminjaman updated successfully');
+        return redirect()->route('peminjaman')->with('success', 'Peminjaman updated successfully');
     }
 
     /**
@@ -140,6 +140,11 @@ class PeminjamanController extends Controller
   
         $peminjaman->delete();
   
-        return redirect()->route('peminjaman')->with('success', 'peminjaman deleted successfully');
+        return redirect()->route('peminjaman')->with('success', 'Peminjaman deleted successfully');
+    }
+
+    public function removeAll(){
+        Peminjaman::query()->forceDelete();
+        return redirect()->route('peminjaman')->with('removeAll', 'Reset data Peminjaman successfully');
     }
 }

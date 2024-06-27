@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use App\Models\Bukucrud;
-use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use App\Models\PeminjamanTahunan;
 use App\Models\User;
@@ -177,7 +176,7 @@ class PeminjamanTahunanController extends Controller
         $peminjamantahunan = PeminjamanTahunan::findOrFail($id);
         $peminjamantahunan->update($request->all());
 
-        return redirect()->route('peminjamantahunan')->with('success', 'peminjaman updated successfully');
+        return redirect()->route('peminjamantahunan')->with('success', 'Peminjaman updated successfully');
     }
 
     /**
@@ -192,6 +191,11 @@ class PeminjamanTahunanController extends Controller
 
         $peminjamantahunan->delete();
 
-        return redirect()->route('peminjamantahunan')->with('success', 'peminjaman deleted successfully');
+        return redirect()->route('peminjamantahunan')->with('success', 'Peminjaman deleted successfully');
+    }
+
+    public function removeAll(){
+        PeminjamanTahunan::query()->forceDelete();
+        return redirect()->route('peminjamantahunan')->with('removeAll', 'Reset data Peminjaman Tahunan successfully');
     }
 }

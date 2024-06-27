@@ -42,7 +42,7 @@
 </head>
 
 <body>
-    {{-- <table class="table-kop">
+    <table class="table-kop">
         <thead>
             <tr>
                 <td width="25" align="center"><img src="AdminLTE-3.2.0/dist/img/smp2.png" width="60%"></td>
@@ -50,16 +50,17 @@
                     <h3 style="line-height: 0.20em;">PEMERINTAH KABUPATEN LUMAJANG</h3>
                     <h3 style="line-height: 0.20em;">DINAS PENDIDIKAN</h3>
                     <h2 style="line-height: 0.20em;">SMP NEGERI 02 KLAKAH</h2>
-                    <b style="line-height: 0.20em;">Jl. Ranu No.23, Linduboyo, Klakah, Kec. Klakah, Kabupaten Lumajang, Jawa Timur 67356</b>
+                    <b style="line-height: 0.20em;">Jl. Ranu No.23, Linduboyo, Klakah, Kec. Klakah, Kabupaten Lumajang,
+                        Jawa Timur 67356</b>
                 </td>
                 <td width="25" align="center"><img src="AdminLTE-3.2.0/dist/img/lumajang.png" width="60%"></td>
             </tr>
         </thead>
-    </table> --}}
+    </table>
 
-    {{-- <hr />
+    <hr />
     <br />
-    <br /> --}}
+    <br />
 
     <!-- Main content -->
     <section class="content">
@@ -93,29 +94,23 @@
                                             <td align="center">{{ $k->kelas }}</td>
                                             <td align="center">
                                                 @foreach ($k->bukus()->get() as $b)
-                                                
                                                     <ul type=disc>
                                                         <li>{{ $b->buku }}</li>
                                                     </ul>
-                                                
                                                 @endforeach
                                             </td>
                                             <td align="center">
                                                 @foreach ($k->bukus()->get() as $c)
-                                                
                                                     <ul type=circle>
                                                         <li>{{ $c->jml_buku }}</li>
                                                     </ul>
-                                                
                                                 @endforeach
                                             </td>
                                             <td align="center">
                                                 @foreach ($k->bukus()->get() as $d)
-                                                
                                                     <ul type=circle>
                                                         <li>{{ $d->kodebuku }}</li>
                                                     </ul>
-                                                
                                                 @endforeach
                                             </td>
                                             <td align=center>{{ $k->jam_pinjam }}</td>
@@ -153,7 +148,7 @@
                 </td>
                 <td width="85" align="center"></td>
             </tr>
-            
+
             <tr>
                 <td width="85" align="center">
                     {{-- <span>Sekertaris,</span> --}}
@@ -164,18 +159,22 @@
                     <br />
                     {{-- <span>Nama Sekretaris S.Pd</span> --}}
                 </td>
-            
+
                 <td></td>
-            
+
                 <td width="85" align="center">
-                    {{-- <span>Kepala Sekolah, </span>
+                    <span>Kepala Perpustakaan</span>
+                    <br />
+                    <span>SMPN 02 Klakah</span>
                     <br />
                     <br />
                     <br />
                     <br />
                     <br />
-                    <span>Nama Kepala Sekolah S.Kom</span> --}}
-            
+                    <span>Umi Widarti, S.Pd.</span>
+                    <br />
+                    <span>NIP. 19680810 200801 2 028</span>
+
                 </td>
             </tr>
         </tfoot>

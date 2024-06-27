@@ -28,6 +28,10 @@
     <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/dist/css/adminlte.min.css') }}">
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/plugins/daterangepicker/daterangepicker.css') }}">
+    <!-- Modal -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -37,7 +41,6 @@
     @section('title', 'Home Product')
 
     @section('contents')
-
 
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -55,21 +58,48 @@
                         </div><!-- /.col -->
                     </div><!-- /.row -->
 
-                    <!-- /.content-header -->
-                    @if (Session::has('success'))
-                        <div class="btn btn-success swalDefaultSuccess" role="alert">
-                            {{ Session::get('success') }}
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger float-sm-right" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Reset
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Reset Data Peminjaman Tahunan</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Apakah Anda yakin ingin menghapus semua data!
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+
+                                    <a href="{{ route('peminjamantahunan.removeAll') }}" id="btn"
+                                        class="btn btn-primary profile-button">Reset</a>
+                                </div>
+                            </div>
                         </div>
-                    @endif
-                    <div class="breadcrumb float-sm-right" role="group" aria-label="Basic example">
-                        <a href="{{ route('peminjamantahunan.create') }}" class="btn btn-success  float-sm-right"
-                            type="button">
-                            <i class="fas fa-plus"></i> Buat Pinjaman
-                        </a>
-                        <a href="{{ route('peminjamantahunanbuku.create') }}" class="btn btn-primary  float-sm-right"
-                            type="button">
-                            <i class="fas fa-plus"></i> Add Buku
-                        </a>
+                    </div>
+
+                    <!-- /.content-header -->
+                    <div class="col-md-7 mt-2 float-sm-right">
+                        @if (Session::has('removeAll'))
+                            <div class="btn btn-success swalDefaultSuccess" role="alert">
+                                {{ Session::get('removeAll') }}
+                            </div>
+                        @endif
+                        @if (Session::has('success'))
+                            <div class="btn btn-success swalDefaultSuccess" role="alert">
+                                {{ Session::get('success') }}
+                            </div>
+                        @endif
                     </div>
 
                     <form action="/peminjamantahunan" method="GET">
@@ -83,6 +113,16 @@
                             </button>
                         </div>
                     </form>
+                    <div class="breadcrumb mb-3 float-sm-right" role="group" aria-label="Basic example">
+                        <a href="{{ route('peminjamantahunan.create') }}" class="btn btn-success  float-sm-right"
+                            type="button">
+                            <i class="fas fa-plus"></i> Buat Pinjaman
+                        </a>
+                        <a href="{{ route('peminjamantahunanbuku.create') }}" class="btn btn-primary  float-sm-right"
+                            type="button">
+                            <i class="fas fa-plus"></i> Add Buku
+                        </a>
+                    </div>
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.row -->
@@ -143,8 +183,8 @@
                                                 class="btn btn-secondary"><i class="fas fa-eye"></i></a>
                                             <a href="{{ route('peminjamantahunan.edit', $p->id) }}" type="button"
                                                 class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                            <form action="{{ route('peminjamantahunan.destroy', $p->id) }}" method="POST"
-                                                type="button" class="btn btn-danger p-0"
+                                            <form action="{{ route('peminjamantahunan.destroy', $p->id) }}"
+                                                method="POST" type="button" class="btn btn-danger p-0"
                                                 onsubmit="return confirm('Delete?')">
                                                 @csrf
                                                 @method('DELETE')

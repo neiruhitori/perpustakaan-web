@@ -28,6 +28,10 @@
     <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/dist/css/adminlte.min.css') }}">
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('AdminLTE-3.2.0/plugins/daterangepicker/daterangepicker.css') }}">
+    <!-- Modal -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -40,40 +44,80 @@
 
 
         <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-      <div class="content-header">
-          <div class="container-fluid">
-              <div class="row mb-2">
-                  <div class="col-sm-6">
-                      <h1 class="m-0">Peminjaman Harian</h1>
-                  </div><!-- /.col -->
-                  <div class="col-sm-6">
-                      <ol class="breadcrumb float-sm-right">
-                          <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                          <li class="breadcrumb-item active">Peminjaman</li>
-                      </ol>
-                  </div><!-- /.col -->
-              </div><!-- /.row -->
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Peminjaman Harian</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item active">Peminjaman</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
 
-      <!-- /.content-header -->
-                    @if (Session::has('success'))
-                        <div class="btn btn-success swalDefaultSuccess" role="alert">
-                            {{ Session::get('success') }}
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger float-sm-right" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Reset
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Reset Data Peminjaman</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Apakah Anda yakin ingin menghapus semua data!
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+
+                                    <a href="{{ route('peminjaman.removeAll') }}" id="btn"
+                                        class="btn btn-primary profile-button">Reset</a>
+                                </div>
+                            </div>
                         </div>
-                    @endif
-                    <a href="{{ route('peminjaman.create') }}" class="btn btn-primary breadcrumb float-sm-right">Add
-                        Peminjaman</a>
+                    </div>
+
+                    <!-- /.content-header -->
+                    <div class="col-md-7 mt-2 float-sm-right">
+                        @if (Session::has('removeAll'))
+                            <div class="btn btn-success swalDefaultSuccess" role="alert">
+                                {{ Session::get('removeAll') }}
+                            </div>
+                        @endif
+                        @if (Session::has('success'))
+                            <div class="btn btn-success swalDefaultSuccess" role="alert">
+                                {{ Session::get('success') }}
+                            </div>
+                        @endif
+                    </div>
 
                     <form action="/peminjaman" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama Siswa"/>
+                                <input type="search" name="search" id="form1" class="form-control"
+                                    placeholder="Cari Nama Siswa" />
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
                     </form>
+                    <div class="mb-3">
+                        <a href="{{ route('peminjaman.create') }}" class="btn btn-primary float-sm-right">Add
+                            Peminjaman</a>
+                    </div>
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.row -->
