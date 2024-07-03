@@ -130,12 +130,27 @@ class PeminjamanTahunanController extends Controller
             'jml_buku' => 'required:true',
             'kodebuku' => 'required:true',
         ]);
-        Buku::create([
-            'peminjamantahunan_id' => $request->peminjamantahunan_id,
-            'buku' => $request->buku,
-            'jml_buku' => $request->jml_buku,
-            'kodebuku' => $request->kodebuku,
-        ]);
+        // Buku::create([
+        //     'peminjamantahunan_id' => $request->peminjamantahunan_id,
+        //     'buku' => $request->buku,
+        //     'jml_buku' => $request->jml_buku,
+        //     'kodebuku' => $request->kodebuku,
+        // ]);
+
+        $peminjamantahunan_id = $request->peminjamantahunan_id;
+        $buku = $request->buku;
+        $kodebuku = $request->kodebuku;
+        $jml_buku = $request->jml_buku;
+
+        for ($i=0; $i < count($kodebuku); $i++) { 
+            $datasave = [
+                'peminjamantahunan_id' => $peminjamantahunan_id[$i],
+                'buku' => $buku[$i],
+                'kodebuku' => $kodebuku[$i],
+                'jml_buku' => $jml_buku[$i],
+            ];
+            Buku::insert($datasave);
+        }
         return redirect('/peminjamantahunan')->with('success', 'Data Berhasil di Tambahkan');
     }
 

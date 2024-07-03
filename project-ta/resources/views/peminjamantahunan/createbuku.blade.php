@@ -42,7 +42,7 @@
                         </div>
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label for="peminjamantahunan_id">Kode Pinjam</label>
                                 @error('peminjamantahunan_id')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -81,6 +81,64 @@
                                 @enderror
                                 <input type="text" class="form-control" id="kodebuku" name="kodebuku"
                                     placeholder=" Masukkan Kode Buku" />
+                            </div> --}}
+
+                            <div class="input-group mb-3" id="table">
+                                <div class="col-md-6">
+                                    @error('peminjamantahunan_id')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    @error('buku')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    @error('jml_buku')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    @error('kodebuku')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Kode Pinjam</th>
+                                        <th>Buku</th>
+                                        <th>Kode Buku</th>
+                                        <th>Jumlah Buku</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <select class="form-control" name="peminjamantahunan_id[]"
+                                                id="peminjamantahunan_id">
+                                                <option selected disabled>Pilih Kode Pinjaman</option>
+                                                @foreach ($peminjamantahunanbuku as $buku)
+                                                    <option scope="row" value="{{ $buku->id }}">
+                                                        {{ $buku->kode_pinjam }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select id="bukucrud" name="buku[]" class="form-control">
+                                                <option selected disabled>Pilih buku</option>
+                                                @foreach ($bukucrud as $buk)
+                                                    <option value="{{ $buk->buku }}">{{ $buk->buku }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td><input type="text" class="form-control" id="kodebuku" name="kodebuku[]"
+                                                placeholder=" Masukkan Kode Buku" /></td>
+                                        <td><input type="text" class="form-control" id="jml_buku" name="jml_buku[]"
+                                                placeholder=" Masukkan Jumlah Buku yang di Pinjam" /></td>
+                                        <td><button class="btn btn-success add_buku" type="button" name="add"
+                                                id="add">Add More</button></td>
+                                    </tr>
+                                </table>
                             </div>
 
                             <div class="col-md-6">
@@ -122,5 +180,55 @@
                 </div>
             </div>
         </form>
-    @endsection
+        <script>
+            const add = document.querySelectorAll(".input-group .add_buku")
+            add.forEach(function(e) {
+                e.addEventListener('click', function() {
+                    let element = this.parentElement
+                    // console.log(element);
+                    let newElement = document.createElement('div')
+                    newElement.classList.add('input-group', 'mb-3')
+                    newElement.innerHTML = `
+                        <tr>
+                            <td>
+                                <select class="form-control tag-select" name="peminjamantahunan_id[]" id="peminjamantahunan_id">
+                                    <option selected disabled>Pilih Kode Pinjaman</option>
+                                        @foreach ($peminjamantahunanbuku as $buku)
+                                            <option scope="row" value="{{ $buku->id }}">{{ $buku->kode_pinjam }}</option>
+                                        @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select id="bukucrud" name="buku[]" class="form-control tag-select">
+                                    <option selected disabled>Pilih buku</option>
+                                        @foreach ($bukucrud as $buk)
+                                            <option value="{{ $buk->buku }}">{{ $buk->buku }}</option>
+                                        @endforeach
+                                </select>
+                            </td>
+                            <td><input type="text" class="form-control" id="kodebuku" name="kodebuku[]" placeholder=" Masukkan Kode Buku"/></td>
+                            <td><input type="text" class="form-control" id="jml_buku" name="jml_buku[]" placeholder=" Masukkan Jumlah Buku yang di Pinjam"/></td>
+                            <td><button class="btn btn-danger remove_buku" type="button" name="add" id="add">Remove</button></td>
+                        </tr>`
+                    document.getElementById('table').appendChild(newElement)
+                    callEvent()
+                })
+            })
+            callEvent()
 
+            function callEvent() {
+                // Dibawah ini adalah untuk Hapus Input yang ditambahkan
+                document.querySelector('div').querySelectorAll('.remove_buku').forEach(function(remove) {
+                    remove.addEventListener('click', function(elmClick) {
+                        elmClick.target.parentElement.remove()
+                    })
+                })
+                // Dibawah ini adalah untuk fitur select2 pada saat add multiple
+                $(document).ready(function() {
+                    $('.tag-select').select2({
+                        placeholder: 'Select tags',
+                    });
+                });
+            }
+        </script>
+    @endsection
