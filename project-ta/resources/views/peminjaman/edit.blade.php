@@ -44,12 +44,14 @@
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label>Nama :</label>
-                                <select id="name" name="name" class="form-control">
+                                <input type="text" class="form-control" name="name"
+                                    value="{{ $peminjaman->name }}" />
+                                {{-- <select id="name" name="name" class="form-control">
                                     <option selected disabled>{{ $peminjaman->name }}</option>
                                     @foreach ($siswa as $sw)
                                         <option value="{{ $sw->name }}">{{ $sw->name }}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
                             </div>
                             <div class="col-md-6">
                                 <label for="inputStatus">Kelas :</label>
