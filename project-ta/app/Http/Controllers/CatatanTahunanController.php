@@ -19,10 +19,15 @@ class CatatanTahunanController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();
         
+        $keyword = $request->input('search');
         if ($request->has('search')) {
-            $catatan = PeminjamanTahunan::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
+            $catatan = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->orWhereHas('siswas', function ($query) use ($keyword) {
+                $query->where('kelas', 'like', '%' . $keyword . '%');
+            })->get();
         } else {
-            $catatan = PeminjamanTahunan::orderBy('created_at', 'DESC')->paginate(10);
+            $catatan = PeminjamanTahunan::latest()->paginate(10);
         }
         return view('catatantahunan.catatan', compact('catatan', 'profile'));
     }

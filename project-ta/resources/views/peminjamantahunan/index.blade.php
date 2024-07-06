@@ -106,7 +106,7 @@
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
                                 <input type="search" name="search" id="form1" class="form-control"
-                                    placeholder="Cari Nama Peminjam" />
+                                    placeholder="Cari Nama atau Kelas" />
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -145,16 +145,12 @@
                     </thead>
                     <tbody>
                         @if ($peminjamantahunan->count() > 0)
-                            @forelse ($peminjamantahunan as $key => $p)
+                            @forelse ($peminjamantahunan as $p)
                                 <tr>
-                                    <td scope="row">{{ $peminjamantahunan->firstItem() + $key }}</td>
+                                    <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ $p->kode_pinjam }}</td>
-                                    <td>
-                                        {{ $p->name }}
-                                    </td>
-                                    <td>
-                                        {{ $p->kelas }}
-                                    </td>
+                                    <td>{{ optional($p->siswas)->name }}</td>
+                                    <td>{{ optional($p->siswas)->kelas }}</td>
                                     <td>
                                         @foreach ($p->bukus()->get() as $b)
                                             <ul type=disc>
@@ -203,18 +199,6 @@
                         @endif
                     </tbody>
                 </table>
-                <div class="float-sm-left">
-                    Showing
-                    {{ $peminjamantahunan->firstItem() }}
-                    to
-                    {{ $peminjamantahunan->lastItem() }}
-                    of
-                    {{ $peminjamantahunan->total() }}
-                    entries
-                </div>
-                <div class="float-sm-right">
-                    {{ $peminjamantahunan->links() }}
-                </div>
             @endsection
         </div>
 

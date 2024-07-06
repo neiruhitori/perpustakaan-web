@@ -35,13 +35,13 @@
                             <div class="col-md-6">
                                 <label>Nama :</label>
                                     <input type="text" class="form-control"
-                                        value="{{ $peminjamantahunan->name }}" disabled />
+                                        value="{{ $peminjamantahunan->siswas->name }}" disabled />
                             </div>
 
                             <div class="col-md-6">
                                 <label>Kelas :</label>
                                     <input type="text" class="form-control"
-                                        value="{{ $peminjamantahunan->kelas }}" disabled />
+                                        value="{{ $peminjamantahunan->siswas->kelas }}" disabled />
                             </div>
                             <div class="col-md-6">
                                 <label>Buku :</label>

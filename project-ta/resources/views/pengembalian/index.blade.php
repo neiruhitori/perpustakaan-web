@@ -74,7 +74,7 @@
                     <form action="/pengembalian" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama Siswa"/>
+                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama atau Kelas"/>
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -100,11 +100,11 @@
                     </thead>
                     <tbody>
                         @if ($pengembalian->count() > 0)
-                            @forelse ($pengembalian as $key => $k)
+                            @forelse ($pengembalian as $k)
                                 <tr>
-                                    <td scope="row">{{ $pengembalian->firstItem() + $key }}</td>
-                                    <td>{{ $k->name }}</td>
-                                    <td>{{ $k->kelas }}</td>
+                                    <td scope="row">{{ $loop->iteration }}</td>
+                                    <td>{{ optional($k->siswas)->name }}</td>
+                                    <td>{{ optional($k->siswas)->kelas }}</td>
                                     <td>{{ $k->buku }}</td>
                                     <td>{{ $k->jml_buku }}</td>
                                     {{-- <td>{{ $k->jam_pinjam }}</td> --}}
@@ -145,18 +145,6 @@
                         @endif
                     </tbody>
                 </table>
-                <div class="float-sm-left">
-                    Showing
-                    {{ $pengembalian->firstItem() }}
-                    to
-                    {{ $pengembalian->lastItem() }}
-                    of
-                    {{ $pengembalian->total() }}
-                    entries
-                </div>
-                <div class="float-sm-right">
-                    {{ $pengembalian->links() }}
-                </div>
             @endsection
         </div>
 

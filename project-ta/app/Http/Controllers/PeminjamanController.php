@@ -21,10 +21,20 @@ class PeminjamanController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();
         
+        // if ($request->has('search')) {
+        //     $peminjaman = Peminjaman::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
+        // } else {
+        //     $peminjaman = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
+        // }
+        $keyword = $request->input('search');
         if ($request->has('search')) {
-            $peminjaman = Peminjaman::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
+            $peminjaman = Peminjaman::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->orWhereHas('siswas', function ($query) use ($keyword) {
+                $query->where('kelas', 'like', '%' . $keyword . '%');
+            })->get();
         } else {
-            $peminjaman = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
+            $peminjaman = Peminjaman::latest()->paginate(10);
         }
         return view('peminjaman.index', compact('peminjaman', 'profile'));
         
@@ -58,8 +68,9 @@ class PeminjamanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:1|max:50',
-            'kelas' => 'required:true',
+            // 'name' => 'required|min:1|max:50',
+            // 'kelas' => 'required:true',
+            'siswas_id' => 'required|min:1|max:50',
             'buku' => 'required|min:1|max:50',
             'jml_buku' => 'required|min:1|max:50',
             'jam_pinjam' => 'required:true',
@@ -68,8 +79,9 @@ class PeminjamanController extends Controller
         ]);
         
         Peminjaman::create([
-                    'name' => $request->name,
-                    'kelas' => $request->kelas,
+                    'siswas_id' => $request->siswas_id,
+                    // 'name' => $request->name,
+                    // 'kelas' => $request->kelas,
                     'buku' => $request->buku,
                     'kodebuku' => $request->kodebuku,
                     'jml_buku' => $request->jml_buku,

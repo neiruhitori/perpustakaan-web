@@ -90,8 +90,8 @@
                                         <tr>
                                             <td scope="row" align="center">{{ $loop->iteration }}</td>
                                             <td>{{ $k->kode_pinjam }}</td>
-                                            <td>{{ $k->name }}</td>
-                                            <td align="center">{{ $k->kelas }}</td>
+                                            <td align="left">{{ optional($k->siswas)->name }}</td>
+                                            <td align="center">{{ optional($k->siswas)->kelas }}</td>
                                             <td align="center">
                                                 @foreach ($k->bukus()->get() as $b)
                                                     <ul type=disc>

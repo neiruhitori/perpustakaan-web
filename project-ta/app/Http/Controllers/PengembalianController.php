@@ -20,10 +20,15 @@ class PengembalianController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();
         
+        $keyword = $request->input('search');
         if ($request->has('search')) {
-            $pengembalian = Peminjaman::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
+            $pengembalian = Peminjaman::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->orWhereHas('siswas', function ($query) use ($keyword) {
+                $query->where('kelas', 'like', '%' . $keyword . '%');
+            })->get();
         } else {
-            $pengembalian = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
+            $pengembalian = Peminjaman::latest()->paginate(10);
         }
         return view('pengembalian.index', compact('pengembalian', 'profile'));
         

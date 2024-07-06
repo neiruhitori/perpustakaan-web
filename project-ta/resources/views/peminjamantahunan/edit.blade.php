@@ -46,18 +46,19 @@
                                 <label>Kode Pinjam :</label>
                                 <input type="text" class="form-control" id="kode_pinjam" name="kode_pinjam" value="{{ $peminjamantahunan->kode_pinjam }}" disabled/>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label>Nama :</label>
                                 <input type="text" class="form-control" name="name"
-                                    value="{{ $peminjamantahunan->name }}" />
+                                    value="{{ $peminjamantahunan->name }}" /> --}}
+
                                 {{-- <select id="name" name="name" class="form-control">
                                     <option selected disabled>{{ $peminjamantahunan->name }}</option>
                                     @foreach ($siswa as $sw)
                                         <option value="{{ $sw->name }}">{{ $sw->name }}</option>
                                     @endforeach
                                 </select> --}}
-                            </div>
-                            <div class="col-md-6">
+                            {{-- </div> --}}
+                            {{-- <div class="col-md-6">
                                 <label for="inputStatus">Kelas :</label>
                                 @error('kelas')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -86,7 +87,7 @@
                                     <option>IX F</option>
                                     <option>IX G</option>
                                 </select>
-                            </div>
+                            </div> --}}
                             <!-- Date and time -->
                             <div class="col-md-6">
                                 <div class="form-group">

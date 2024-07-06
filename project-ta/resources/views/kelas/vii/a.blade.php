@@ -92,33 +92,27 @@
                                     <tr>
                                         <td scope="row">{{ $loop->iteration }}</td>
                                         <td>{{ $k->kode_pinjam }}</td>
-                                        <td>{{ $k->name }}</td>
-                                        <td>{{ $k->kelas }}</td>
+                                        <td align="left">{{ optional($k->siswas)->name }}</td>
+                                        <td align="center">{{ optional($k->siswas)->kelas }}</td>
                                         <td>
                                             @foreach ($k->bukus()->get() as $b)
-                                            
                                                 <ul type=disc>
                                                     <li>{{ $b->buku }}</li>
                                                 </ul>
-                                            
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach ($k->bukus()->get() as $c)
-                                            
                                                 <ul type=circle>
                                                     <li>{{ $c->jml_buku }}</li>
                                                 </ul>
-                                            
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach ($k->bukus()->get() as $d)
-                                            
                                                 <ul type=circle>
                                                     <li>{{ $d->kodebuku }}</li>
                                                 </ul>
-                                            
                                             @endforeach
                                         </td>
                                     </tr>

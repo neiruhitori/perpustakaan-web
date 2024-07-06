@@ -19,10 +19,15 @@ class CatatanHarianController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();
         
+        $keyword = $request->input('search');
         if ($request->has('search')) {
-            $catatan = Peminjaman::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
+            $catatan = Peminjaman::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->orWhereHas('siswas', function ($query) use ($keyword) {
+                $query->where('kelas', 'like', '%' . $keyword . '%');
+            })->get();
         } else {
-            $catatan = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
+            $catatan = Peminjaman::latest()->paginate(10);
         }
         return view('catatanharian.catatan', compact('catatan', 'profile'));
     }

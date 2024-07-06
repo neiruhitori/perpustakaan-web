@@ -79,11 +79,11 @@
                     </thead>
                     <tbody>
                         @if ($selesaimeminjam->count() > 0)
-                            @forelse ($selesaimeminjam as $key => $k)
+                            @forelse ($selesaimeminjam as $k)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
-                                    <td>{{ $k->name }}</td>
-                                    <td>{{ $k->kelas }}</td>
+                                    <td>{{ optional($k->siswas)->name }}</td>
+                                    <td>{{ optional($k->siswas)->kelas }}</td>
                                     <td>{{ $k->buku }}</td>
                                     <td>{{ $k->jml_buku }}</td>
                                     <td>{{ $k->kodebuku }}</td>

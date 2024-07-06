@@ -22,10 +22,15 @@ class PeminjamanTahunanController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id', $iduser)->first();
 
+        $keyword = $request->input('search');
         if ($request->has('search')) {
-            $peminjamantahunan = PeminjamanTahunan::where('name', 'LIKE', '%' . $request->search . '%')->paginate(5);
+            $peminjamantahunan = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->orWhereHas('siswas', function ($query) use ($keyword) {
+                $query->where('kelas', 'like', '%' . $keyword . '%');
+            })->get();
         } else {
-            $peminjamantahunan = PeminjamanTahunan::orderBy('updated_at', 'DESC')->paginate(10);
+            $peminjamantahunan = PeminjamanTahunan::latest()->paginate(10);
         }
         return view('peminjamantahunan.index', compact('peminjamantahunan', 'profile'));
     }
@@ -58,15 +63,17 @@ class PeminjamanTahunanController extends Controller
             'absen' => 'required:true',
             'tgl' => 'required:true',
             // 'kode_pinjam' => 'required:true',
-            'name' => 'required:true',
-            'kelas' => 'required:true',
+            // 'name' => 'required:true',
+            // 'kelas' => 'required:true',
+            'siswas_id' => 'required:true',
             'jam_pinjam' => 'required:true',
             'jam_kembali' => 'required:true',
         ]);
 
         $kode_pinjam = $request->kls . '' . $request->absen . '-' . $request->tgl;
-        $name = $request->name;
-        $kelas = $request->kelas;
+        // $name = $request->name;
+        // $kelas = $request->kelas;
+        $siswas_id = $request->siswas_id;
         $jam_pinjam = $request->jam_pinjam;
         $jam_kembali = $request->jam_kembali;
         $description = $request->description;
@@ -74,8 +81,9 @@ class PeminjamanTahunanController extends Controller
         // Simpan ke database
         $yourModel = new PeminjamanTahunan();
         $yourModel->kode_pinjam = $kode_pinjam;
-        $yourModel->name = $name;
-        $yourModel->kelas = $kelas;
+        // $yourModel->name = $name;
+        // $yourModel->kelas = $kelas;
+        $yourModel->siswas_id = $siswas_id;
         $yourModel->jam_pinjam = $jam_pinjam;
         $yourModel->jam_kembali = $jam_kembali;
         $yourModel->description = $description;

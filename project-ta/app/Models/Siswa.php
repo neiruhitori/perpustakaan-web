@@ -13,6 +13,15 @@ class Siswa extends Model
     protected $fillable = [];
     protected $guarded = [];
 
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'id');
+    }
+    public function peminjamantahunan()
+    {
+        return $this->hasMany(PeminjamanTahunan::class, 'id');
+    }
+
     // public function peminjaman()
     // {
     //     return $this->hasMany(Peminjaman::class, 'siswa_id');

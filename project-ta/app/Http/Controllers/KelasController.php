@@ -18,27 +18,46 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viia = PeminjamanTahunan::where('kelas', 'VII A')->orderBy('name', 'ASC')->paginate(35);
+        // $viia = PeminjamanTahunan::where('kelas', 'VII A')->orderBy('name', 'ASC')->paginate(35);
+
+        $viia = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII A');
+        })->paginate(35);
 
         return view('kelas.vii.a', compact('viia', 'profile'));
     }
 
     public function search_viia(Request $request)
     {
-        $search = $request->search;
-        $viia = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VII A');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VII A');
-        })
-        ->get();
-        return view('kelas.vii.a', compact('viia','search'));
+        // $search = $request->search;
+        // $viia = PeminjamanTahunan::where(function($query) use ($search){
+        //     $query->where('name','like',"%$search%")->where('kelas', 'VII A');
+        // })
+        // ->orWhereHas('bukus', function($query) use($search){
+        //     $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VII A');
+        // })
+        // ->get();
+
+        $keyword = $request->search;
+            $viia = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII A');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII A');
+            })->get();
+
+        return view('kelas.vii.a', compact('viia'));
     }
 
     public function pdf_viia()
     {
-        $viia = PeminjamanTahunan::where('kelas', 'VII A')->get();
+        // $viia = PeminjamanTahunan::where('kelas', 'VII A')->get();
+        $viia = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII A');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_a', ['viia' => $viia]);
         return $pdf->stream('data-perpustakaan-VII-A.pdf');
     }
@@ -49,27 +68,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viib = PeminjamanTahunan::where('kelas', 'VII B')->orderBy('name', 'ASC')->paginate(35);
+        $viib = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII B');
+        })->paginate(35);
 
         return view('kelas.vii.b', compact('viib', 'profile'));
     }
 
     public function search_viib(Request $request)
     {
-        $search = $request->search;
-        $viib = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VII B');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VII B');
-        })
-        ->get();
-        return view('kelas.vii.b', compact('viib','search'));
+        $keyword = $request->search;
+            $viib = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII B');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII B');
+            })->get();
+        return view('kelas.vii.b', compact('viib'));
     }
 
     public function pdf_viib()
     {
-        $viib = PeminjamanTahunan::where('kelas', 'VII B')->get();
+        $viib = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII B');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_b', ['viib' => $viib]);
         return $pdf->stream('data-perpustakaan-VII-B.pdf');
     }
@@ -80,27 +105,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viic = PeminjamanTahunan::where('kelas', 'VII C')->orderBy('name', 'ASC')->paginate(35);
+        $viic = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII C');
+        })->paginate(35);
 
         return view('kelas.vii.c', compact('viic', 'profile'));
     }
 
     public function search_viic(Request $request)
     {
-        $search = $request->search;
-        $viic = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VII C');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VII C');
-        })
-        ->get();
-        return view('kelas.vii.c', compact('viic','search'));
+        $keyword = $request->search;
+            $viic = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII C');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII C');
+            })->get();
+        return view('kelas.vii.c', compact('viic'));
     }
 
     public function pdf_viic()
     {
-        $viic = PeminjamanTahunan::where('kelas', 'VII C')->get();
+        $viic = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII C');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_c', ['viic' => $viic]);
         return $pdf->stream('data-perpustakaan-VII-C.pdf');
     }
@@ -111,27 +142,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viid = PeminjamanTahunan::where('kelas', 'VII D')->orderBy('name', 'ASC')->paginate(35);
+        $viid = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII D');
+        })->paginate(35);
 
         return view('kelas.vii.d', compact('viid', 'profile'));
     }
 
     public function search_viid(Request $request)
     {
-        $search = $request->search;
-        $viid = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VII D');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VII D');
-        })
-        ->get();
-        return view('kelas.vii.d', compact('viid','search'));
+        $keyword = $request->search;
+            $viid = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII D');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII D');
+            })->get();
+        return view('kelas.vii.d', compact('viid'));
     }
 
     public function pdf_viid()
     {
-        $viid = PeminjamanTahunan::where('kelas', 'VII D')->get();
+        $viid = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII D');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_d', ['viid' => $viid]);
         return $pdf->stream('data-perpustakaan-VII-D.pdf');
     }
@@ -142,27 +179,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viie = PeminjamanTahunan::where('kelas', 'VII E')->orderBy('name', 'ASC')->paginate(35);
+        $viie = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII E');
+        })->paginate(35);
 
         return view('kelas.vii.e', compact('viie', 'profile'));
     }
 
     public function search_viie(Request $request)
     {
-        $search = $request->search;
-        $viie = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VII E');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VII E');
-        })
-        ->get();
-        return view('kelas.vii.e', compact('viie','search'));
+        $keyword = $request->search;
+            $viie = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII E');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII E');
+            })->get();
+        return view('kelas.vii.e', compact('viie'));
     }
 
     public function pdf_viie()
     {
-        $viie = PeminjamanTahunan::where('kelas', 'VII E')->get();
+        $viie = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII E');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_e', ['viie' => $viie]);
         return $pdf->stream('data-perpustakaan-VII-E.pdf');
     }
@@ -173,27 +216,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viif = PeminjamanTahunan::where('kelas', 'VII F')->orderBy('name', 'ASC')->paginate(35);
+        $viif = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII F');
+        })->paginate(35);
 
         return view('kelas.vii.f', compact('viif', 'profile'));
     }
 
     public function search_viif(Request $request)
     {
-        $search = $request->search;
-        $viif = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VII F');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VII F');
-        })
-        ->get();
-        return view('kelas.vii.f', compact('viif','search'));
+        $keyword = $request->search;
+            $viif = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII F');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII F');
+            })->get();
+        return view('kelas.vii.f', compact('viif'));
     }
 
     public function pdf_viif()
     {
-        $viif = PeminjamanTahunan::where('kelas', 'VII F')->get();
+        $viif = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII F');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_f', ['viif' => $viif]);
         return $pdf->stream('data-perpustakaan-VII-F.pdf');
     }
@@ -204,27 +253,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viig = PeminjamanTahunan::where('kelas', 'VII G')->orderBy('name', 'ASC')->paginate(35);
+        $viig = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII G');
+        })->paginate(35);
 
         return view('kelas.vii.g', compact('viig', 'profile'));
     }
 
     public function search_viig(Request $request)
     {
-        $search = $request->search;
-        $viig = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VII G');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VII G');
-        })
-        ->get();
-        return view('kelas.vii.g', compact('viig','search'));
+        $keyword = $request->search;
+            $viig = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII G');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VII G');
+            })->get();
+        return view('kelas.vii.g', compact('viig'));
     }
 
     public function pdf_viig()
     {
-        $viig = PeminjamanTahunan::where('kelas', 'VII G')->get();
+        $viig = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VII G');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_g', ['viig' => $viig]);
         return $pdf->stream('data-perpustakaan-VII-G.pdf');
     }
@@ -235,27 +290,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viiia = PeminjamanTahunan::where('kelas', 'VIII A')->orderBy('name', 'ASC')->paginate(35);
+        $viiia = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII A');
+        })->paginate(35);
 
         return view('kelas.viii.a', compact('viiia', 'profile'));
     }
 
     public function search_viiia(Request $request)
     {
-        $search = $request->search;
-        $viiia = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VIII A');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VIII A');
-        })
-        ->get();
-        return view('kelas.viii.a', compact('viiia','search'));
+        $keyword = $request->search;
+            $viiia = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII A');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII A');
+            })->get();
+        return view('kelas.viii.a', compact('viiia'));
     }
 
     public function pdf_viiia()
     {
-        $viiia = PeminjamanTahunan::where('kelas', 'VIII A')->get();
+        $viiia = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII A');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_a', ['viiia' => $viiia]);
         return $pdf->stream('data-perpustakaan-VIII-A.pdf');
     }
@@ -266,27 +327,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viiib = PeminjamanTahunan::where('kelas', 'VIII B')->orderBy('name', 'ASC')->paginate(35);
+        $viiib = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII B');
+        })->paginate(35);
 
         return view('kelas.viii.b', compact('viiib', 'profile'));
     }
 
     public function search_viiib(Request $request)
     {
-        $search = $request->search;
-        $viiib = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VIII B');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VIII B');
-        })
-        ->get();
-        return view('kelas.viii.b', compact('viiib','search'));
+        $keyword = $request->search;
+            $viiib = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII B');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII B');
+            })->get();
+        return view('kelas.viii.b', compact('viiib'));
     }
 
     public function pdf_viiib()
     {
-        $viiib = PeminjamanTahunan::where('kelas', 'VIII B')->get();
+        $viiib = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII B');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_b', ['viiib' => $viiib]);
         return $pdf->stream('data-perpustakaan-VIII-B.pdf');
     }
@@ -297,27 +364,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viiic = PeminjamanTahunan::where('kelas', 'VIII C')->orderBy('name', 'ASC')->paginate(35);
+        $viiic = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII C');
+        })->paginate(35);
 
         return view('kelas.viii.c', compact('viiic', 'profile'));
     }
 
     public function search_viiic(Request $request)
     {
-        $search = $request->search;
-        $viiic = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VIII C');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VIII C');
-        })
-        ->get();
-        return view('kelas.viii.c', compact('viiic','search'));
+        $keyword = $request->search;
+            $viiic = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII C');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII C');
+            })->get();
+        return view('kelas.viii.c', compact('viiic'));
     }
 
     public function pdf_viiic()
     {
-        $viiic = PeminjamanTahunan::where('kelas', 'VIII C')->get();
+        $viiic = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII C');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_c', ['viiic' => $viiic]);
         return $pdf->stream('data-perpustakaan-VIII-C.pdf');
     }
@@ -328,27 +401,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viiid = PeminjamanTahunan::where('kelas', 'VIII D')->orderBy('name', 'ASC')->paginate(35);
+        $viiid = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII D');
+        })->paginate(35);
 
         return view('kelas.viii.d', compact('viiid', 'profile'));
     }
 
     public function search_viiid(Request $request)
     {
-        $search = $request->search;
-        $viiid = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VIII D');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VIII D');
-        })
-        ->get();
-        return view('kelas.viii.d', compact('viiid','search'));
+        $keyword = $request->search;
+            $viiid = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII D');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII D');
+            })->get();
+        return view('kelas.viii.d', compact('viiid'));
     }
 
     public function pdf_viiid()
     {
-        $viiid = PeminjamanTahunan::where('kelas', 'VIII D')->get();
+        $viiid = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII D');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_d', ['viiid' => $viiid]);
         return $pdf->stream('data-perpustakaan-VIII-D.pdf');
     }
@@ -359,27 +438,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viiie = PeminjamanTahunan::where('kelas', 'VIII E')->orderBy('name', 'ASC')->paginate(35);
+        $viiie = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII E');
+        })->paginate(35);
 
         return view('kelas.viii.e', compact('viiie', 'profile'));
     }
 
     public function search_viiie(Request $request)
     {
-        $search = $request->search;
-        $viiie = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VIII E');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VIII E');
-        })
-        ->get();
-        return view('kelas.viii.e', compact('viiie','search'));
+        $keyword = $request->search;
+            $viiie = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII E');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII E');
+            })->get();
+        return view('kelas.viii.e', compact('viiie'));
     }
 
     public function pdf_viiie()
     {
-        $viiie = PeminjamanTahunan::where('kelas', 'VIII E')->get();
+        $viiie = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII E');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_e', ['viiie' => $viiie]);
         return $pdf->stream('data-perpustakaan-VIII-E.pdf');
     }
@@ -390,27 +475,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viiif = PeminjamanTahunan::where('kelas', 'VIII F')->orderBy('name', 'ASC')->paginate(35);
+        $viiif = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII F');
+        })->paginate(35);
 
         return view('kelas.viii.f', compact('viiif', 'profile'));
     }
 
     public function search_viiif(Request $request)
     {
-        $search = $request->search;
-        $viiif = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VIII F');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VIII F');
-        })
-        ->get();
-        return view('kelas.viii.f', compact('viiif','search'));
+        $keyword = $request->search;
+            $viiif = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII F');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII F');
+            })->get();
+        return view('kelas.viii.f', compact('viiif'));
     }
 
     public function pdf_viiif()
     {
-        $viiif = PeminjamanTahunan::where('kelas', 'VIII F')->get();
+        $viiif = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII F');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_f', ['viiif' => $viiif]);
         return $pdf->stream('data-perpustakaan-VIII-F.pdf');
     }
@@ -421,27 +512,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $viiig = PeminjamanTahunan::where('kelas', 'VIII G')->orderBy('name', 'ASC')->paginate(35);
+        $viiig = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII G');
+        })->paginate(35);
 
         return view('kelas.viii.g', compact('viiig', 'profile'));
     }
 
     public function search_viiig(Request $request)
     {
-        $search = $request->search;
-        $viiig = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'VIII G');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'VIII G');
-        })
-        ->get();
-        return view('kelas.viii.g', compact('viiig','search'));
+        $keyword = $request->search;
+            $viiig = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII G');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'VIII G');
+            })->get();
+        return view('kelas.viii.g', compact('viiig'));
     }
 
     public function pdf_viiig()
     {
-        $viiig = PeminjamanTahunan::where('kelas', 'VIII G')->get();
+        $viiig = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'VIII G');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_g', ['viiig' => $viiig]);
         return $pdf->stream('data-perpustakaan-VIII-G.pdf');
     }
@@ -452,27 +549,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $ixa = PeminjamanTahunan::where('kelas', 'IX A')->orderBy('name', 'ASC')->paginate(35);
+        $ixa = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX A');
+        })->paginate(35);
 
         return view('kelas.ix.a', compact('ixa', 'profile'));
     }
 
     public function search_ixa(Request $request)
     {
-        $search = $request->search;
-        $ixa = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'IX A');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'IX A');
-        })
-        ->get();
-        return view('kelas.ix.a', compact('ixa','search'));
+        $keyword = $request->search;
+            $ixa = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX A');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX A');
+            })->get();
+        return view('kelas.ix.a', compact('ixa'));
     }
 
     public function pdf_ixa()
     {
-        $ixa = PeminjamanTahunan::where('kelas', 'IX A')->get();
+        $ixa = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX A');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_a', ['ixa' => $ixa]);
         return $pdf->stream('data-perpustakaan-IX-A.pdf');
     }
@@ -483,27 +586,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $ixb = PeminjamanTahunan::where('kelas', 'IX B')->orderBy('name', 'ASC')->paginate(35);
+        $ixb = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX B');
+        })->paginate(35);
 
         return view('kelas.ix.b', compact('ixb', 'profile'));
     }
 
     public function search_ixb(Request $request)
     {
-        $search = $request->search;
-        $ixb = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'IX B');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'IX B');
-        })
-        ->get();
-        return view('kelas.ix.b', compact('ixb','search'));
+        $keyword = $request->search;
+            $ixb = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX B');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX B');
+            })->get();
+        return view('kelas.ix.b', compact('ixb'));
     }
 
     public function pdf_ixb()
     {
-        $ixb = PeminjamanTahunan::where('kelas', 'IX B')->get();
+        $ixb = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX B');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_b', ['ixb' => $ixb]);
         return $pdf->stream('data-perpustakaan-IX-B.pdf');
     }
@@ -514,27 +623,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $ixc = PeminjamanTahunan::where('kelas', 'IX C')->orderBy('name', 'ASC')->paginate(35);
+        $ixc = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX C');
+        })->paginate(35);
 
         return view('kelas.ix.c', compact('ixc', 'profile'));
     }
 
     public function search_ixc(Request $request)
     {
-        $search = $request->search;
-        $ixc = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'IX C');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'IX C');
-        })
-        ->get();
-        return view('kelas.ix.c', compact('ixc','search'));
+        $keyword = $request->search;
+            $ixc = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX C');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX C');
+            })->get();
+        return view('kelas.ix.c', compact('ixc'));
     }
 
     public function pdf_ixc()
     {
-        $ixc = PeminjamanTahunan::where('kelas', 'IX C')->get();
+        $ixc = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX C');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_c', ['ixc' => $ixc]);
         return $pdf->stream('data-perpustakaan-IX-C.pdf');
     }
@@ -545,27 +660,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $ixd = PeminjamanTahunan::where('kelas', 'IX D')->orderBy('name', 'ASC')->paginate(35);
+        $ixd = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX D');
+        })->paginate(35);
 
         return view('kelas.ix.d', compact('ixd', 'profile'));
     }
 
     public function search_ixd(Request $request)
     {
-        $search = $request->search;
-        $ixd = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'IX D');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'IX D');
-        })
-        ->get();
-        return view('kelas.ix.d', compact('ixd','search'));
+        $keyword = $request->search;
+            $ixd = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX D');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX D');
+            })->get();
+        return view('kelas.ix.d', compact('ixd'));
     }
 
     public function pdf_ixd()
     {
-        $ixd = PeminjamanTahunan::where('kelas', 'IX D')->get();
+        $ixd = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX D');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_d', ['ixd' => $ixd]);
         return $pdf->stream('data-perpustakaan-IX-D.pdf');
     }
@@ -576,27 +697,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $ixe = PeminjamanTahunan::where('kelas', 'IX E')->orderBy('name', 'ASC')->paginate(35);
+        $ixe = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX E');
+        })->paginate(35);
 
         return view('kelas.ix.e', compact('ixe', 'profile'));
     }
 
     public function search_ixe(Request $request)
     {
-        $search = $request->search;
-        $ixe = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'IX E');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'IX E');
-        })
-        ->get();
-        return view('kelas.ix.e', compact('ixe','search'));
+        $keyword = $request->search;
+            $ixe = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX E');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX E');
+            })->get();
+        return view('kelas.ix.e', compact('ixe'));
     }
 
     public function pdf_ixe()
     {
-        $ixe = PeminjamanTahunan::where('kelas', 'IX E')->get();
+        $ixe = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX E');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_e', ['ixe' => $ixe]);
         return $pdf->stream('data-perpustakaan-IX-E.pdf');
     }
@@ -607,27 +734,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $ixf = PeminjamanTahunan::where('kelas', 'IX F')->orderBy('name', 'ASC')->paginate(35);
+        $ixf = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX F');
+        })->paginate(35);
 
         return view('kelas.ix.f', compact('ixf', 'profile'));
     }
 
     public function search_ixf(Request $request)
     {
-        $search = $request->search;
-        $ixf = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'IX F');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'IX F');
-        })
-        ->get();
-        return view('kelas.ix.f', compact('ixf','search'));
+        $keyword = $request->search;
+            $ixf = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX F');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX F');
+            })->get();
+        return view('kelas.ix.f', compact('ixf'));
     }
 
     public function pdf_ixf()
     {
-        $ixf = PeminjamanTahunan::where('kelas', 'IX F')->get();
+        $ixf = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX F');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_f', ['ixf' => $ixf]);
         return $pdf->stream('data-perpustakaan-IX-F.pdf');
     }
@@ -638,27 +771,33 @@ class KelasController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();   
 
-        $ixg = PeminjamanTahunan::where('kelas', 'IX G')->orderBy('name', 'ASC')->paginate(35);
+        $ixg = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX G');
+        })->paginate(35);
 
         return view('kelas.ix.g', compact('ixg', 'profile'));
     }
 
     public function search_ixg(Request $request)
     {
-        $search = $request->search;
-        $ixg = PeminjamanTahunan::where(function($query) use ($search){
-            $query->where('name','like',"%$search%")->where('kelas', 'IX G');
-        })
-        ->orWhereHas('bukus', function($query) use($search){
-            $query->where('kodebuku', 'like', "%$search%")->where('kelas', 'IX G');
-        })
-        ->get();
-        return view('kelas.ix.g', compact('ixg','search'));
+        $keyword = $request->search;
+            $ixg = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX G');
+            })->orWhereHas('bukus', function ($query) use ($keyword) {
+                $query->where('kodebuku', 'like', '%' . $keyword . '%');
+            })->whereHas('siswas', function ($query) {
+                $query->where('kelas', 'IX G');
+            })->get();
+        return view('kelas.ix.g', compact('ixg'));
     }
 
     public function pdf_ixg()
     {
-        $ixg = PeminjamanTahunan::where('kelas', 'IX G')->get();
+        $ixg = PeminjamanTahunan::whereHas('siswas', function ($query) {
+            $query->where('kelas', 'IX G');
+        })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_g', ['ixg' => $ixg]);
         return $pdf->stream('data-perpustakaan-IX-G.pdf');
     }

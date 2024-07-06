@@ -74,7 +74,7 @@
                     <form action="/pengembaliantahunan" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama Peminjam"/>
+                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama atau Kelas"/>
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -100,12 +100,12 @@
                     </thead>
                     <tbody>
                         @if ($pengembaliantahunan->count() > 0)
-                            @forelse ($pengembaliantahunan as $key => $k)
+                            @forelse ($pengembaliantahunan as $k)
                                 <tr>
-                                    <td scope="row">{{ $pengembaliantahunan->firstItem() + $key }}</td>
+                                    <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ $k->kode_pinjam }}</td>
-                                    <td>{{ $k->name }}</td>
-                                    <td>{{ $k->kelas }}</td>
+                                    <td>{{ optional($k->siswas)->name }}</td>
+                                    <td>{{ optional($k->siswas)->kelas }}</td>
                                     <td>
                                         @foreach ($k->bukus()->get() as $b)
                                         
@@ -169,18 +169,6 @@
                         @endif
                     </tbody>
                 </table>
-                <div class="float-sm-left">
-                    Showing
-                    {{ $pengembaliantahunan->firstItem() }}
-                    to
-                    {{ $pengembaliantahunan->lastItem() }}
-                    of
-                    {{ $pengembaliantahunan->total() }}
-                    entries
-                </div>
-                <div class="float-sm-right">
-                    {{ $pengembaliantahunan->links() }}
-                </div>
             @endsection
         </div>
 

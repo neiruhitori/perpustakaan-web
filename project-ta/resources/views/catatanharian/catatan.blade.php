@@ -67,7 +67,7 @@
                     <form action="/catatanharian" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama Siswa"/>
+                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama atau Kelas"/>
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -92,11 +92,11 @@
                     </thead>
                     <tbody>
                         @if ($catatan->count() > 0)
-                            @forelse ($catatan as $key => $p)
+                            @forelse ($catatan as $p)
                                 <tr>
-                                    <td scope="row">{{ $catatan->firstItem() + $key }}</td>
-                                    <td>{{ $p->name }}</td>
-                                    <td>{{ $p->kelas }}</td>
+                                    <td scope="row">{{ $loop->iteration }}</td>
+                                    <td>{{ optional($p->siswas)->name }}</td>
+                                    <td>{{ optional($p->siswas)->kelas }}</td>
                                     <td>{{ $p->description }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
@@ -116,18 +116,6 @@
                         @endif
                     </tbody>
                 </table>
-                <div class="float-sm-left">
-                    Showing
-                    {{ $catatan->firstItem() }}
-                    to
-                    {{ $catatan->lastItem() }}
-                    of
-                    {{ $catatan->total() }}
-                    entries
-                </div>
-                <div class="float-sm-right">
-                    {{ $catatan->links() }}
-                </div>
             @endsection
         </div>
 </body>

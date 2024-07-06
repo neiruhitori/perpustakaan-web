@@ -43,6 +43,18 @@
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label for="inputStatus">Nama :</label>
+                                @error('siswas_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <select id="peminjaman_name" name="siswas_id" class="form-control">
+                                    <option selected disabled>Pilih Siswa</option>
+                                    @foreach ($siswa as $sw)
+                                        <option value="{{ $sw->id }}">{{ $sw->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            {{-- <div class="col-md-6">
+                                <label for="inputStatus">Nama :</label>
                                 @error('name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -82,7 +94,7 @@
                                     <option>IX F</option>
                                     <option>IX G</option>
                                 </select>
-                            </div>
+                            </div> --}}
                             <div class="col-md-6">
                                 <label for="inputStatus">Buku :</label>
                                 @error('buku')

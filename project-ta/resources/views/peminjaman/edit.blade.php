@@ -42,18 +42,19 @@
                         </div>
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label>Nama :</label>
                                 <input type="text" class="form-control" name="name"
-                                    value="{{ $peminjaman->name }}" />
+                                    value="{{ $peminjaman->name }}" /> --}}
+
                                 {{-- <select id="name" name="name" class="form-control">
                                     <option selected disabled>{{ $peminjaman->name }}</option>
                                     @foreach ($siswa as $sw)
                                         <option value="{{ $sw->name }}">{{ $sw->name }}</option>
                                     @endforeach
                                 </select> --}}
-                            </div>
-                            <div class="col-md-6">
+                            {{-- </div> --}}
+                            {{-- <div class="col-md-6">
                                 <label for="inputStatus">Kelas :</label>
                                 @error('kelas')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -82,7 +83,7 @@
                                     <option>IX F</option>
                                     <option>IX G</option>
                                 </select>
-                            </div>
+                            </div> --}}
                             <div class="col-md-6">
                                 <label for="inputStatus">Buku :</label>
                                 @error('buku')

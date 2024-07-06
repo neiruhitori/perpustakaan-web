@@ -18,6 +18,11 @@ class PeminjamanTahunan extends Model
         return $this->hasMany(Buku::class, 'peminjamantahunan_id');
     }
 
+    public function siswas()
+    {
+        return $this->belongsTo(Siswa::class);
+    }
+
     // public function siswa()
     // {
     //     return $this->belongsTo(Siswa::class, 'siswa_id');

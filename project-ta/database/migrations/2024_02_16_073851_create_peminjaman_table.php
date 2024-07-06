@@ -15,8 +15,10 @@ class CreatePeminjamanTable extends Migration
     {
         Schema::create('peminjaman', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name'); 
-            $table->string('kelas');
+            $table->foreignId('siswas_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            // $table->string('name'); 
+            // $table->string('kelas');
+
             // $table->unsignedBigInteger('siswa_id'); 
             $table->string('buku');
             $table->string('jml_buku'); 

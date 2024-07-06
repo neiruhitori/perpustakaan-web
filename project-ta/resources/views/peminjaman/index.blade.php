@@ -107,7 +107,7 @@
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
                                 <input type="search" name="search" id="form1" class="form-control"
-                                    placeholder="Cari Nama Siswa" />
+                                    placeholder="Cari Nama atau Kelas" />
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -140,11 +140,13 @@
                     </thead>
                     <tbody>
                         @if ($peminjaman->count() > 0)
-                            @forelse ($peminjaman as $key => $p)
+                            {{-- @forelse ($peminjaman as $key => $p) --}}
+                            @forelse ($peminjaman as $p)
                                 <tr>
-                                    <td scope="row">{{ $peminjaman->firstItem() + $key }}</td>
-                                    <td>{{ $p->name }}</td>
-                                    <td>{{ $p->kelas }}</td>
+                                    {{-- <td scope="row">{{ $peminjaman->firstItem() + $key }}</td> --}}
+                                    <td scope="row">{{ $loop->iteration }}</td>
+                                    <td>{{ optional($p->siswas)->name }}</td>
+                                    <td>{{ optional($p->siswas)->kelas }}</td>
                                     <td>{{ $p->buku }}</td>
                                     <td>{{ $p->jml_buku }}</td>
                                     <td>{{ $p->kodebuku }}</td>
@@ -175,7 +177,7 @@
                         @endif
                     </tbody>
                 </table>
-                <div class="float-sm-left">
+                {{-- <div class="float-sm-left">
                     Showing
                     {{ $peminjaman->firstItem() }}
                     to
@@ -186,7 +188,7 @@
                 </div>
                 <div class="float-sm-right">
                     {{ $peminjaman->links() }}
-                </div>
+                </div> --}}
             @endsection
         </div>
 

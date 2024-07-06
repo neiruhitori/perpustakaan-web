@@ -107,17 +107,17 @@
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label for="inputStatus">Nama :</label>
-                                @error('name')
+                                @error('siswas_id')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                                <select id="name" name="name" class="form-control">
+                                <select id="peminjamantahunan_name" name="siswas_id" class="form-control">
                                     <option selected disabled>Pilih Siswa</option>
                                     @foreach ($siswa as $sw)
-                                        <option value="{{ $sw->name }}">{{ $sw->name }}</option>
+                                        <option value="{{ $sw->id }}">{{ $sw->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label for="inputStatus">Kelas :</label>
                                 @error('kelas')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -146,7 +146,7 @@
                                     <option>IX F</option>
                                     <option>IX G</option>
                                 </select>
-                            </div>
+                            </div> --}}
                             <!-- Date and time -->
                             <div class="form-group col-md-2">
                                 <label>Tanggal Pinjam :</label>

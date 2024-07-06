@@ -20,10 +20,15 @@ class PengembalianTahunanController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id',$iduser)->first();
         
+        $keyword = $request->input('search');
         if ($request->has('search')) {
-            $pengembaliantahunan = PeminjamanTahunan::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
+            $pengembaliantahunan = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })->orWhereHas('siswas', function ($query) use ($keyword) {
+                $query->where('kelas', 'like', '%' . $keyword . '%');
+            })->get();
         } else {
-            $pengembaliantahunan = PeminjamanTahunan::orderBy('updated_at', 'DESC')->paginate(10);
+            $pengembaliantahunan = PeminjamanTahunan::latest()->paginate(10);
         }
         return view('pengembaliantahunan.index', compact('pengembaliantahunan', 'profile'));
     }

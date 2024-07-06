@@ -59,7 +59,13 @@
 </script>
 <script>
     $(document).ready(function() {
-        $('#name').select2()
+        $('#peminjaman_name').select2()
+
+    })
+</script>
+<script>
+    $(document).ready(function() {
+        $('#peminjamantahunan_name').select2()
 
     })
 </script>
@@ -75,12 +81,3 @@
 
     })
 </script>
-{{-- auto fill --}}
-{{-- <script type="text/javascript">
-    $(document).ready(function() {
-        $('#name').on('change', function() {
-            $('#kelas').val($(this).val());
-        });
-    });
-</script> --}}
-{{-- ############ --}}

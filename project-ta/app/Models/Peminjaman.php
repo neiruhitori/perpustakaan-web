@@ -13,6 +13,11 @@ class Peminjaman extends Model
     protected $fillable = [];
     protected $guarded = [];
 
+    public function siswas()
+    {
+        return $this->belongsTo(Siswa::class);
+    }
+
     // public function siswa()
     // {
     //     return $this->belongsTo(Siswa::class, 'siswa_id');
