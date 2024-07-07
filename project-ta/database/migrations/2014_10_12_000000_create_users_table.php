@@ -15,7 +15,8 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->integer('nis')->unique();//unique adalah tidak boleh ada yang sama.
+            $table->integer('perpustakaan_id')->unique();//unique adalah tidak boleh ada yang sama.
+            $table->string('nip')->nullable();
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('password')->nullable();

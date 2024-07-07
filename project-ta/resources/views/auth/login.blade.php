@@ -37,7 +37,7 @@
                         </div>
                     @endif
                     <div class="input-group mb-3">
-                        <input type="text" name="nis" class="form-control" placeholder="Username" autocomplete="off">
+                        <input type="text" name="perpustakaan_id" class="form-control" placeholder="Username" autocomplete="off">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>

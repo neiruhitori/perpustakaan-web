@@ -34,7 +34,7 @@ class LoginControllerr extends Controller
     public function registeruser(Request $request)
     {
         User::create([
-            'nis' => $request->nis,
+            'perpustakaan_id' => $request->perpustakaan_id,
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),

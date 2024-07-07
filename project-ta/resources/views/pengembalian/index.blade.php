@@ -37,6 +37,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+
+    <!--CSS-->
+    <script>
+        .text - red {
+            color: red;
+        }
+    </script>
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -74,7 +81,8 @@
                     <form action="/pengembalian" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama atau Kelas"/>
+                                <input type="search" name="search" id="form1" class="form-control"
+                                    placeholder="Cari Nama atau Kelas" />
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -91,7 +99,6 @@
                         <th>Kelas</th>
                         <th>Buku</th>
                         <th>Jumlah Buku</th>
-                        {{-- <th>Jam Pinjam</th> --}}
                         <th>Kode Buku</th>
                         <th>Jam Kembali</th>
                         <th>Status</th>
@@ -107,20 +114,27 @@
                                     <td>{{ optional($k->siswas)->kelas }}</td>
                                     <td>{{ $k->buku }}</td>
                                     <td>{{ $k->jml_buku }}</td>
-                                    {{-- <td>{{ $k->jam_pinjam }}</td> --}}
                                     <td>{{ $k->kodebuku }}</td>
-                                    <td>{{ $k->jam_kembali }}</td>
+                                    {{-- Dibawah Ini adalah Logika untuk membuat text pada jam_kembali berwarna merah jika melebihi batas tanggal --}}
+                                    @php
+                                        $isOverdue = \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($k->jam_kembali)) && $k->status != 0;
+                                    @endphp
+                                    <td class="{{ $isOverdue ? 'text-red' : '' }}">
+                                        {{ $k->jam_kembali }}
+                                    </td>
+                                    {{-- =========================================================================================================== --}}
                                     <td>
                                         <label
-                                            class="label {{ $k->status == 1 ? 'label-danger' : 'label-success' }}">{{ $k->status == 1 ? 'Sedang Meminjam' : 'Selesai' }}</label>
+                                            class="label {{ $k->status == 1 ? 'badge bg-danger' : 'badge bg-success' }}">{{ $k->status == 1 ? 'Sedang Meminjam' : 'Selesai' }}</label>
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="close">
                                             @if ($k->status == 1)
-                                            <!-- Tanpa Modal -->
+                                                <!-- Tanpa Modal -->
                                                 <a href="{{ route('pengembalian.status', $k->id) }}"
-                                                    class="btn btn-sm btn-danger" onclick="return confirm('Harap periksa terlebih dahulu kelengkapan buku dan kondisi buku sebelum proses pengembalian selesai!')">Selesai</a>
-                                            <!-- Tanpa Modal End -->
+                                                    class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Harap periksa terlebih dahulu kelengkapan buku dan kondisi buku sebelum proses pengembalian selesai!')">Selesai</a>
+                                                <!-- Tanpa Modal End -->
                                             @else
                                                 {{-- <a href="" class="btn btn-sm btn-success">Meminjam</a> --}}
                                             @endif

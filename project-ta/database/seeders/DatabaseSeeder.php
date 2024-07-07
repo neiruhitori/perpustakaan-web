@@ -16,8 +16,9 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         User::updateOrCreate([
-            'nis' => '2141750010',
-            'name' => 'Admin',
+            'perpustakaan_id' => '2141750010',
+            'nip' => '19680810 200801 2 028',
+            'name' => 'Umi Widarti, S.Pd.',
             'password' => bcrypt('admin'),
 
         ]);

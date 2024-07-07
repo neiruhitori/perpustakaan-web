@@ -133,10 +133,17 @@
                                         
                                         @endforeach
                                     </td>
-                                    <td>{{ $k->jam_kembali }}</td>
+                                    {{-- Dibawah Ini adalah Logika untuk membuat text pada jam_kembali berwarna merah jika melebihi batas tanggal --}}
+                                    @php
+                                        $isOverdue = \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($k->jam_kembali)) && $k->status != 0;
+                                    @endphp
+                                    <td class="{{ $isOverdue ? 'text-red' : '' }}">
+                                        {{ $k->jam_kembali }}
+                                    </td>
+                                    {{-- =========================================================================================================== --}}
                                     <td>
                                         <label
-                                            class="label {{ $k->status == 1 ? 'label-danger' : 'label-success' }}">{{ $k->status == 1 ? 'Sedang Meminjam' : 'Selesai' }}</label>
+                                            class="label {{ $k->status == 1 ? 'badge bg-danger' : 'badge bg-success' }}">{{ $k->status == 1 ? 'Sedang Meminjam' : 'Selesai' }}</label>
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="close">

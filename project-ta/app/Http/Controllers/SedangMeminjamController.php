@@ -27,9 +27,12 @@ class SedangMeminjamController extends Controller
     }
      public function view_pdf()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+
         $sedangmeminjam = Peminjaman::where('status', 1)->get();
         $pdf = Pdf::loadView('sedangmeminjam.pdf', ['sedangmeminjam' => $sedangmeminjam])->setPaper('a4', 'portrait'); // atau 'landscape';
-        return $pdf->stream('data-perpustakaan.pdf');
+        return $pdf->stream('data-perpustakaan.pdf', compact('profile'));
     }
 
     /**

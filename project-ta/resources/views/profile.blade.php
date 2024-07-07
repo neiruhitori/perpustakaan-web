@@ -47,8 +47,13 @@
 
                             <div class="col-md-6">
                                 <label class="labels">ID Perpustakaan</label>
-                                <input type="text" name="nis" disabled class="form-control" placeholder="ID Perpustakaan"
-                                    value="{{ auth()->user()->nis }}">
+                                <input type="text" name="perpustakaan_id" disabled class="form-control" placeholder="ID Perpustakaan"
+                                    value="{{ auth()->user()->perpustakaan_id }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="labels">NIP</label>
+                                <input type="text" name="nip" class="form-control" placeholder="NIP"
+                                    value="{{ auth()->user()->nip }}">
                             </div>
                             <div class="col-md-6">
                                 <label class="labels">Nama</label>

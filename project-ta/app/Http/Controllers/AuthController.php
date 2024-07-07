@@ -22,14 +22,14 @@ class AuthController extends Controller
     {
 
         $this->validate($request, [
-            'nis' => 'required|min:10|max:10',
+            'perpustakaan_id' => 'required|min:10|max:10',
             'name' => 'required|min:1|max:50',
             // 'email' => 'required|min:1|max:50',
             'password' => 'required|min:5|max:50',
         ]);
         
         User::create([
-            'nis' => $request->nis,
+            'perpustakaan_id' => $request->perpustakaan_id,
             'name' => $request->name,
             // 'email' => $request->email,
             // 'password' => $request->password,
@@ -46,7 +46,7 @@ class AuthController extends Controller
 
     public function loginAction(Request $request)
     {
-        if (Auth::attempt($request->only('nis', 'password'))) {
+        if (Auth::attempt($request->only('perpustakaan_id', 'password'))) {
             return redirect('/dashboard');
         }
         return redirect('/login')->with('error', 'Username atau password yang anda masukkan salah');
@@ -72,7 +72,8 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        if ($request->has('name', 'email', 'password')) {           
+        if ($request->has('nip', 'name', 'email', 'password')) {           
+            $user->nip = ($request->input('nip'));
             $user->name = ($request->input('name'));
             $user->email = ($request->input('email'));
             $user->password = bcrypt($request->input('password'));

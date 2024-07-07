@@ -148,9 +148,9 @@
                     <br />
                     <br />
                     <br />
-                    <span>Umi Widarti, S.Pd.</span>
+                    <span>{{ auth()->user()->name }}</span>
                     <br />
-                    <span>NIP. 19680810 200801 2 028</span>
+                    <span>NIP. {{ auth()->user()->nip }}</span>
 
                 </td>
             </tr>

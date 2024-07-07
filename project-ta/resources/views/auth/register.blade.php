@@ -30,8 +30,8 @@
                 <form action="{{ route('register.save') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="number" name="nis" id="nis" class="form-control from-control-user @error('nis')is-invalid @enderror" placeholder="ID Perpustakaan" autocomplete="off">
-                        @error('nis')
+                        <input type="number" name="perpustakaan_id" id="perpustakaan_id" class="form-control from-control-user @error('perpustakaan_id')is-invalid @enderror" placeholder="ID Perpustakaan" autocomplete="off">
+                        @error('perpustakaan_id')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                         <div class="input-group-append">

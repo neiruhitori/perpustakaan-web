@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +13,7 @@ class PeminjamanTahunan extends Model
     protected $primaryKey = 'id';
     protected $fillable = [];
     protected $guarded = [];
+    protected $appends = ['is_overdue'];
 
     public function bukus()
     {
@@ -23,9 +25,10 @@ class PeminjamanTahunan extends Model
         return $this->belongsTo(Siswa::class);
     }
 
-    // public function siswa()
-    // {
-    //     return $this->belongsTo(Siswa::class, 'siswa_id');
-    // }
+    public function getIsOverdueAttribute()
+    {
+        return Carbon::now()->gt(Carbon::parse($this->jam_kembali)) && $this->status != 0;
+    }
+
 }
 

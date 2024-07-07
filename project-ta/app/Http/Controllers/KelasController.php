@@ -54,12 +54,15 @@ class KelasController extends Controller
 
     public function pdf_viia()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         // $viia = PeminjamanTahunan::where('kelas', 'VII A')->get();
         $viia = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VII A');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_a', ['viia' => $viia]);
-        return $pdf->stream('data-perpustakaan-VII-A.pdf');
+        return $pdf->stream('data-perpustakaan-VII-A.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas VII B ==============================================================================
@@ -92,11 +95,14 @@ class KelasController extends Controller
 
     public function pdf_viib()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $viib = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VII B');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_b', ['viib' => $viib]);
-        return $pdf->stream('data-perpustakaan-VII-B.pdf');
+        return $pdf->stream('data-perpustakaan-VII-B.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas VII C ==============================================================================
@@ -129,11 +135,14 @@ class KelasController extends Controller
 
     public function pdf_viic()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $viic = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VII C');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_c', ['viic' => $viic]);
-        return $pdf->stream('data-perpustakaan-VII-C.pdf');
+        return $pdf->stream('data-perpustakaan-VII-C.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas VII D ==============================================================================
@@ -166,11 +175,14 @@ class KelasController extends Controller
 
     public function pdf_viid()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $viid = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VII D');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_d', ['viid' => $viid]);
-        return $pdf->stream('data-perpustakaan-VII-D.pdf');
+        return $pdf->stream('data-perpustakaan-VII-D.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas VII E ==============================================================================
@@ -203,11 +215,14 @@ class KelasController extends Controller
 
     public function pdf_viie()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $viie = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VII E');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_e', ['viie' => $viie]);
-        return $pdf->stream('data-perpustakaan-VII-E.pdf');
+        return $pdf->stream('data-perpustakaan-VII-E.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas VII F ==============================================================================
@@ -240,11 +255,14 @@ class KelasController extends Controller
 
     public function pdf_viif()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $viif = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VII F');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_f', ['viif' => $viif]);
-        return $pdf->stream('data-perpustakaan-VII-F.pdf');
+        return $pdf->stream('data-perpustakaan-VII-F.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas VII G ==============================================================================
@@ -277,11 +295,14 @@ class KelasController extends Controller
 
     public function pdf_viig()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $viig = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VII G');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.vii.pdf_g', ['viig' => $viig]);
-        return $pdf->stream('data-perpustakaan-VII-G.pdf');
+        return $pdf->stream('data-perpustakaan-VII-G.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas VIII A ==============================================================================
@@ -314,11 +335,14 @@ class KelasController extends Controller
 
     public function pdf_viiia()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $viiia = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VIII A');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_a', ['viiia' => $viiia]);
-        return $pdf->stream('data-perpustakaan-VIII-A.pdf');
+        return $pdf->stream('data-perpustakaan-VIII-A.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas VIII B ==============================================================================
@@ -351,11 +375,14 @@ class KelasController extends Controller
 
     public function pdf_viiib()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $viiib = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VIII B');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_b', ['viiib' => $viiib]);
-        return $pdf->stream('data-perpustakaan-VIII-B.pdf');
+        return $pdf->stream('data-perpustakaan-VIII-B.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas VIII C ==============================================================================
@@ -388,11 +415,14 @@ class KelasController extends Controller
 
     public function pdf_viiic()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $viiic = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VIII C');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_c', ['viiic' => $viiic]);
-        return $pdf->stream('data-perpustakaan-VIII-C.pdf');
+        return $pdf->stream('data-perpustakaan-VIII-C.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas VIII D ==============================================================================
@@ -425,11 +455,14 @@ class KelasController extends Controller
 
     public function pdf_viiid()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $viiid = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VIII D');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_d', ['viiid' => $viiid]);
-        return $pdf->stream('data-perpustakaan-VIII-D.pdf');
+        return $pdf->stream('data-perpustakaan-VIII-D.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas VIII E ==============================================================================
@@ -462,11 +495,14 @@ class KelasController extends Controller
 
     public function pdf_viiie()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $viiie = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VIII E');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_e', ['viiie' => $viiie]);
-        return $pdf->stream('data-perpustakaan-VIII-E.pdf');
+        return $pdf->stream('data-perpustakaan-VIII-E.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas VIII F ==============================================================================
@@ -499,11 +535,14 @@ class KelasController extends Controller
 
     public function pdf_viiif()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $viiif = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VIII F');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_f', ['viiif' => $viiif]);
-        return $pdf->stream('data-perpustakaan-VIII-F.pdf');
+        return $pdf->stream('data-perpustakaan-VIII-F.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas VIII G ==============================================================================
@@ -536,11 +575,14 @@ class KelasController extends Controller
 
     public function pdf_viiig()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $viiig = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'VIII G');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.viii.pdf_g', ['viiig' => $viiig]);
-        return $pdf->stream('data-perpustakaan-VIII-G.pdf');
+        return $pdf->stream('data-perpustakaan-VIII-G.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas IX A ==============================================================================
@@ -573,11 +615,14 @@ class KelasController extends Controller
 
     public function pdf_ixa()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $ixa = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'IX A');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_a', ['ixa' => $ixa]);
-        return $pdf->stream('data-perpustakaan-IX-A.pdf');
+        return $pdf->stream('data-perpustakaan-IX-A.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas IX B ==============================================================================
@@ -610,11 +655,14 @@ class KelasController extends Controller
 
     public function pdf_ixb()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $ixb = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'IX B');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_b', ['ixb' => $ixb]);
-        return $pdf->stream('data-perpustakaan-IX-B.pdf');
+        return $pdf->stream('data-perpustakaan-IX-B.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas IX C ==============================================================================
@@ -647,11 +695,14 @@ class KelasController extends Controller
 
     public function pdf_ixc()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $ixc = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'IX C');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_c', ['ixc' => $ixc]);
-        return $pdf->stream('data-perpustakaan-IX-C.pdf');
+        return $pdf->stream('data-perpustakaan-IX-C.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas IX D ==============================================================================
@@ -684,11 +735,14 @@ class KelasController extends Controller
 
     public function pdf_ixd()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $ixd = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'IX D');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_d', ['ixd' => $ixd]);
-        return $pdf->stream('data-perpustakaan-IX-D.pdf');
+        return $pdf->stream('data-perpustakaan-IX-D.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas IX E ==============================================================================
@@ -721,11 +775,14 @@ class KelasController extends Controller
 
     public function pdf_ixe()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $ixe = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'IX E');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_e', ['ixe' => $ixe]);
-        return $pdf->stream('data-perpustakaan-IX-E.pdf');
+        return $pdf->stream('data-perpustakaan-IX-E.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas IX F ==============================================================================
@@ -758,11 +815,14 @@ class KelasController extends Controller
 
     public function pdf_ixf()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $ixf = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'IX F');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_f', ['ixf' => $ixf]);
-        return $pdf->stream('data-perpustakaan-IX-F.pdf');
+        return $pdf->stream('data-perpustakaan-IX-F.pdf', compact('profile'));
     }
     // ====================================================================================================
     // Untuk isi Kelas IX G ==============================================================================
@@ -795,11 +855,14 @@ class KelasController extends Controller
 
     public function pdf_ixg()
     {
+        $iduser = Auth::id();
+        $profile = User::where('id',$iduser)->first();
+        
         $ixg = PeminjamanTahunan::whereHas('siswas', function ($query) {
             $query->where('kelas', 'IX G');
         })->paginate(35);
         $pdf = Pdf::loadView('kelas.ix.pdf_g', ['ixg' => $ixg]);
-        return $pdf->stream('data-perpustakaan-IX-G.pdf');
+        return $pdf->stream('data-perpustakaan-IX-G.pdf', compact('profile'));
     }
     // ====================================================================================================
 }
