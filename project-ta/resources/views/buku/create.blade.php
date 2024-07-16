@@ -45,7 +45,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <input type="text" class="form-control" name="buku"
-                                    placeholder=" Masukkan Nama Buku" />
+                                    placeholder=" Masukkan Nama Buku" autocomplete="off"/>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <!-- Button trigger modal -->

@@ -43,7 +43,7 @@
                             <div class="col-md-6">
                                 <label>Buku :</label>
                                 <input type="text" class="form-control" name="buku"
-                                    value="{{ $buku->buku }}" />
+                                    value="{{ $buku->buku }}" autocomplete="off"/>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <div>

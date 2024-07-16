@@ -95,7 +95,7 @@
                                     <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                         <input type="date" name="jam_pinjam" class="form-control datetimepicker-input"
                                             data-target="#reservationdatetime"
-                                            value="{{ $peminjamantahunan->jam_pinjam }}" />
+                                            value="{{ $peminjamantahunan->jam_pinjam }}" autocomplete="off"/>
                                         <div class="input-group-append" data-target="#reservationdatetime"
                                             data-toggle="datetimepicker">
                                         </div>
@@ -110,7 +110,7 @@
                                     <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                         <input type="date" name="jam_kembali" class="form-control datetimepicker-input"
                                             data-target="#reservationdatetime"
-                                            value="{{ $peminjamantahunan->jam_kembali }}" />
+                                            value="{{ $peminjamantahunan->jam_kembali }}" autocomplete="off"/>
                                         <div class="input-group-append" data-target="#reservationdatetime"
                                             data-toggle="datetimepicker">
                                         </div>

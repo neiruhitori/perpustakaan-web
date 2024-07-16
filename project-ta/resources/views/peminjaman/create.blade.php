@@ -121,7 +121,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    placeholder=" Masukkan Nama Kode Buku" />
+                                    placeholder=" Masukkan Nama Kode Buku" autocomplete="off"/>
                             </div>
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>
@@ -129,7 +129,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <input type="text" class="form-control" id="jml_buku" name="jml_buku"
-                                    placeholder=" Masukkan Jumlah Buku yang di Pinjam" />
+                                    placeholder=" Masukkan Jumlah Buku yang di Pinjam" autocomplete="off"/>
                             </div>
                             <!-- Date and time -->
                             <div class="form-group">
@@ -139,7 +139,7 @@
                                 @enderror
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="datetime-local" name="jam_pinjam" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" />
+                                        data-target="#reservationdatetime" autocomplete="off"/>
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -154,7 +154,7 @@
                                 @enderror
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="datetime-local" name="jam_kembali"
-                                        class="form-control datetimepicker-input" data-target="#reservationdatetime" />
+                                        class="form-control datetimepicker-input" data-target="#reservationdatetime" autocomplete="off"/>
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>

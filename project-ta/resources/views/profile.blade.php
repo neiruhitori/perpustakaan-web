@@ -48,22 +48,22 @@
                             <div class="col-md-6">
                                 <label class="labels">ID Perpustakaan</label>
                                 <input type="text" name="perpustakaan_id" disabled class="form-control" placeholder="ID Perpustakaan"
-                                    value="{{ auth()->user()->perpustakaan_id }}">
+                                    value="{{ auth()->user()->perpustakaan_id }}" autocomplete="off">
                             </div>
                             <div class="col-md-6">
                                 <label class="labels">NIP</label>
                                 <input type="text" name="nip" class="form-control" placeholder="NIP"
-                                    value="{{ auth()->user()->nip }}">
+                                    value="{{ auth()->user()->nip }}" autocomplete="off">
                             </div>
                             <div class="col-md-6">
                                 <label class="labels">Nama</label>
                                 <input type="text" name="name" class="form-control" placeholder="Masukan Nama Baru"
-                                    value="{{ auth()->user()->name }}">
+                                    value="{{ auth()->user()->name }}" autocomplete="off">
                             </div>
                             <div class="col-md-6">
                                 <label class="labels">Email</label>
                                 <input type="text" name="email" class="form-control"
-                                    value="{{ auth()->user()->email }}" placeholder="Email tidak wajib diisi">
+                                    value="{{ auth()->user()->email }}" placeholder="Email tidak wajib diisi" autocomplete="off">
                             </div>
                             {{-- <div class="col-md-6">
                                 <label for="photoProfile" class="">Tambah Foto Profile</label>
@@ -77,7 +77,7 @@
                             <div class="col-md-6">
                                 <label class="labels">Changes Password</label>
                                 <input type="password" name="password" class="form-control" value=""
-                                    placeholder="Password baru" id="MyPass">
+                                    placeholder="Password baru" id="MyPass" autocomplete="off">
                                 <input type="checkbox" onclick="ShowHidden()">Show Password
                             </div>
                         </div>

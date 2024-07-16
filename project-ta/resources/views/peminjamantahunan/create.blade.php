@@ -98,11 +98,11 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <input type="text" class="form-control col-md-2" id="absen" name="absen"
-                                placeholder="No Absen" />
+                                placeholder="No Absen" autocomplete="off"/>
                             @error('tgl')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            <input type="date" class="form-control col-md-2" id="tgl" name="tgl" />
+                            <input type="date" class="form-control col-md-2" id="tgl" name="tgl" autocomplete="off"/>
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-6">
@@ -155,7 +155,7 @@
                                 @enderror
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="date" name="jam_pinjam" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" />
+                                        data-target="#reservationdatetime" autocomplete="off"/>
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -170,7 +170,7 @@
                                 @enderror
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="date" name="jam_kembali" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" />
+                                        data-target="#reservationdatetime" autocomplete="off"/>
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>

@@ -132,9 +132,9 @@
                                             </select>
                                         </td>
                                         <td><input type="text" class="form-control" id="kodebuku" name="kodebuku[]"
-                                                placeholder=" Masukkan Kode Buku" /></td>
+                                                placeholder=" Masukkan Kode Buku" autocomplete="off"/></td>
                                         <td><input type="text" class="form-control" id="jml_buku" name="jml_buku[]"
-                                                placeholder=" Masukkan Jumlah Buku yang di Pinjam" /></td>
+                                                placeholder=" Masukkan Jumlah Buku yang di Pinjam" autocomplete="off"/></td>
                                         <td><button class="btn btn-success add_buku" type="button" name="add"
                                                 id="add">Add More</button></td>
                                     </tr>
@@ -206,8 +206,8 @@
                                         @endforeach
                                 </select>
                             </td>
-                            <td><input type="text" class="form-control" id="kodebuku" name="kodebuku[]" placeholder=" Masukkan Kode Buku"/></td>
-                            <td><input type="text" class="form-control" id="jml_buku" name="jml_buku[]" placeholder=" Masukkan Jumlah Buku yang di Pinjam"/></td>
+                            <td><input type="text" class="form-control" id="kodebuku" name="kodebuku[]" placeholder=" Masukkan Kode Buku" autocomplete="off"/></td>
+                            <td><input type="text" class="form-control" id="jml_buku" name="jml_buku[]" placeholder=" Masukkan Jumlah Buku yang di Pinjam" autocomplete="off"/></td>
                             <td><button class="btn btn-danger remove_buku" type="button" name="add" id="add">Remove</button></td>
                         </tr>`
                     document.getElementById('table').appendChild(newElement)

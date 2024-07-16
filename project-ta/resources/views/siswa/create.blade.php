@@ -45,7 +45,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <input type="text" class="form-control" name="name"
-                                    placeholder=" Masukkan Nama Siswa" />
+                                    placeholder=" Masukkan Nama Siswa" autocomplete="off"/>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputStatus">Kelas :</label>

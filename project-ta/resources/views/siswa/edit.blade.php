@@ -43,7 +43,7 @@
                             <div class="col-md-6">
                                 <label>Nama :</label>
                                 <input type="text" class="form-control" name="name"
-                                    value="{{ $siswa->name }}" />
+                                    value="{{ $siswa->name }}" autocomplete="off"/>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputStatus">Kelas :</label>
