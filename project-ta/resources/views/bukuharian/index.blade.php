@@ -108,7 +108,7 @@
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
                                 <input type="search" name="search" id="form1" class="form-control"
-                                    placeholder="Cari Buku" autocomplete="off"/>
+                                    placeholder="Cari Buku" autocomplete="off" />
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -134,8 +134,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($bukuharian->count() > 0)
-                            @forelse ($bukuharian as $key => $p)
+                        @forelse ($bukuharian as $key => $p)
+                            @if ($bukuharian->count() > 0)
                                 <tr>
                                     <td scope="row">{{ $bukuharian->firstItem() + $key }}</td>
                                     <td>{{ $p->buku }}</td>
@@ -156,13 +156,12 @@
 
                                     </td>
                                 </tr>
-
-                            @empty
-                                <div class="alert alert-danger">
-                                    Data Kategori Repositori belum Tersedia.
-                                </div>
-                            @endforelse
-                        @endif
+                            @endif
+                        @empty
+                            <div class="alert alert-danger">
+                                Data Buku Harian belum Tersedia.
+                            </div>
+                        @endforelse
                     </tbody>
                 </table>
                 <div class="float-sm-left">

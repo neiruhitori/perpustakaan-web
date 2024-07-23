@@ -62,7 +62,7 @@
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
                                 <input type="search" name="search" id="form1" class="form-control"
-                                    placeholder="Cari Nama / kode buku" autocomplete="off"/>
+                                    placeholder="Cari Nama / kode buku" autocomplete="off" />
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -87,8 +87,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @if ($ixc->count() > 'IX C')
-                                @forelse ($ixc as $key => $k)
+                            @forelse ($ixc as $key => $k)
+                                @if ($ixc->count() > 'IX C')
                                     <tr>
                                         <td scope="row">{{ $loop->iteration }}</td>
                                         <td>{{ $k->kode_pinjam }}</td>
@@ -96,36 +96,32 @@
                                         <td align="center">{{ optional($k->siswas)->kelas }}</td>
                                         <td>
                                             @foreach ($k->bukus()->get() as $b)
-                                            
                                                 <ul type=disc>
                                                     <li>{{ $b->buku }}</li>
                                                 </ul>
-                                            
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach ($k->bukus()->get() as $c)
-                                            
                                                 <ul type=circle>
                                                     <li>{{ $c->jml_buku }}</li>
                                                 </ul>
-                                            
                                             @endforeach
                                         </td>
                                         <td>
                                             @foreach ($k->bukus()->get() as $d)
-                                            
                                                 <ul type=circle>
                                                     <li>{{ $d->kodebuku }}</li>
                                                 </ul>
-                                            
                                             @endforeach
                                         </td>
                                     </tr>
-
-                                @empty
-                                @endforelse
-                            @endif
+                                @endif
+                            @empty
+                                <div class="alert alert-danger">
+                                    Data Kelas IX C belum Tersedia.
+                                </div>
+                            @endforelse
                         </tbody>
                     </table>
 

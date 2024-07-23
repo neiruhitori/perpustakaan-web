@@ -74,7 +74,8 @@
                     <form action="/pengembaliantahunan" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama atau Kelas" autocomplete="off"/>
+                                <input type="search" name="search" id="form1" class="form-control"
+                                    placeholder="Cari Nama atau Kelas" autocomplete="off" />
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -99,8 +100,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($pengembaliantahunan->count() > 0)
-                            @forelse ($pengembaliantahunan as $k)
+                        @forelse ($pengembaliantahunan as $k)
+                            @if ($pengembaliantahunan->count() > 0)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ $k->kode_pinjam }}</td>
@@ -108,34 +109,30 @@
                                     <td>{{ optional($k->siswas)->kelas }}</td>
                                     <td>
                                         @foreach ($k->bukus()->get() as $b)
-                                        
                                             <ul type=disc>
                                                 <li>{{ $b->buku }}</li>
                                             </ul>
-                                        
                                         @endforeach
                                     </td>
                                     <td>
                                         @foreach ($k->bukus()->get() as $c)
-                                        
                                             <ul type=circle>
                                                 <li>{{ $c->jml_buku }}</li>
                                             </ul>
-                                        
                                         @endforeach
                                     </td>
                                     <td>
                                         @foreach ($k->bukus()->get() as $d)
-                                        
                                             <ul type=circle>
                                                 <li>{{ $d->kodebuku }}</li>
                                             </ul>
-                                        
                                         @endforeach
                                     </td>
                                     {{-- Dibawah Ini adalah Logika untuk membuat text pada jam_kembali berwarna merah jika melebihi batas tanggal --}}
                                     @php
-                                        $isOverdue = \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($k->jam_kembali)) && $k->status != 0;
+                                        $isOverdue =
+                                            \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($k->jam_kembali)) &&
+                                            $k->status != 0;
                                     @endphp
                                     <td class="{{ $isOverdue ? 'text-red' : '' }}">
                                         {{ $k->jam_kembali }}
@@ -148,10 +145,11 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="close">
                                             @if ($k->status == 1)
-                                            <!-- Tanpa Modal -->
+                                                <!-- Tanpa Modal -->
                                                 <a href="{{ route('pengembaliantahunan.status', $k->id) }}"
-                                                    class="btn btn-sm btn-danger" onclick="return confirm('Harap periksa terlebih dahulu kelengkapan buku dan kondisi buku sebelum proses pengembalian selesai!')">Selesai</a>
-                                            <!-- Tanpa Modal End -->
+                                                    class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Harap periksa terlebih dahulu kelengkapan buku dan kondisi buku sebelum proses pengembalian selesai!')">Selesai</a>
+                                                <!-- Tanpa Modal End -->
                                             @else
                                                 {{-- <a href="" class="btn btn-sm btn-success">Meminjam</a> --}}
                                             @endif
@@ -167,13 +165,12 @@
                                         </div> --}}
                                     </td>
                                 </tr>
-
-                            @empty
-                                <div class="alert alert-danger">
-                                    Data Kategori Repositori belum Tersedia.
-                                </div>
-                            @endforelse
-                        @endif
+                            @endif
+                        @empty
+                            <div class="alert alert-danger">
+                                Data Pengembalian Tahunan belum Tersedia.
+                            </div>
+                        @endforelse
                     </tbody>
                 </table>
             @endsection

@@ -40,22 +40,22 @@
 
 
         <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-      <div class="content-header">
-          <div class="container-fluid">
-              <div class="row mb-2">
-                  <div class="col-sm-6">
-                      <h1 class="m-0">Catatan Harian</h1>
-                  </div><!-- /.col -->
-                  <div class="col-sm-6">
-                      <ol class="breadcrumb float-sm-right">
-                          <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                          <li class="breadcrumb-item active">Catatan</li>
-                      </ol>
-                  </div><!-- /.col -->
-              </div><!-- /.row -->
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Catatan Harian</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item active">Catatan</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
 
-      <!-- /.content-header -->
+                    <!-- /.content-header -->
                     @if (Session::has('success'))
                         <div class="btn btn-success swalDefaultSuccess" role="alert">
                             {{ Session::get('success') }}
@@ -67,7 +67,8 @@
                     <form action="/catatanharian" method="GET">
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
-                                <input type="search" name="search" id="form1" class="form-control" placeholder="Cari Nama atau Kelas" autocomplete="off"/>
+                                <input type="search" name="search" id="form1" class="form-control"
+                                    placeholder="Cari Nama atau Kelas" autocomplete="off" />
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -91,8 +92,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($catatan->count() > 0)
-                            @forelse ($catatan as $p)
+                        @forelse ($catatan as $p)
+                            @if ($catatan->count() > 0)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ optional($p->siswas)->name }}</td>
@@ -107,16 +108,16 @@
                                         </div>
                                     </td>
                                 </tr>
-
-                            @empty
-                                <div class="alert alert-danger">
-                                    Data Kategori Repositori belum Tersedia.
-                                </div>
-                            @endforelse
-                        @endif
+                            @endif
+                        @empty
+                            <div class="alert alert-danger">
+                                Data Catatan Harian belum Tersedia.
+                            </div>
+                        @endforelse
                     </tbody>
                 </table>
             @endsection
         </div>
 </body>
+
 </html>

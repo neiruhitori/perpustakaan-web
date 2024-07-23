@@ -58,7 +58,7 @@
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
-                    
+
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger float-sm-right" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">
@@ -107,7 +107,7 @@
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
                                 <input type="search" name="search" id="form1" class="form-control"
-                                    placeholder="Cari Nama Peminjam" autocomplete="off"/>
+                                    placeholder="Cari Nama Peminjam" autocomplete="off" />
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -135,8 +135,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($siswa->count() > 0)
-                            @forelse ($siswa as $key => $p)
+                        @forelse ($siswa as $key => $p)
+                            @if ($siswa->count() > 0)
                                 <tr>
                                     <td scope="row">{{ $siswa->firstItem() + $key }}</td>
                                     <td>{{ $p->name }}</td>
@@ -158,13 +158,12 @@
 
                                     </td>
                                 </tr>
-
-                            @empty
-                                <div class="alert alert-danger">
-                                    Data Kategori Repositori belum Tersedia.
-                                </div>
-                            @endforelse
-                        @endif
+                            @endif
+                        @empty
+                            <div class="alert alert-danger">
+                                Data Siswa belum Tersedia.
+                            </div>
+                        @endforelse
                     </tbody>
                 </table>
                 <div class="float-sm-left">

@@ -106,7 +106,7 @@
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
                                 <input type="search" name="search" id="form1" class="form-control"
-                                    placeholder="Cari Nama atau Kelas" autocomplete="off"/>
+                                    placeholder="Cari Nama atau Kelas" autocomplete="off" />
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -144,8 +144,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($peminjamantahunan->count() > 0)
-                            @forelse ($peminjamantahunan as $p)
+                        @forelse ($peminjamantahunan as $p)
+                            @if ($peminjamantahunan->count() > 0)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ $p->kode_pinjam }}</td>
@@ -190,13 +190,12 @@
 
                                     </td>
                                 </tr>
-
-                            @empty
-                                <div class="alert alert-danger">
-                                    Data Kategori Repositori belum Tersedia.
-                                </div>
-                            @endforelse
-                        @endif
+                            @endif
+                        @empty
+                            <div class="alert alert-danger">
+                                Data Peminjaman Tahunan belum Tersedia.
+                            </div>
+                        @endforelse
                     </tbody>
                 </table>
             @endsection

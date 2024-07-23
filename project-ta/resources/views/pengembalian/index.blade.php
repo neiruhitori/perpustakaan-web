@@ -82,7 +82,7 @@
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
                                 <input type="search" name="search" id="form1" class="form-control"
-                                    placeholder="Cari Nama atau Kelas" autocomplete="off"/>
+                                    placeholder="Cari Nama atau Kelas" autocomplete="off" />
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -106,8 +106,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($pengembalian->count() > 0)
-                            @forelse ($pengembalian as $k)
+                        @forelse ($pengembalian as $k)
+                            @if ($pengembalian->count() > 0)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ optional($k->siswas)->name }}</td>
@@ -117,7 +117,9 @@
                                     <td>{{ $k->kodebuku }}</td>
                                     {{-- Dibawah Ini adalah Logika untuk membuat text pada jam_kembali berwarna merah jika melebihi batas tanggal --}}
                                     @php
-                                        $isOverdue = \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($k->jam_kembali)) && $k->status != 0;
+                                        $isOverdue =
+                                            \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($k->jam_kembali)) &&
+                                            $k->status != 0;
                                     @endphp
                                     <td class="{{ $isOverdue ? 'text-red' : '' }}">
                                         {{ $k->jam_kembali }}
@@ -150,13 +152,12 @@
                                         </div> --}}
                                     </td>
                                 </tr>
-
-                            @empty
-                                <div class="alert alert-danger">
-                                    Data Kategori Repositori belum Tersedia.
-                                </div>
-                            @endforelse
-                        @endif
+                            @endif
+                        @empty
+                            <div class="alert alert-danger">
+                                Data Pengembalian Harian belum Tersedia.
+                            </div>
+                        @endforelse
                     </tbody>
                 </table>
             @endsection

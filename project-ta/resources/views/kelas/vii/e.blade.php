@@ -87,8 +87,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @if ($viie->count() > 'VII E')
-                                @forelse ($viie as $key => $k)
+                            @forelse ($viie as $key => $k)
+                                @if ($viie->count() > 'VII E')
                                     <tr>
                                         <td scope="row">{{ $loop->iteration }}</td>
                                         <td>{{ $k->kode_pinjam }}</td>
@@ -116,10 +116,12 @@
                                             @endforeach
                                         </td>
                                     </tr>
-
-                                @empty
-                                @endforelse
-                            @endif
+                                @endif
+                            @empty
+                                <div class="alert alert-danger">
+                                    Data Kelas VII E belum Tersedia.
+                                </div>
+                            @endforelse
                         </tbody>
                     </table>
 

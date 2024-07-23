@@ -107,7 +107,7 @@
                         <div class="input-group">
                             <div class="form-outline" data-mdb-input-init>
                                 <input type="search" name="search" id="form1" class="form-control"
-                                    placeholder="Cari Nama atau Kelas" autocomplete="off"/>
+                                    placeholder="Cari Nama atau Kelas" autocomplete="off" />
                             </div>
                             <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
                                 <i class="fas fa-search"></i>
@@ -139,9 +139,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($peminjaman->count() > 0)
-                            {{-- @forelse ($peminjaman as $key => $p) --}}
-                            @forelse ($peminjaman as $p)
+                        {{-- @forelse ($peminjaman as $key => $p) --}}
+                        @forelse ($peminjaman as $p)
+                            @if ($peminjaman->count() > 0)
                                 <tr>
                                     {{-- <td scope="row">{{ $peminjaman->firstItem() + $key }}</td> --}}
                                     <td scope="row">{{ $loop->iteration }}</td>
@@ -168,13 +168,12 @@
 
                                     </td>
                                 </tr>
-
-                            @empty
-                                <div class="alert alert-danger">
-                                    Data Kategori Repositori belum Tersedia.
-                                </div>
-                            @endforelse
-                        @endif
+                            @endif
+                        @empty
+                            <div class="alert alert-danger">
+                                Data Peminjaman Harian belum Tersedia.
+                            </div>
+                        @endforelse
                     </tbody>
                 </table>
                 {{-- <div class="float-sm-left">
