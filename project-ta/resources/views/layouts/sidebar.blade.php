@@ -21,7 +21,7 @@
     <div class="dropdown-menu dropdown-menu-right profile-dropdown">
         <!-- item-->
         <div class="dropdown-item noti-title">
-            <h6 class="text-overflow m-0">Welcome !</h6>
+            <h6 class="text-overflow m-0">Selamat Datang !</h6>
         </div>
         <!-- item-->
         <form id="logout-form" action="{{ url('/profile') }}" method="get">
@@ -46,7 +46,7 @@
                 <a href="/dashboard" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-home"></i>
                     <p>
-                        Dashboard
+                        Beranda
                     </p>
                 </a>
             </li>

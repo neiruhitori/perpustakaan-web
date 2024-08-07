@@ -16,13 +16,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Create Siswa</h1>
+                        <h1 class="m-0">Buat Siswa</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                             <li class="breadcrumb-item active"><a href="/siswa">Siswa</a></li>
-                            <li class="breadcrumb-item active">Create</li>
+                            <li class="breadcrumb-item active">Buat</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -35,7 +35,7 @@
                 <div class="col-md-12 border-right">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Create Siswa</h4>
+                            <h4 class="text-right">Buat Siswa</h4>
                         </div>
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
@@ -99,7 +99,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close
+                                                    data-bs-dismiss="modal">Batal
                                                 </button>
 
                                                 <button id="btn" class="btn btn-primary profile-button"

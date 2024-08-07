@@ -51,11 +51,18 @@ class BukuHarianController extends Controller
     {
         $this->validate($request, [
             'buku' => 'required|min:1|max:50',
+            'penulis' => 'required|min:1|max:50',
+            'penerbit' => 'required|min:1|max:50',
+            'stok' => 'required:true',
         ]);
 
-        Bukusharian::create([
-            'buku' => $request->buku,
-        ]);
+        $data = Bukusharian::create($request->all());
+
+        if($request->hasFile('foto')){
+            $request->file('foto')->move('gambarbukuharian/', $request->file('foto')->getClientOriginalName());
+            $data->foto = $request->file('foto')->getClientOriginalName();
+            $data->save();
+        }
         return redirect('/bukuharian')->with('success', 'Data Berhasil di Tambahkan');
     }
 
@@ -98,8 +105,27 @@ class BukuHarianController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $bukuharian = Bukusharian::findOrFail($id);
-        $bukuharian->update($request->all());
+        $this->validate($request, [
+            'buku' => 'required|min:1|max:50',
+            'penulis' => 'required|min:1|max:50',
+            'penerbit' => 'required|min:1|max:50',
+            'stok' => 'required:true',
+        ]);
+
+        $data = Bukusharian::findOrFail($id);
+        $data->update($request->all());
+
+        if ($request->hasFile('foto')) {
+            // Delete old photo if it exists
+            if ($data->foto && file_exists(public_path('gambarbukuharian/' . $data->foto))) {
+                unlink(public_path('gambarbukuharian/' . $data->foto));
+            }
+
+            // Store the new photo
+            $request->file('foto')->move('gambarbukuharian/', $request->file('foto')->getClientOriginalName());
+            $data->foto = $request->file('foto')->getClientOriginalName();
+            $data->save();
+        }
 
         return redirect()->route('bukuharian')->with('success', 'buku updated successfully');
     }

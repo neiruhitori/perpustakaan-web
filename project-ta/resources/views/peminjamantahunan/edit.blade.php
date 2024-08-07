@@ -21,7 +21,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                             <li class="breadcrumb-item active"><a href="/peminjamantahunan">Peminjaman</a></li>
                             <li class="breadcrumb-item active">Edit</li>
                         </ol>
@@ -118,16 +118,16 @@
                                 </div>
                             </div>
                             <!-- /.form group -->
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label>Description :</label>
                                 <textarea type="text" class="form-control" id="description" name="description">{{ $peminjamantahunan->description }}</textarea>
-                            </div>
+                            </div> --}}
                             <div class="col-md-6">
                                 <div>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal">
-                                        <i class="fas fa-plus-circle"></i>Update
+                                        <i class="fas fa-plus-circle"></i>Ubah
                                     </button>
 
                                     <!-- Modal -->
@@ -142,16 +142,16 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Apakah anda yakin ingin Update?
+                                                    Apakah anda yakin ingin mengubah data?
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close
+                                                        data-bs-dismiss="modal">Batal
                                                     </button>
 
                                                     <button type="submit" class="btn btn-primary waves-light waves-effect"
                                                         id="update-modal">
-                                                        Update
+                                                        Ubah
                                                     </button>
                                                 </div>
                                             </div>

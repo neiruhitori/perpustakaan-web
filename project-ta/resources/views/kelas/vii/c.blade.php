@@ -53,7 +53,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                                 <li class="breadcrumb-item active">Kelas VII C</li>
                             </ol>
                         </div><!-- /.col -->
@@ -88,7 +88,6 @@
                         </thead>
                         <tbody>
                             @forelse ($viic as $key => $k)
-                                @if ($viic->count() > 'VII C')
                                     <tr>
                                         <td scope="row">{{ $loop->iteration }}</td>
                                         <td>{{ $k->kode_pinjam }}</td>
@@ -97,7 +96,7 @@
                                         <td>
                                             @foreach ($k->bukus()->get() as $b)
                                                 <ul type=disc>
-                                                    <li>{{ $b->buku }}</li>
+                                                    <li>{{ $b->bukucruds->buku }}</li>
                                                 </ul>
                                             @endforeach
                                         </td>
@@ -116,7 +115,6 @@
                                             @endforeach
                                         </td>
                                     </tr>
-                                @endif
                             @empty
                                 <div class="alert alert-danger">
                                     Data Kelas VII C belum Tersedia.

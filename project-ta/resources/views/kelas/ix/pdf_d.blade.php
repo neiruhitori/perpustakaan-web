@@ -79,7 +79,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($ixd->count() > 'IX D')
                                     @forelse ($ixd as $a)
                                         <tr>
                                             <td scope="row" align=center>{{ $loop->iteration }}</td>
@@ -90,7 +89,7 @@
                                                 @foreach ($a->bukus()->get() as $b)
                                                 
                                                     <ul type=disc>
-                                                        <li>{{ $b->buku }}</li>
+                                                        <li>{{ $b->bukucruds->buku }}</li>
                                                     </ul>
                                                 
                                                 @endforeach
@@ -116,7 +115,6 @@
                                         </tr>
                                     @empty
                                     @endforelse
-                                @endif
                             </tbody>
                         </table>
                     </div>

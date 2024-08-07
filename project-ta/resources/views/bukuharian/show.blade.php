@@ -13,7 +13,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                             <li class="breadcrumb-item active"><a href="/bukuharian">Buku Harian</a></li>
                             <li class="breadcrumb-item active">Detail</li>
                         </ol>
@@ -33,9 +33,31 @@
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
                             <div class="col-md-6">
-                                <label>Buku :</label>
+                                <label>Sampul :</label>
+                                <div>
+                                    <img src="{{ asset('gambarbukuharian/' . $bukuharian->foto) }}" alt="" style="width:200px;">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Judul :</label>
                                 <input type="text" class="form-control"
                                 value="{{ $bukuharian->buku }}" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Penulis :</label>
+                                <input type="text" class="form-control" value="{{ $bukuharian->penulis }}" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Penerbit :</label>
+                                <input type="text" class="form-control" value="{{ $bukuharian->penerbit }}" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Stok :</label>
+                                <input type="number" class="form-control" value="{{ $bukuharian->stok }}" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Deskripsi :</label>
+                                <textarea type="text" class="form-control" disabled>{{ $bukuharian->description }}</textarea>
                             </div>
                         </div>
                     </div>

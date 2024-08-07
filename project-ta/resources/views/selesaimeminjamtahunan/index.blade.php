@@ -53,7 +53,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                                 <li class="breadcrumb-item active">Selesai Meminjam</li>
                             </ol>
                         </div><!-- /.col -->
@@ -80,7 +80,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @if ($selesaimeminjamtahunan->count() > 0)
                                 @forelse ($selesaimeminjamtahunan as $key => $k)
                                     <tr>
                                         <td scope="row">{{ $loop->iteration }}</td>
@@ -88,9 +87,9 @@
                                         <td align="left">{{ optional($k->siswas)->name }}</td>
                                         <td align="center">{{ optional($k->siswas)->kelas }}</td>
                                         <td>
-                                            @foreach ($k->bukus()->get() as $b)
-                                                <ul type=disc>
-                                                    <li>{{ $b->buku }}</li>
+                                            @foreach ($k->bukus()->get() as $peminjaman)
+                                                <ul type=circle>
+                                                    <li>{{ $peminjaman->bukucruds->buku }}</li>
                                                 </ul>
                                             @endforeach
                                         </td>
@@ -122,7 +121,6 @@
                                         Data Kategori Repositori belum Tersedia.
                                     </div>
                                 @endforelse
-                            @endif
                         </tbody>
                     </table>
 

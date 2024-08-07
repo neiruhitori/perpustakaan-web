@@ -12,4 +12,27 @@ class Bukucrud extends Model
     protected $primaryKey = 'id';
     protected $fillable = [];
     protected $guarded = [];
+
+    public function bukus()
+    {
+        return $this->hasMany(Buku::class, 'bukucruds_id');
+    }
+
+    // Method untuk meminjam buku
+    public function pinjam()
+    {
+        if ($this->stok > 0) {
+            $this->stok--;
+            $this->save();
+            return true;
+        }
+        return false;
+    }
+
+    // Method untuk mengembalikan buku
+    public function kembali()
+    {
+        $this->stok++;
+        $this->save();
+    }
 }

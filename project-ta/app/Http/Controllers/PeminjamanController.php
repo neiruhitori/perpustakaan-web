@@ -19,13 +19,8 @@ class PeminjamanController extends Controller
     public function index(Request $request)
     {
         $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();
-        
-        // if ($request->has('search')) {
-        //     $peminjaman = Peminjaman::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
-        // } else {
-        //     $peminjaman = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
-        // }
+        $profile = User::where('id', $iduser)->first();
+
         $keyword = $request->input('search');
         if ($request->has('search')) {
             $peminjaman = Peminjaman::whereHas('siswas', function ($query) use ($keyword) {
@@ -34,13 +29,9 @@ class PeminjamanController extends Controller
                 $query->where('kelas', 'like', '%' . $keyword . '%');
             })->get();
         } else {
-            $peminjaman = Peminjaman::latest()->paginate(10);
+            $peminjaman = Peminjaman::latest()->paginate(35);
         }
         return view('peminjaman.index', compact('peminjaman', 'profile'));
-        
-        /* -------dibawah ini adalah sebelum adanya fitur search-------*/
-        // $peminjaman = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
-        // return view('peminjaman.index', compact('peminjaman'));
     }
 
     /**
@@ -51,7 +42,7 @@ class PeminjamanController extends Controller
     public function create()
     {
         $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();
+        $profile = User::where('id', $iduser)->first();
 
         $peminjaman = Peminjaman::all();
         $siswa = Siswa::all();
@@ -68,28 +59,38 @@ class PeminjamanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            // 'name' => 'required|min:1|max:50',
-            // 'kelas' => 'required:true',
             'siswas_id' => 'required|min:1|max:50',
-            'buku' => 'required|min:1|max:50',
+            'bukusharians_id' => 'required|min:1|max:50',
             'jml_buku' => 'required|min:1|max:50',
             'jam_pinjam' => 'required:true',
             'jam_kembali' => 'required:true',
             'kodebuku' => 'required:true',
         ]);
-        
+
+        // Ambil data buku
+        $bukuharian = Bukusharian::findOrFail($request->bukusharians_id);
+
+        // Cek stok buku
+        if ($bukuharian->stok < $request->jml_buku) {
+            return redirect()->back()->with('error', 'Stok buku tidak mencukupi.');
+        }
+
+        // Kurangi stok buku
+        $bukuharian->stok -= $request->jml_buku;
+        $bukuharian->save();
+
+        // Simpan data peminjaman
+
         Peminjaman::create([
-                    'siswas_id' => $request->siswas_id,
-                    // 'name' => $request->name,
-                    // 'kelas' => $request->kelas,
-                    'buku' => $request->buku,
-                    'kodebuku' => $request->kodebuku,
-                    'jml_buku' => $request->jml_buku,
-                    'jam_pinjam' => $request->jam_pinjam,
-                    'jam_kembali' => $request->jam_kembali,
-                    'description' => $request->description
-                ]);
-                return redirect('/peminjaman')->with('success', 'Data Berhasil di Tambahkan');
+            'siswas_id' => $request->siswas_id,
+            'bukusharians_id' => $request->bukusharians_id,
+            'kodebuku' => $request->kodebuku,
+            'jml_buku' => $request->jml_buku,
+            'jam_pinjam' => $request->jam_pinjam,
+            'jam_kembali' => $request->jam_kembali,
+            'description' => $request->description
+        ]);
+        return redirect('/peminjaman')->with('success', 'Data Berhasil di Tambahkan');
     }
 
     /**
@@ -101,8 +102,8 @@ class PeminjamanController extends Controller
     public function show(string $id)
     {
         $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();
-        
+        $profile = User::where('id', $iduser)->first();
+
         $peminjaman = Peminjaman::findOrFail($id);
         $siswa = Siswa::all();
         return view('peminjaman.show', compact('peminjaman', 'siswa', 'profile'));
@@ -117,8 +118,8 @@ class PeminjamanController extends Controller
     public function edit($id)
     {
         $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();
-        
+        $profile = User::where('id', $iduser)->first();
+
         $peminjaman = Peminjaman::findOrFail($id);
         $siswa = Siswa::all();
         $bukuharian = Bukusharian::all();
@@ -149,13 +150,14 @@ class PeminjamanController extends Controller
     public function destroy($id)
     {
         $peminjaman = Peminjaman::findOrFail($id);
-  
+
         $peminjaman->delete();
-  
+
         return redirect()->route('peminjaman')->with('success', 'Peminjaman deleted successfully');
     }
 
-    public function removeAll(){
+    public function removeAll()
+    {
         Peminjaman::query()->forceDelete();
         return redirect()->route('peminjaman')->with('removeAll', 'Reset data Peminjaman successfully');
     }

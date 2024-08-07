@@ -21,7 +21,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                             <li class="breadcrumb-item active"><a href="/peminjaman">Peminjaman</a></li>
                             <li class="breadcrumb-item active">Edit</li>
                         </ol>
@@ -47,7 +47,7 @@
                                 <input type="text" class="form-control" name="name"
                                     value="{{ $peminjaman->name }}" /> --}}
 
-                                {{-- <select id="name" name="name" class="form-control">
+                            {{-- <select id="name" name="name" class="form-control">
                                     <option selected disabled>{{ $peminjaman->name }}</option>
                                     @foreach ($siswa as $sw)
                                         <option value="{{ $sw->name }}">{{ $sw->name }}</option>
@@ -89,10 +89,15 @@
                                 @error('buku')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                                <select id="bukuharian" name="buku" class="form-control">
-                                    <option selected disabled>{{ $peminjaman->buku }}</option>
+                                <select id="bukuharian" name="bukusharians_id" class="form-control">
+                                    <option selected disabled>{{ $peminjaman->bukusharians->buku }}</option>
                                     @foreach ($bukuharian as $sw)
-                                        <option value="{{ $sw->buku }}">{{ $sw->buku }}</option>
+                                        <option value="{{ $sw->id }}"
+                                            @if ($sw->stok <= 0) disabled @endif>{{ $sw->buku }}
+                                            @if ($sw->stok <= 0)
+                                                (Stok Habis)
+                                            @endif
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -104,19 +109,20 @@
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
                                 <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    value="{{ $peminjaman->kodebuku }}" autocomplete="off"/>
+                                    value="{{ old('kodebuku', $peminjaman->kodebuku) }}" autocomplete="off" />
                             </div>
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>
-                                <input type="text" class="form-control" id="jml_buku" name="jml_buku"
-                                    value="{{ $peminjaman->jml_buku }}" autocomplete="off"/>
+                                <input type="number" class="form-control" id="jml_buku" name="jml_buku"
+                                    value="{{ old('jml_buku', $peminjaman->jml_buku) }}" autocomplete="off" />
                             </div>
                             <!-- Date and time -->
                             <div class="form-group">
                                 <label>Jam Pinjam :</label>
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="datetime-local" name="jam_pinjam" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" value="{{ $peminjaman->jam_pinjam }}" autocomplete="off"/>
+                                        data-target="#reservationdatetime" value="{{ old('jam_pinjam', $peminjaman->jam_pinjam) }}"
+                                        autocomplete="off" />
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -129,23 +135,23 @@
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="datetime-local" name="jam_kembali"
                                         class="form-control datetimepicker-input" data-target="#reservationdatetime"
-                                        value="{{ $peminjaman->jam_kembali }}" autocomplete="off"/>
+                                        value="{{ old('jam_kembali', $peminjaman->jam_kembali) }}" autocomplete="off" />
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
                                 </div>
                             </div>
                             <!-- /.form group -->
-                            <div class="col-md-6">
-                                <label>Description :</label>
+                            {{-- <div class="col-md-6">
+                                <label>Deskripsi :</label>
                                 <textarea type="text" class="form-control" id="description" name="description">{{ $peminjaman->description }}</textarea>
-                            </div>
+                            </div> --}}
                             <div class="col-md-6">
                                 <div>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal">
-                                        <i class="fas fa-plus-circle"></i>Update
+                                        <i class="fas fa-plus-circle"></i>Ubah
                                     </button>
 
                                     <!-- Modal -->
@@ -160,17 +166,16 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Apakah anda yakin ingin Update?
+                                                    Apakah anda yakin ingin mengubah data?
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close
+                                                        data-bs-dismiss="modal">Batal
                                                     </button>
 
-                                                    <button type="submit"
-                                                        class="btn btn-primary waves-light waves-effect"
+                                                    <button type="submit" class="btn btn-primary waves-light waves-effect"
                                                         id="update-modal">
-                                                        Update
+                                                        Ubah
                                                     </button>
                                                 </div>
                                             </div>

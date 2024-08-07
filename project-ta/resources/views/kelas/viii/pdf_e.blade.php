@@ -49,7 +49,8 @@
                 <h3 style="line-height: 0.20em;">PEMERINTAH KABUPATEN LUMAJANG</h3>
                 <h3 style="line-height: 0.20em;">DINAS PENDIDIKAN</h3>
                 <h2 style="line-height: 0.20em;">SMP NEGERI 02 KLAKAH</h2>
-                <b style="line-height: 0.20em;">Jl. Ranu No.23, Linduboyo, Klakah, Kec. Klakah, Kabupaten Lumajang, Jawa Timur 67356</b>
+                <b style="line-height: 0.20em;">Jl. Ranu No.23, Linduboyo, Klakah, Kec. Klakah, Kabupaten Lumajang, Jawa
+                    Timur 67356</b>
             </td>
             <td width="25" align="center"><img src="AdminLTE-3.2.0/dist/img/lumajang.png" width="60%"></td>
         </tr>
@@ -79,44 +80,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($viiie->count() > 'VIII E')
-                                    @forelse ($viiie as $a)
-                                        <tr>
-                                            <td scope="row" align=center>{{ $loop->iteration }}</td>
-                                            <td>{{ $a->kode_pinjam }}</td>
-                                            <td align="left">{{ optional($a->siswas)->name }}</td>
-                                            <td align="center">{{ optional($a->siswas)->kelas }}</td>
-                                            <td>
-                                                @foreach ($a->bukus()->get() as $b)
-                                                
-                                                    <ul type=disc>
-                                                        <li>{{ $b->buku }}</li>
-                                                    </ul>
-                                                
-                                                @endforeach
-                                            </td>
-                                            <td>
-                                                @foreach ($a->bukus()->get() as $c)
-                                                
-                                                    <ul type=circle>
-                                                        <li>{{ $c->jml_buku }}</li>
-                                                    </ul>
-                                                
-                                                @endforeach
-                                            </td>
-                                            <td>
-                                                @foreach ($a->bukus()->get() as $d)
-                                                
-                                                    <ul type=circle>
-                                                        <li>{{ $d->kodebuku }}</li>
-                                                    </ul>
-                                                
-                                                @endforeach
-                                            </td>
-                                        </tr>
-                                    @empty
-                                    @endforelse
-                                @endif
+                                @forelse ($viiie as $a)
+                                    <tr>
+                                        <td scope="row" align=center>{{ $loop->iteration }}</td>
+                                        <td>{{ $a->kode_pinjam }}</td>
+                                        <td align="left">{{ optional($a->siswas)->name }}</td>
+                                        <td align="center">{{ optional($a->siswas)->kelas }}</td>
+                                        <td>
+                                            @foreach ($a->bukus()->get() as $b)
+                                                <ul type=disc>
+                                                    <li>{{ $b->bukucruds->buku }}</li>
+                                                </ul>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach ($a->bukus()->get() as $c)
+                                                <ul type=circle>
+                                                    <li>{{ $c->jml_buku }}</li>
+                                                </ul>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach ($a->bukus()->get() as $d)
+                                                <ul type=circle>
+                                                    <li>{{ $d->kodebuku }}</li>
+                                                </ul>
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                @empty
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

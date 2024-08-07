@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buku;
+use App\Models\Bukucrud;
 use Illuminate\Http\Request;
 use App\Models\PeminjamanTahunan;
 use App\Models\User;
@@ -18,8 +20,8 @@ class PengembalianTahunanController extends Controller
     public function index(Request $request)
     {
         $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();
-        
+        $profile = User::where('id', $iduser)->first();
+
         $keyword = $request->input('search');
         if ($request->has('search')) {
             $pengembaliantahunan = PeminjamanTahunan::whereHas('siswas', function ($query) use ($keyword) {
@@ -28,7 +30,7 @@ class PengembalianTahunanController extends Controller
                 $query->where('kelas', 'like', '%' . $keyword . '%');
             })->get();
         } else {
-            $pengembaliantahunan = PeminjamanTahunan::latest()->paginate(10);
+            $pengembaliantahunan = PeminjamanTahunan::latest()->paginate(35);
         }
         return view('pengembaliantahunan.index', compact('pengembaliantahunan', 'profile'));
     }
@@ -96,22 +98,33 @@ class PengembalianTahunanController extends Controller
      */
     public function destroy($id)
     {
-        $pengembaliantahunan = PeminjamanTahunan::findOrFail($id);
-  
-        $pengembaliantahunan->delete();
-  
-        return redirect()->route('pengembaliantahunan')->with('success', 'peminjaman deleted successfully');
+        // 
     }
 
     public function status($id)
     {
-        $pengembaliantahunan = PeminjamanTahunan::where('id', $id)->update([
-            'status'=>0
-        ]);
+        // Temukan peminjaman berdasarkan id
+        $pengembaliantahunan = PeminjamanTahunan::with('bukus.bukucruds')->find($id);
+
+        if (!$pengembaliantahunan) {
+            return response()->json(['message' => 'Peminjaman tidak ditemukan'], 404);
+        }
+
+        // Update status peminjaman menjadi 0 (dikembalikan)
+        $pengembaliantahunan->status = 0;
+        $pengembaliantahunan->save();
+
+        // Tambahkan stok buku sesuai dengan jumlah yang dipinjam
+        foreach ($pengembaliantahunan->bukus as $buku) {
+            if ($buku->bukucruds) {
+                $buku->bukucruds->stok += $buku->jml_buku;  // Asumsi 'jumlah' ada di model Buku
+                $buku->bukucruds->save();
+            }
+        }
         return redirect()->route('pengembaliantahunan', compact('pengembaliantahunan'))->with('success', 'Peminjaman selesai successfully');
     }
 
-    
+
     public function view_pdf()
     {
         $pengembaliantahunan = PeminjamanTahunan::orderBy('name', 'ASC')->get();

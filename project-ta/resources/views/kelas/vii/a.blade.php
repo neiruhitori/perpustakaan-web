@@ -53,7 +53,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                                 <li class="breadcrumb-item active">Kelas VII A</li>
                             </ol>
                         </div><!-- /.col -->
@@ -88,39 +88,37 @@
                         </thead>
                         <tbody>
                             @forelse ($viia as $key => $k)
-                                @if ($viia->count() > 'VII A')
-                                    <tr>
-                                        <td scope="row">{{ $loop->iteration }}</td>
-                                        <td>{{ $k->kode_pinjam }}</td>
-                                        <td align="left">{{ optional($k->siswas)->name }}</td>
-                                        <td align="center">{{ optional($k->siswas)->kelas }}</td>
-                                        <td>
-                                            @foreach ($k->bukus()->get() as $b)
-                                                <ul type=disc>
-                                                    <li>{{ $b->buku }}</li>
-                                                </ul>
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            @foreach ($k->bukus()->get() as $c)
-                                                <ul type=circle>
-                                                    <li>{{ $c->jml_buku }}</li>
-                                                </ul>
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            @foreach ($k->bukus()->get() as $d)
-                                                <ul type=circle>
-                                                    <li>{{ $d->kodebuku }}</li>
-                                                </ul>
-                                            @endforeach
-                                        </td>
-                                    </tr>
-                                @endif
+                                <tr>
+                                    <td scope="row">{{ $loop->iteration }}</td>
+                                    <td>{{ $k->kode_pinjam }}</td>
+                                    <td align="left">{{ optional($k->siswas)->name }}</td>
+                                    <td align="center">{{ optional($k->siswas)->kelas }}</td>
+                                    <td>
+                                        @foreach ($k->bukus()->get() as $b)
+                                            <ul type=disc>
+                                                <li>{{ $b->bukucruds->buku }}</li>
+                                            </ul>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach ($k->bukus()->get() as $c)
+                                            <ul type=circle>
+                                                <li>{{ $c->jml_buku }}</li>
+                                            </ul>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach ($k->bukus()->get() as $d)
+                                            <ul type=circle>
+                                                <li>{{ $d->kodebuku }}</li>
+                                            </ul>
+                                        @endforeach
+                                    </td>
+                                </tr>
                             @empty
-                            <div class="alert alert-danger">
-                                Data Kelas VII A belum Tersedia.
-                            </div>
+                                <div class="alert alert-danger">
+                                    Data Kelas VII A belum Tersedia.
+                                </div>
                             @endforelse
                         </tbody>
                     </table>

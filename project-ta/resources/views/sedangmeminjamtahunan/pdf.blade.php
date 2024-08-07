@@ -83,7 +83,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($sedangmeminjamtahunan->count() > 0)
                                     @forelse ($sedangmeminjamtahunan as $k)
                                         <tr>
                                             <td scope="row" align=center>{{ $loop->iteration }}</td>
@@ -91,9 +90,9 @@
                                             <td align="left">{{ optional($k->siswas)->name }}</td>
                                             <td align="center">{{ optional($k->siswas)->kelas }}</td>
                                             <td align="center">
-                                                @foreach ($k->bukus()->get() as $b)
-                                                    <ul type=disc>
-                                                        <li>{{ $b->buku }}</li>
+                                                @foreach ($k->bukus()->get() as $peminjaman)
+                                                    <ul type=circle>
+                                                        <li>{{ $peminjaman->bukucruds->buku }}</li>
                                                     </ul>
                                                 @endforeach
                                             </td>
@@ -120,7 +119,6 @@
                                         </tr>
                                     @empty
                                     @endforelse
-                                @endif
                             </tbody>
                         </table>
                     </div>

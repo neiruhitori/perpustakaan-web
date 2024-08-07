@@ -52,7 +52,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                                 <li class="breadcrumb-item active">Peminjaman</li>
                             </ol>
                         </div><!-- /.col -->
@@ -78,7 +78,7 @@
                                     Apakah Anda yakin ingin menghapus semua data!
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal
                                     </button>
 
                                     <a href="{{ route('peminjamantahunan.removeAll') }}" id="btn"
@@ -120,7 +120,7 @@
                         </a>
                         <a href="{{ route('peminjamantahunanbuku.create') }}" class="btn btn-primary  float-sm-right"
                             type="button">
-                            <i class="fas fa-plus"></i> Add Buku
+                            <i class="fas fa-plus"></i> Tambah Buku
                         </a>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -140,7 +140,8 @@
                         <th>Jumlah Buku</th>
                         <th>Kode Buku</th>
                         <th>Tanggal Kembali</th>
-                        <th>Action</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -152,9 +153,9 @@
                                     <td>{{ optional($p->siswas)->name }}</td>
                                     <td>{{ optional($p->siswas)->kelas }}</td>
                                     <td>
-                                        @foreach ($p->bukus()->get() as $b)
-                                            <ul type=disc>
-                                                <li>{{ $b->buku }}</li>
+                                        @foreach ($p->bukus()->get() as $peminjaman)
+                                            <ul type=circle>
+                                                <li>{{ $peminjaman->bukucruds->buku }}</li>
                                             </ul>
                                         @endforeach
                                     </td>
@@ -172,7 +173,29 @@
                                             </ul>
                                         @endforeach
                                     </td>
-                                    <td>{{ $p->jam_kembali }}</td>
+                                    @php
+                                        $isOverdue =
+                                            \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($p->jam_kembali)) &&
+                                            $p->status != 0;
+                                    @endphp
+                                    <td class="{{ $isOverdue ? 'text-red' : '' }}">
+                                        {{ $p->jam_kembali }}
+                                    </td>
+                                    <td>
+                                        <label
+                                            class="label 
+                                            @if ($p->status == 0) badge bg-success 
+                                            @elseif ($p->status == 1) badge bg-danger 
+                                            @else badge bg-warning @endif">
+                                            @if ($p->status == 0)
+                                                Selesai
+                                            @elseif ($p->status == 1)
+                                                Sedang Meminjam
+                                            @else
+                                                Butuh Diproses
+                                            @endif
+                                        </label>
+                                    </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('peminjamantahunan.show', $p->id) }}" type="button"

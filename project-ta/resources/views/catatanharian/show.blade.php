@@ -13,7 +13,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                             <li class="breadcrumb-item active"><a href="/catatanharian">Catatan</a></li>
                             <li class="breadcrumb-item active">Detail</li>
                         </ol>
@@ -44,18 +44,36 @@
                                         value="{{ $catatan->siswas->kelas }}" disabled />
                             </div>
                             <div class="col-md-6">
+                                <label>Gambar :</label>
+                                <div>
+                                    <img src="{{ asset('gambarbukuharian/' . $catatan->bukusharians->foto) }}" alt="" style="width:200px;">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <label>Buku :</label>
-                                <input type="text" class="form-control" id="buku" name="buku"
-                                    value="{{ $catatan->buku }}" disabled/>
+                                <input type="text" class="form-control"
+                                    value="{{ $catatan->bukusharians->buku }}" disabled/>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Penulis :</label>
+                                <input type="text" class="form-control" value="{{ $catatan->bukusharians->penulis }}" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Penerbit :</label>
+                                <input type="text" class="form-control" value="{{ $catatan->bukusharians->penerbit }}" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Deskripsi :</label>
+                                <textarea type="text" class="form-control" disabled>{{ $catatan->bukusharians->description }}</textarea>
                             </div>
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
-                                <input type="text" class="form-control" id="kodebuku" name="kodebuku"
+                                <input type="text" class="form-control"
                                     value="{{ $catatan->kodebuku }}" disabled/>
                             </div>
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>
-                                <input type="text" class="form-control" id="jml_buku" name="jml_buku"
+                                <input type="text" class="form-control"
                                 value="{{ $catatan->jml_buku }}" disabled />
                             </div>
                             <!-- Date and time -->
@@ -82,11 +100,11 @@
                                 </div>
                             </div>
                             <!-- /.form group -->
-                            <div class="col-md-6">
-                                <label>Description :</label>
+                            {{-- <div class="col-md-6">
+                                <label>Deskripsi :</label>
                                 <textarea class="form-control" id="description" name="description"
                                  disabled >{{ $catatan->description }}</textarea>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 

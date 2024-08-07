@@ -54,7 +54,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                                 <li class="breadcrumb-item active">Buku Harian</li>
                             </ol>
                         </div><!-- /.col -->
@@ -81,7 +81,7 @@
                                     Apakah Anda yakin ingin menghapus semua data!
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal
                                     </button>
 
                                     <a href="{{ route('bukuharian.removeAll') }}" id="btn"
@@ -116,7 +116,7 @@
                         </div>
                     </form>
                     <div class="mb-3">
-                        <a href="{{ route('bukuharian.create') }}" class="btn btn-primary float-sm-right">Add
+                        <a href="{{ route('bukuharian.create') }}" class="btn btn-primary float-sm-right">Tambah
                             Buku</a>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -129,8 +129,12 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <tr>
                         <th>No</th>
-                        <th>Buku</th>
-                        <th>Action</th>
+                        <th>Sampul</th>
+                        <th>Judul</th>
+                        <th>Penulis</th>
+                        <th>Penerbit</th>
+                        <th>Stok</th>
+                        <th>Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -138,7 +142,13 @@
                             @if ($bukuharian->count() > 0)
                                 <tr>
                                     <td scope="row">{{ $bukuharian->firstItem() + $key }}</td>
+                                    <td>
+                                        <img src="{{ asset('gambarbukuharian/'.$p->foto) }}" alt="" style="width:40px;">
+                                    </td>
                                     <td>{{ $p->buku }}</td>
+                                    <td>{{ $p->penulis }}</td>
+                                    <td>{{ $p->penerbit }}</td>
+                                    <td>{{ $p->stok }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('bukuharian.show', $p->id) }}" type="button"

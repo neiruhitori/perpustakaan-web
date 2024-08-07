@@ -53,7 +53,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                                 <li class="breadcrumb-item active">Siswa</li>
                             </ol>
                         </div><!-- /.col -->
@@ -79,7 +79,7 @@
                                     Apakah Anda yakin ingin menghapus semua data!
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal
                                     </button>
 
                                     <a href="{{ route('siswa.removeAll') }}" id="btn"
@@ -115,7 +115,7 @@
                         </div>
                     </form>
                     <div class="mb-3">
-                        <a href="{{ route('siswa.create') }}" class="btn btn-primary float-sm-right">Add
+                        <a href="{{ route('siswa.create') }}" class="btn btn-primary float-sm-right">Tambah
                             Siswa</a>
                     </div>
 
@@ -131,7 +131,7 @@
                         <th>No</th>
                         <th>Nama</th>
                         <th>Kelas</th>
-                        <th>Action</th>
+                        <th>Aksi</th>
                     </tr>
                     </thead>
                     <tbody>

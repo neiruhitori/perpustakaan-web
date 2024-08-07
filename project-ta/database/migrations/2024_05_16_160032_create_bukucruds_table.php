@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBukushariansTable extends Migration
+class CreateBukucrudsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateBukushariansTable extends Migration
      */
     public function up()
     {
-        Schema::create('bukusharians', function (Blueprint $table) {
+        Schema::create('bukucruds', function (Blueprint $table) {
             $table->id();
             $table->string('buku');
+            $table->string('penulis');
+            $table->string('penerbit');
+            $table->string('foto')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('stok')->default(0);
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ class CreateBukushariansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bukusharians');
+        Schema::dropIfExists('bukucruds');
     }
 }

@@ -9,6 +9,7 @@ use App\Models\PeminjamanTahunan;
 use App\Models\User;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PeminjamanTahunanController extends Controller
 {
@@ -30,7 +31,7 @@ class PeminjamanTahunanController extends Controller
                 $query->where('kelas', 'like', '%' . $keyword . '%');
             })->get();
         } else {
-            $peminjamantahunan = PeminjamanTahunan::latest()->paginate(10);
+            $peminjamantahunan = PeminjamanTahunan::latest()->paginate(35);
         }
         return view('peminjamantahunan.index', compact('peminjamantahunan', 'profile'));
     }
@@ -62,17 +63,12 @@ class PeminjamanTahunanController extends Controller
             'kls' => 'required:true',
             'absen' => 'required:true',
             'tgl' => 'required:true',
-            // 'kode_pinjam' => 'required:true',
-            // 'name' => 'required:true',
-            // 'kelas' => 'required:true',
             'siswas_id' => 'required:true',
             'jam_pinjam' => 'required:true',
             'jam_kembali' => 'required:true',
         ]);
 
         $kode_pinjam = $request->kls . '' . $request->absen . '-' . $request->tgl;
-        // $name = $request->name;
-        // $kelas = $request->kelas;
         $siswas_id = $request->siswas_id;
         $jam_pinjam = $request->jam_pinjam;
         $jam_kembali = $request->jam_kembali;
@@ -81,41 +77,12 @@ class PeminjamanTahunanController extends Controller
         // Simpan ke database
         $yourModel = new PeminjamanTahunan();
         $yourModel->kode_pinjam = $kode_pinjam;
-        // $yourModel->name = $name;
-        // $yourModel->kelas = $kelas;
         $yourModel->siswas_id = $siswas_id;
         $yourModel->jam_pinjam = $jam_pinjam;
         $yourModel->jam_kembali = $jam_kembali;
         $yourModel->description = $description;
         $yourModel->save();
 
-
-        // PeminjamanTahunan::create([
-        //     'kode_pinjam' => $request->kode_pinjam,
-        //     'name' => $request->name,
-        //     'kelas' => $request->kelas,
-        //     'jam_pinjam' => $request->jam_pinjam,
-        //     'jam_kembali' => $request->jam_kembali,
-        //     'description' => $request->description
-        // ]);
-
-        // $buku = $request->buku;
-        // $kodebuku = $request->kodebuku;
-        // $jml_buku = $request->jml_buku;
-
-        // for ($i=0; $i < count($buku); $i++) { 
-        //     $datasave = [
-        //         'name' => $request->name,
-        //         'buku' => $buku[$i],
-        //         'kodebuku' => $kodebuku[$i],
-        //         'jml_buku' => $jml_buku[$i],
-        //         'kelas' => $request->kelas,
-        //         'jam_pinjam' => $request->jam_pinjam,
-        //         'jam_kembali' => $request->jam_kembali,
-        //         'description' => $request->description,
-        //     ];
-        //     PeminjamanTahunan::insert($datasave);
-        // }
         return redirect('/peminjamantahunan')->with('success', 'Data Berhasil di Tambahkan');
     }
 
@@ -133,33 +100,51 @@ class PeminjamanTahunanController extends Controller
     public function storebuku(Request $request)
     {
         $this->validate($request, [
-            'peminjamantahunan_id' => 'required|min:1|max:50',
-            'buku' => 'required|min:1|max:50',
-            'jml_buku' => 'required:true',
-            'kodebuku' => 'required:true',
+            'peminjamantahunan_id' => 'required|array|min:1|max:50',
+            'bukucruds_id' => 'required|array|min:1|max:50',
+            'jml_buku' => 'required|array',
+            'kodebuku' => 'required|array',
         ]);
-        // Buku::create([
-        //     'peminjamantahunan_id' => $request->peminjamantahunan_id,
-        //     'buku' => $request->buku,
-        //     'jml_buku' => $request->jml_buku,
-        //     'kodebuku' => $request->kodebuku,
-        // ]);
-
+    
         $peminjamantahunan_id = $request->peminjamantahunan_id;
-        $buku = $request->buku;
+        $bukucruds_id = $request->bukucruds_id;
         $kodebuku = $request->kodebuku;
         $jml_buku = $request->jml_buku;
-
-        for ($i=0; $i < count($kodebuku); $i++) { 
-            $datasave = [
-                'peminjamantahunan_id' => $peminjamantahunan_id[$i],
-                'buku' => $buku[$i],
-                'kodebuku' => $kodebuku[$i],
-                'jml_buku' => $jml_buku[$i],
-            ];
-            Buku::insert($datasave);
+    
+        DB::beginTransaction();
+    
+        try {
+            foreach ($kodebuku as $i => $kode) {
+                $buku = Bukucrud::find($bukucruds_id[$i]);
+    
+                if (!$buku) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', 'Buku tidak ditemukan.');
+                }
+    
+                if ($buku->stok < $jml_buku[$i]) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', 'Stok buku tidak mencukupi.');
+                }
+    
+                // Kurangi stok
+                $buku->stok -= $jml_buku[$i];
+                $buku->save();
+    
+                Buku::create([
+                    'peminjamantahunan_id' => $peminjamantahunan_id[$i],
+                    'bukucruds_id' => $bukucruds_id[$i],
+                    'kodebuku' => $kode,
+                    'jml_buku' => $jml_buku[$i],
+                ]);
+            }
+    
+            DB::commit();
+            return redirect('/peminjamantahunan')->with('success', 'Data Berhasil di Tambahkan');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menambahkan data.');
         }
-        return redirect('/peminjamantahunan')->with('success', 'Data Berhasil di Tambahkan');
     }
 
     public function show(string $id)
@@ -217,7 +202,8 @@ class PeminjamanTahunanController extends Controller
         return redirect()->route('peminjamantahunan')->with('success', 'Peminjaman deleted successfully');
     }
 
-    public function removeAll(){
+    public function removeAll()
+    {
         PeminjamanTahunan::query()->forceDelete();
         return redirect()->route('peminjamantahunan')->with('removeAll', 'Reset data Peminjaman Tahunan successfully');
     }

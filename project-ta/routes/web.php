@@ -19,6 +19,7 @@ use App\Http\Controllers\SelesaiMeminjamController;
 use App\Http\Controllers\SelesaiMeminjamTahunanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\UntukSiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,11 +32,55 @@ use App\Http\Controllers\SiswaController;
 |
 */
 
+// Route root untuk mengarahkan ke halaman untuksiswa
+Route::get('/', [UntukSiswaController::class, 'index'], function () {
+    return redirect()->route('untuksiswa');
+});
+// Route untuk halaman untuksiswa
+Route::controller(UntukSiswaController::class)->prefix('untuksiswa')->group(function () {
+    Route::get('', 'index')->name('untuksiswa');
+    // PEMINAJAMN HARIAN ==================================================================
+    Route::get('pinjamharian', 'pinjamharian')->name('untuksiswa.pinjamharian.index');
+    Route::get('pinjamhariancreate', 'pinjamhariancreate')->name('untuksiswa.pinjamharian.create');
+    Route::post('pinjamharianstore', 'pinjamharianstore')->name('untuksiswa.pinjamharian.store');
+    Route::get('pinjamharianshow/{id}', 'pinjamharianshow')->name('untuksiswa.pinjamharian.show');
+    // ===================================================================================
+    // PENGEMBALIAN HARIAN ==================================================================
+    Route::get('kembalianharian', 'kembalianharian')->name('untuksiswa.kembalianharian.index');
+    Route::get('kembalianharianstatus/{id}', 'kembalianharianstatus')->name('untuksiswa.kembalianharian.status');
+    // ===================================================================================
+    // PEMINAJAMN TAHUNAN ==================================================================
+    Route::get('pinjamtahunan', 'pinjamtahunan')->name('untuksiswa.pinjamtahunan.index');
+    Route::get('pinjamtahunancreate', 'pinjamtahunancreate')->name('untuksiswa.pinjamtahunan.create');
+    Route::post('pinjamtahunanstore', 'pinjamtahunanstore')->name('untuksiswa.pinjamtahunan.store');
+    Route::get('pinjamtahunanaddbuku', 'pinjamtahunanaddbuku')->name('untuksiswa.pinjamtahunan.addbuku');
+    Route::post('pinjamtahunanaddbukustore', 'pinjamtahunanaddbukustore')->name('untuksiswa.pinjamtahunan.addbukustore');
+    Route::get('pinjamtahunanshow/{id}', 'pinjamtahunanshow')->name('untuksiswa.pinjamtahunan.show');
+    // =============================================================================================
+    // PENGEMBALIAN TAHUNAN ==================================================================
+    Route::get('kembaliantahunan', 'kembaliantahunan')->name('untuksiswa.kembaliantahunan.index');
+    Route::get('kembaliantahunanstatus/{id}', 'kembaliantahunanstatus')->name('untuksiswa.kembaliantahunan.status');
+    // ===================================================================================
+
+    Route::get('daftarbuku', 'daftarbuku')->name('untuksiswa.daftarbuku.index');
+
+    // BUKU HARIAN ================================================================================================
+    Route::get('daftarbukuharian', 'daftarbukuharian')->name('untuksiswa.daftarbuku.harian.index');
+    Route::get('daftarbukuhariansearch', 'daftarbukuhariansearch')->name('untuksiswa.daftarbuku.harian.search');
+    Route::get('daftarbukuharianlihat/{id}', 'daftarbukuharianlihat')->name('untuksiswa.daftarbuku.harian.lihat');
+    // ==============================================================================================================
+    // BUKU TAHUNAN===================================================================================================
+    Route::get('daftarbukutahunan', 'daftarbukutahunan')->name('untuksiswa.daftarbuku.tahunan.index');
+    Route::get('daftarbukutahunansearch', 'daftarbukutahunansearch')->name('untuksiswa.daftarbuku.tahunan.search');
+    Route::get('daftarbukutahunanlihat/{id}', 'daftarbukutahunanlihat')->name('untuksiswa.daftarbuku.tahunan.lihat');
+    // ================================================================================================================
+
+});
 
 /* Dibawah ini adalah route langsung redirect ke dashboard jika sebelumnya belum logout */
-Route::get('/', [HomeController::class, 'index'], function () {
-        return view('dashboard');
-    })->middleware('auth');
+// Route::get('/', [HomeController::class, 'index'], function () {
+//         return view('dashboard');
+//     })->middleware('auth');
 /*------------------------------------------------------------------------------------------------------ */
 
 // Route Login ====================================================================
@@ -54,52 +99,52 @@ Route::controller(AuthController::class)->group(function () {
 // =====================================================================================================
 
 Route::middleware('auth')->group(function () {
-//======================Dibawah ini adalah dashboard setelah login akan redirect ke ini===================
+    //======================Dibawah ini adalah dashboard setelah login akan redirect ke ini===================
     Route::get('dashboard', [HomeController::class, 'index'], function () {
         return view('dashboard');
     })->name('dashboard');
-// =======================================================================================================
+    // =======================================================================================================
 
-// ================================= Siswa ===============================================================
-Route::controller(SiswaController::class)->prefix('siswa')->group(function () {
-    Route::get('', 'index')->name('siswa');
-    Route::get('create', 'create')->name('siswa.create');
-    Route::post('store', 'store')->name('siswa.store');
-    Route::get('show/{id}', 'show')->name('siswa.show');
-    Route::get('edit/{id}', 'edit')->name('siswa.edit');
-    Route::put('edit/{id}', 'update')->name('siswa.update');
-    Route::delete('destroy/{id}', 'destroy')->name('siswa.destroy');
-    Route::get('removeAll', 'removeAll')->name('siswa.removeAll');
-});
-// =======================================================================================================
+    // ================================= Siswa ===============================================================
+    Route::controller(SiswaController::class)->prefix('siswa')->group(function () {
+        Route::get('', 'index')->name('siswa');
+        Route::get('create', 'create')->name('siswa.create');
+        Route::post('store', 'store')->name('siswa.store');
+        Route::get('show/{id}', 'show')->name('siswa.show');
+        Route::get('edit/{id}', 'edit')->name('siswa.edit');
+        Route::put('edit/{id}', 'update')->name('siswa.update');
+        Route::delete('destroy/{id}', 'destroy')->name('siswa.destroy');
+        Route::get('removeAll', 'removeAll')->name('siswa.removeAll');
+    });
+    // =======================================================================================================
 
-// ================================= Buku Tahunan===============================================================
-Route::controller(BukucrudController::class)->prefix('buku')->group(function () {
-    Route::get('', 'index')->name('buku');
-    Route::get('create', 'create')->name('buku.create');
-    Route::post('store', 'store')->name('buku.store');
-    Route::get('show/{id}', 'show')->name('buku.show');
-    Route::get('edit/{id}', 'edit')->name('buku.edit');
-    Route::put('edit/{id}', 'update')->name('buku.update');
-    Route::delete('destroy/{id}', 'destroy')->name('buku.destroy');
-    Route::get('removeAll', 'removeAll')->name('buku.removeAll');
-});
-// =======================================================================================================
+    // ================================= Buku Tahunan===============================================================
+    Route::controller(BukucrudController::class)->prefix('buku')->group(function () {
+        Route::get('', 'index')->name('buku');
+        Route::get('create', 'create')->name('buku.create');
+        Route::post('store', 'store')->name('buku.store');
+        Route::get('show/{id}', 'show')->name('buku.show');
+        Route::get('edit/{id}', 'edit')->name('buku.edit');
+        Route::put('edit/{id}', 'update')->name('buku.update');
+        Route::delete('destroy/{id}', 'destroy')->name('buku.destroy');
+        Route::get('removeAll', 'removeAll')->name('buku.removeAll');
+    });
+    // =======================================================================================================
 
-// ================================= Buku Harian===============================================================
-Route::controller(BukuHarianController::class)->prefix('bukuharian')->group(function () {
-    Route::get('', 'index')->name('bukuharian');
-    Route::get('create', 'create')->name('bukuharian.create');
-    Route::post('store', 'store')->name('bukuharian.store');
-    Route::get('show/{id}', 'show')->name('bukuharian.show');
-    Route::get('edit/{id}', 'edit')->name('bukuharian.edit');
-    Route::put('edit/{id}', 'update')->name('bukuharian.update');
-    Route::delete('destroy/{id}', 'destroy')->name('bukuharian.destroy');
-    Route::get('removeAll', 'removeAll')->name('bukuharian.removeAll');
-});
-// =======================================================================================================
+    // ================================= Buku Harian===============================================================
+    Route::controller(BukuHarianController::class)->prefix('bukuharian')->group(function () {
+        Route::get('', 'index')->name('bukuharian');
+        Route::get('create', 'create')->name('bukuharian.create');
+        Route::post('store', 'store')->name('bukuharian.store');
+        Route::get('show/{id}', 'show')->name('bukuharian.show');
+        Route::get('edit/{id}', 'edit')->name('bukuharian.edit');
+        Route::put('edit/{id}', 'update')->name('bukuharian.update');
+        Route::delete('destroy/{id}', 'destroy')->name('bukuharian.destroy');
+        Route::get('removeAll', 'removeAll')->name('bukuharian.removeAll');
+    });
+    // =======================================================================================================
 
-// Harian================================================================================================
+    // Harian================================================================================================
 
     Route::controller(PeminjamanController::class)->prefix('peminjaman')->group(function () {
         Route::get('', 'index')->name('peminjaman');
@@ -138,7 +183,7 @@ Route::controller(BukuHarianController::class)->prefix('bukuharian')->group(func
 
     /*--------------------------------------------------------------------------------------------------------- */
 
-// Tahunan======================================================================================================
+    // Tahunan======================================================================================================
     Route::controller(PeminjamanTahunanController::class)->prefix('peminjamantahunan')->group(function () {
         Route::get('', 'index')->name('peminjamantahunan');
         Route::get('create', 'create')->name('peminjamantahunan.create');

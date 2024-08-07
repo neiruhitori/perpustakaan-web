@@ -13,7 +13,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                             <li class="breadcrumb-item active"><a href="/peminjaman">Peminjaman</a></li>
                             <li class="breadcrumb-item active">Detail</li>
                         </ol>
@@ -44,9 +44,27 @@
                                         value="{{ $peminjaman->siswas->kelas }}" disabled />
                             </div>
                             <div class="col-md-6">
-                                <label>Buku :</label>
+                                <label>Sampul :</label>
+                                <div>
+                                    <img src="{{ asset('gambarbukuharian/' . $peminjaman->bukusharians->foto) }}" alt="" style="width:200px;">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Judul Buku :</label>
                                 <input type="text" class="form-control" id="buku" name="buku"
-                                    value="{{ $peminjaman->buku }}" disabled/>
+                                    value="{{ $peminjaman->bukusharians->buku }}" disabled/>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Penulis :</label>
+                                <input type="text" class="form-control" value="{{ $peminjaman->bukusharians->penulis }}" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Penerbit :</label>
+                                <input type="text" class="form-control" value="{{ $peminjaman->bukusharians->penerbit }}" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Deskripsi :</label>
+                                <textarea type="text" class="form-control" disabled>{{ $peminjaman->bukusharians->description }}</textarea>
                             </div>
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
@@ -82,11 +100,11 @@
                                 </div>
                             </div>
                             <!-- /.form group -->
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label>Description :</label>
                                 <textarea class="form-control" id="description" name="description"
                                  disabled >{{ $peminjaman->description }}</textarea>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 

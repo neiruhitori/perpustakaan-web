@@ -16,11 +16,10 @@ class CreatePeminjamanTable extends Migration
         Schema::create('peminjaman', function (Blueprint $table) {
             $table->increments('id');
             $table->foreignId('siswas_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            // $table->string('name'); 
-            // $table->string('kelas');
 
-            // $table->unsignedBigInteger('siswa_id'); 
-            $table->string('buku');
+            // $table->string('buku');
+            $table->foreignId('bukusharians_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+
             $table->string('jml_buku'); 
             $table->dateTime('jam_pinjam');
             $table->datetime('jam_kembali');

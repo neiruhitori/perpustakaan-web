@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bukusharian;
 use Illuminate\Http\Request;
 use App\Models\Peminjaman;
 use App\Models\User;
@@ -18,8 +19,8 @@ class PengembalianController extends Controller
     public function index(Request $request)
     {
         $iduser = Auth::id();
-        $profile = User::where('id',$iduser)->first();
-        
+        $profile = User::where('id', $iduser)->first();
+
         $keyword = $request->input('search');
         if ($request->has('search')) {
             $pengembalian = Peminjaman::whereHas('siswas', function ($query) use ($keyword) {
@@ -28,10 +29,10 @@ class PengembalianController extends Controller
                 $query->where('kelas', 'like', '%' . $keyword . '%');
             })->get();
         } else {
-            $pengembalian = Peminjaman::latest()->paginate(10);
+            $pengembalian = Peminjaman::latest()->paginate(35);
         }
         return view('pengembalian.index', compact('pengembalian', 'profile'));
-        
+
         /* -------dibawah ini adalah sebelum adanya fitur search-------*/
         // $pengembalian = Peminjaman::orderBy('created_at', 'DESC')->paginate(10);
         // return view('pengembalian.index', compact('pengembalian'));
@@ -100,22 +101,31 @@ class PengembalianController extends Controller
      */
     public function destroy($id)
     {
-        $pengembalian = Peminjaman::findOrFail($id);
-  
-        $pengembalian->delete();
-  
-        return redirect()->route('pengembalian')->with('success', 'peminjaman deleted successfully');
+        // 
     }
 
     public function status($id)
     {
-        $pengembalian = Peminjaman::where('id', $id)->update([
-            'status'=>0
+        // Temukan peminjaman berdasarkan ID
+        $pengembalian = Peminjaman::findOrFail($id);
+
+        // Temukan buku berdasarkan ID peminjaman
+        $bukuharian = Bukusharian::findOrFail($pengembalian->bukusharians_id);
+
+        // Tambah stok buku berdasarkan jumlah buku yang dipinjam
+        $bukuharian->stok += $pengembalian->jml_buku;
+        $bukuharian->save();
+
+        // Update status peminjaman menjadi selesai (0)
+        $pengembalian->update([
+            'status' => 0
         ]);
+
+        // Redirect ke halaman pengembalian dengan pesan sukses
         return redirect()->route('pengembalian', compact('pengembalian'))->with('success', 'Peminjaman selesai successfully');
     }
 
-    
+
     public function view_pdf()
     {
         $pengembalian = Peminjaman::orderBy('name', 'ASC')->get();

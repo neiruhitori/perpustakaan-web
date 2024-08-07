@@ -27,7 +27,7 @@ class CatatanHarianController extends Controller
                 $query->where('kelas', 'like', '%' . $keyword . '%');
             })->get();
         } else {
-            $catatan = Peminjaman::latest()->paginate(10);
+            $catatan = Peminjaman::latest()->paginate(35);
         }
         return view('catatanharian.catatan', compact('catatan', 'profile'));
     }

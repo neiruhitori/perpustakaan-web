@@ -27,7 +27,7 @@ class CatatanTahunanController extends Controller
                 $query->where('kelas', 'like', '%' . $keyword . '%');
             })->get();
         } else {
-            $catatan = PeminjamanTahunan::latest()->paginate(10);
+            $catatan = PeminjamanTahunan::latest()->paginate(35);
         }
         return view('catatantahunan.catatan', compact('catatan', 'profile'));
     }

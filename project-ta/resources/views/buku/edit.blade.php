@@ -19,7 +19,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                             <li class="breadcrumb-item active"><a href="/buku">Buku</a></li>
                             <li class="breadcrumb-item active">Edit</li>
                         </ol>
@@ -41,16 +41,45 @@
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
                             <div class="col-md-6">
-                                <label>Buku :</label>
-                                <input type="text" class="form-control" name="buku"
-                                    value="{{ $buku->buku }}" autocomplete="off"/>
+                                <label>Sampul :</label>
+                                @if ($buku->foto)
+                                    <div>
+                                        <img src="{{ asset('gambarbukutahunan/'.$buku->foto) }}" alt="" style="width:100">
+                                    </div>
+                                @endif
+                                <input type="file" class="form-control" name="foto" value=""
+                                    autocomplete="off" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Judul :</label>
+                                <input type="text" class="form-control" name="buku" value="{{ $buku->buku }}"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Penulis :</label>
+                                <input type="text" class="form-control" name="penulis" value="{{ $buku->penulis }}"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Penerbit :</label>
+                                <input type="text" class="form-control" name="penerbit" value="{{ $buku->penerbit }}"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Stok :</label>
+                                <input type="number" class="form-control" name="stok" value="{{ $buku->stok }}"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Deskripsi :</label>
+                                <textarea type="text" class="form-control" name="description" autocomplete="off">{{ $buku->description }}</textarea>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <div>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal">
-                                        <i class="fas fa-plus-circle"></i>Update
+                                        <i class="fas fa-plus-circle"></i>Ubah
                                     </button>
 
                                     <!-- Modal -->
@@ -65,15 +94,16 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Apakah anda yakin ingin Update?
+                                                    Apakah anda yakin ingin mengubah data?
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close
+                                                        data-bs-dismiss="modal">Batal
                                                     </button>
 
-                                                    <button type="submit" class="btn btn-primary waves-light waves-effect" id="update-modal">
-                                                        Update
+                                                    <button type="submit" class="btn btn-primary waves-light waves-effect"
+                                                        id="update-modal">
+                                                        Ubah
                                                     </button>
                                                 </div>
                                             </div>

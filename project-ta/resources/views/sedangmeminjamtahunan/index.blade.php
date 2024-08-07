@@ -53,7 +53,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                         <li class="breadcrumb-item active">Sedang Meminjam</li>
                     </ol>
                 </div><!-- /.col -->
@@ -79,7 +79,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($sedangmeminjamtahunan->count() > 0)
                             @forelse ($sedangmeminjamtahunan as $key => $k)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
@@ -87,12 +86,10 @@
                                     <td>{{ optional($k->siswas)->name }}</td>
                                     <td>{{ optional($k->siswas)->kelas }}</td>
                                     <td>
-                                        @foreach ($k->bukus()->get() as $b)
-                                        
-                                            <ul type=disc>
-                                                <li>{{ $b->buku }}</li>
+                                        @foreach ($k->bukus()->get() as $peminjaman)
+                                            <ul type=circle>
+                                                <li>{{ $peminjaman->bukucruds->buku }}</li>
                                             </ul>
-                                        
                                         @endforeach
                                     </td>
                                     <td>
@@ -127,7 +124,6 @@
                                     Data Kategori Repositori belum Tersedia.
                                 </div>
                             @endforelse
-                        @endif
                     </tbody>
                 </table>
                 

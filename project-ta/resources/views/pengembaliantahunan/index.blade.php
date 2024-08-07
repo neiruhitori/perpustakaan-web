@@ -58,7 +58,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                                 <li class="breadcrumb-item active">Pengembalian</li>
                             </ol>
                         </div><!-- /.col -->
@@ -96,7 +96,7 @@
                         <th>Kode Buku</th>
                         <th>Tanggal Kembali</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th>Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -108,9 +108,9 @@
                                     <td>{{ optional($k->siswas)->name }}</td>
                                     <td>{{ optional($k->siswas)->kelas }}</td>
                                     <td>
-                                        @foreach ($k->bukus()->get() as $b)
-                                            <ul type=disc>
-                                                <li>{{ $b->buku }}</li>
+                                        @foreach ($k->bukus()->get() as $peminjaman)
+                                            <ul type=circle>
+                                                <li>{{ $peminjaman->bukucruds->buku }}</li>
                                             </ul>
                                         @endforeach
                                     </td>
@@ -138,13 +138,28 @@
                                         {{ $k->jam_kembali }}
                                     </td>
                                     {{-- =========================================================================================================== --}}
-                                    <td>
+                                    {{-- <td>
                                         <label
                                             class="label {{ $k->status == 1 ? 'badge bg-danger' : 'badge bg-success' }}">{{ $k->status == 1 ? 'Sedang Meminjam' : 'Selesai' }}</label>
+                                    </td> --}}
+                                    <td>
+                                        <label
+                                            class="label 
+                                                @if ($k->status == 0) badge bg-success 
+                                                @elseif ($k->status == 1) badge bg-danger 
+                                                @else badge bg-warning @endif">
+                                            @if ($k->status == 0)
+                                                Selesai
+                                            @elseif ($k->status == 1)
+                                                Sedang Meminjam
+                                            @else
+                                                Butuh Diproses
+                                            @endif
+                                        </label>
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="close">
-                                            @if ($k->status == 1)
+                                            @if ($k->status == 1 || $k->status == 2)
                                                 <!-- Tanpa Modal -->
                                                 <a href="{{ route('pengembaliantahunan.status', $k->id) }}"
                                                     class="btn btn-sm btn-danger"

@@ -65,7 +65,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                                 <li class="breadcrumb-item active">Pengembalian</li>
                             </ol>
                         </div><!-- /.col -->
@@ -102,7 +102,7 @@
                         <th>Kode Buku</th>
                         <th>Jam Kembali</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th>Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -112,7 +112,7 @@
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ optional($k->siswas)->name }}</td>
                                     <td>{{ optional($k->siswas)->kelas }}</td>
-                                    <td>{{ $k->buku }}</td>
+                                    <td>{{ optional($k->bukusharians)->buku }}</td>
                                     <td>{{ $k->jml_buku }}</td>
                                     <td>{{ $k->kodebuku }}</td>
                                     {{-- Dibawah Ini adalah Logika untuk membuat text pada jam_kembali berwarna merah jika melebihi batas tanggal --}}
@@ -125,13 +125,28 @@
                                         {{ $k->jam_kembali }}
                                     </td>
                                     {{-- =========================================================================================================== --}}
-                                    <td>
+                                    {{-- <td>
                                         <label
                                             class="label {{ $k->status == 1 ? 'badge bg-danger' : 'badge bg-success' }}">{{ $k->status == 1 ? 'Sedang Meminjam' : 'Selesai' }}</label>
+                                    </td> --}}
+                                    <td>
+                                        <label
+                                            class="label 
+                                            @if ($k->status == 0) badge bg-success 
+                                            @elseif ($k->status == 1) badge bg-danger 
+                                            @else badge bg-warning @endif">
+                                            @if ($k->status == 0)
+                                                Selesai
+                                            @elseif ($k->status == 1)
+                                                Sedang Meminjam
+                                            @else
+                                                Butuh Diproses
+                                            @endif
+                                        </label>
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="close">
-                                            @if ($k->status == 1)
+                                            @if ($k->status == 1 || $k->status == 2)
                                                 <!-- Tanpa Modal -->
                                                 <a href="{{ route('pengembalian.status', $k->id) }}"
                                                     class="btn btn-sm btn-danger"
@@ -141,15 +156,6 @@
                                                 {{-- <a href="" class="btn btn-sm btn-success">Meminjam</a> --}}
                                             @endif
                                         </div>
-                                        {{-- <div class="btn-group" role="group" aria-label="Basic example">
-                                            <form action="{{ route('pengembalian.destroy', $k->id) }}" method="POST"
-                                                type="button" class="btn btn-danger p-0"
-                                                onsubmit="return confirm('Delete?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger m-0"><i class="fas fa-trash"></i></button>
-                                            </form>
-                                        </div> --}}
                                     </td>
                                 </tr>
                             @endif

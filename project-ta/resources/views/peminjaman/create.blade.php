@@ -5,6 +5,17 @@
     </script>
     <!--Select2-->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <style>
+        .message-center-top {
+            position: fixed;
+            left: 55%;
+            transform: translateX(-50%);
+            z-index: 100;
+            width: 50%; /* Sesuaikan lebar pesan */
+            text-align: center;
+        }
+    </style>
 </head>
 
 @extends('layouts.app')
@@ -18,18 +29,24 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Create Harian</h1>
+                        <h1 class="m-0">Buat Harian</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                             <li class="breadcrumb-item active"><a href="/peminjaman">Peminjaman</a></li>
-                            <li class="breadcrumb-item active">Create</li>
+                            <li class="breadcrumb-item active">Buat</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
+        <!-- /.content-header -->
+            @if (Session::has('error'))
+                <div class="btn btn-danger swalDefaultSuccess message-center-top" role="alert">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
         <!-- /.content-header -->
         <form method="post" enctype="multipart/form-data" id="profile_setup_frm" action="{{ route('peminjaman.store') }}">
             @csrf
@@ -37,7 +54,7 @@
                 <div class="col-md-12 border-right">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Create Peminjaman Harian</h4>
+                            <h4 class="text-right">Buat Peminjaman Harian</h4>
                         </div>
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
@@ -53,93 +70,48 @@
                                     @endforeach
                                 </select>
                             </div>
-                            {{-- <div class="col-md-6">
-                                <label for="inputStatus">Nama :</label>
-                                @error('name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                                <select id="name" name="name" class="form-control">
-                                    <option selected disabled>Pilih Siswa</option>
-                                    @foreach ($siswa as $sw)
-                                        <option value="{{ $sw->name }}">{{ $sw->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputStatus">Kelas :</label>
-                                @error('kelas')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                                <select id="kelas" name="kelas" class="form-control">
-                                    <option selected disabled>Pilih Kelas</option>
-                                    <option>VII A</option>
-                                    <option>VII B</option>
-                                    <option>VII C</option>
-                                    <option>VII D</option>
-                                    <option>VII E</option>
-                                    <option>VII F</option>
-                                    <option>VII G</option>
-                                    <option>VIII A</option>
-                                    <option>VIII B</option>
-                                    <option>VIII C</option>
-                                    <option>VIII D</option>
-                                    <option>VIII E</option>
-                                    <option>VIII F</option>
-                                    <option>VIII G</option>
-                                    <option>IX A</option>
-                                    <option>IX B</option>
-                                    <option>IX C</option>
-                                    <option>IX D</option>
-                                    <option>IX E</option>
-                                    <option>IX F</option>
-                                    <option>IX G</option>
-                                </select>
-                            </div> --}}
                             <div class="col-md-6">
                                 <label for="inputStatus">Buku :</label>
-                                @error('buku')
+                                @error('bukusharians_id')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                                <select id="bukuharian" name="buku" class="form-control">
+                                <select id="bukuharian" name="bukusharians_id" class="form-control">
                                     <option selected disabled>Pilih Buku</option>
                                     @foreach ($bukuharian as $sw)
-                                        <option value="{{ $sw->buku }}">{{ $sw->buku }}</option>
+                                        <option value="{{ $sw->id }}"
+                                            @if ($sw->stok <= 0) disabled @endif>{{ $sw->buku }}
+                                            @if ($sw->stok <= 0)
+                                                (Stok Habis)
+                                            @endif
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
-                            {{-- <div class="col-md-6">
-                                <label>Buku :</label>
-                                @error('buku')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                                <input type="text" class="form-control" id="buku" name="buku"
-                                    placeholder=" Masukkan Nama Buku" />
-                            </div> --}}
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
                                 @error('kodebuku')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    placeholder=" Masukkan Nama Kode Buku" autocomplete="off"/>
+                                    placeholder=" Masukkan Nama Kode Buku" autocomplete="off" />
                             </div>
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>
                                 @error('jml_buku')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                                <input type="text" class="form-control" id="jml_buku" name="jml_buku"
-                                    placeholder=" Masukkan Jumlah Buku yang di Pinjam" autocomplete="off"/>
+                                <input type="number" class="form-control" id="jml_buku" name="jml_buku"
+                                    placeholder=" Masukkan Jumlah Buku yang di Pinjam" autocomplete="off" min="1" />
                             </div>
                             <!-- Date and time -->
-                            <div class="form-group">
+                            <div class="form-group col-md-2">
                                 <label>Jam Pinjam :</label>
                                 @error('jam_pinjam')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="datetime-local" name="jam_pinjam" class="form-control datetimepicker-input"
-                                        data-target="#reservationdatetime" autocomplete="off"/>
+                                        data-target="#reservationdatetime" autocomplete="off" />
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
@@ -147,58 +119,50 @@
                             </div>
                             <!-- /.form group -->
                             <!-- Date and time -->
-                            <div class="form-group">
+                            <div class="form-group col-md-2">
                                 <label>Jam Kembali :</label>
                                 @error('jam_kembali')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                     <input type="datetime-local" name="jam_kembali"
-                                        class="form-control datetimepicker-input" data-target="#reservationdatetime" autocomplete="off"/>
+                                        class="form-control datetimepicker-input" data-target="#reservationdatetime"
+                                        autocomplete="off" />
                                     <div class="input-group-append" data-target="#reservationdatetime"
                                         data-toggle="datetimepicker">
                                     </div>
                                 </div>
                             </div>
-                            <!-- /.form group -->
-                            <div class="col-md-6">
-                                <label>Description :</label>
-                                @error('description')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                                <textarea type="text" class="form-control" id="description" name="description"
-                                    placeholder="Silahkan Masukkan Deskripsi Peminjaman"></textarea>
-                            </div>
-
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-4">
 
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
-                                    Tambah Siswa
+                                    Tambah Pinjaman
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Siswa</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Pinjaman
+                                                </h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Pastikan data siswa sudah benar!
+                                                Pastikan data pinjaman sudah benar!
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close
+                                                    data-bs-dismiss="modal">Batal
                                                 </button>
 
                                                 <button id="btn" class="btn btn-primary profile-button"
                                                     type="submit">
-                                                    Tambah
+                                                    Buat
                                                 </button>
                                             </div>
                                         </div>

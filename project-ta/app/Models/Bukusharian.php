@@ -13,4 +13,27 @@ class Bukusharian extends Model
     protected $primaryKey = 'id';
     protected $fillable = [];
     protected $guarded = [];
+
+    public function peminjaman()
+    {
+        return $this->hasMany(Buku::class, 'bukusharianss_id');
+    }
+
+    // Method untuk meminjam buku
+    public function pinjam()
+    {
+        if ($this->stok > 0) {
+            $this->stok--;
+            $this->save();
+            return true;
+        }
+        return false;
+    }
+
+    // Method untuk mengembalikan buku
+    public function kembali()
+    {
+        $this->stok++;
+        $this->save();
+    }
 }

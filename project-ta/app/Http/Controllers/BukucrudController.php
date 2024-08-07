@@ -51,11 +51,25 @@ class BukucrudController extends Controller
     {
         $this->validate($request, [
             'buku' => 'required|min:1|max:50',
+            'penulis' => 'required|min:1|max:50',
+            'penerbit' => 'required|min:1|max:50',
+            'stok' => 'required:true',
         ]);
 
-        Bukucrud::create([
-            'buku' => $request->buku,
-        ]);
+        $data = Bukucrud::create($request->all());
+
+        if($request->hasFile('foto')){
+            $request->file('foto')->move('gambarbukutahunan/', $request->file('foto')->getClientOriginalName());
+            $data->foto = $request->file('foto')->getClientOriginalName();
+            $data->save();
+        }
+
+        // Bukucrud::create([
+        //     'buku' => $request->buku,
+        //     'penulis' => $request->penulis,
+        //     'penerbit' => $request->penerbit,
+        //     'description' => $request->buku,
+        // ]);
         return redirect('/buku')->with('success', 'Data Berhasil di Tambahkan');
     }
 
@@ -98,11 +112,35 @@ class BukucrudController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $buku = Bukucrud::findOrFail($id);
-        $buku->update($request->all());
+        $this->validate($request, [
+            'buku' => 'required|min:1|max:50',
+            'penulis' => 'required|min:1|max:50',
+            'penerbit' => 'required|min:1|max:50',
+        ]);
 
-        return redirect()->route('buku')->with('success', 'buku updated successfully');
+        $data = Bukucrud::findOrFail($id);
+        $data->update($request->all());
+
+        if ($request->hasFile('foto')) {
+            // Delete old photo if it exists
+            if ($data->foto && file_exists(public_path('gambarbukutahunan/' . $data->foto))) {
+                unlink(public_path('gambarbukutahunan/' . $data->foto));
+            }
+
+            // Store the new photo
+            $request->file('foto')->move('gambarbukutahunan/', $request->file('foto')->getClientOriginalName());
+            $data->foto = $request->file('foto')->getClientOriginalName();
+            $data->save();
+        }
+
+        return redirect('/buku')->with('success', 'Data Berhasil di Update');
     }
+    // {
+    //     $buku = Bukucrud::findOrFail($id);
+    //     $buku->update($request->all());
+
+    //     return redirect()->route('buku')->with('success', 'buku updated successfully');
+    // }
 
     /**
      * Remove the specified resource from storage.

@@ -15,13 +15,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Add Catatan Tahunan</h1>
+                        <h1 class="m-0">Buat Catatan Tahunan</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                             <li class="breadcrumb-item active"><a href="/catatantahunan">Catatan</a></li>
-                            <li class="breadcrumb-item active">Add Catatan</li>
+                            <li class="breadcrumb-item active">Buat Catatan</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -36,10 +36,10 @@
                 <div class="col-md-12 border-right">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Add Catatan Tahunan</h4>
+                            <h4 class="text-right">Tambah Catatan Tahunan</h4>
                         </div>
                             <div class="col-md-6">
-                                <label>Description :</label>
+                                <label>Deskripsi :</label>
                                 <textarea type="text" class="form-control" id="description" name="description">{{ $catatan->description }}</textarea>
                             </div>
                             <div class="col-md-6">
@@ -62,15 +62,15 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Apakah anda yakin ingin Update?
+                                                    Pastikan data sudah benar!
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close
+                                                        data-bs-dismiss="modal">Batal
                                                     </button>
 
                                                     <button type="submit" class="btn btn-primary waves-light waves-effect" id="update-modal">
-                                                        Tambah
+                                                        Simpan
                                                     </button>
                                                 </div>
                                             </div>

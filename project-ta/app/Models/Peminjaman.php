@@ -21,6 +21,11 @@ class Peminjaman extends Model
         return $this->belongsTo(Siswa::class);
     }
 
+    public function bukusharians()
+    {
+        return $this->belongsTo(Bukusharian::class, 'bukusharians_id');
+    }
+
     // Dibawah ini adalah untuk merubah text menjadi red ketika melebihi tanggal
     public function getIsOverdueAttribute()
     {

@@ -81,13 +81,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($sedangmeminjam->count() > 0)
                                     @forelse ($sedangmeminjam as $k)
                                         <tr>
                                             <td scope="row" align=center>{{ $loop->iteration }}</td>
                                             <td align="left">{{ optional($k->siswas)->name }}</td>
                                             <td align="center">{{ optional($k->siswas)->kelas }}</td>
-                                            <td align=center>{{ $k->buku }}</td>
+                                            <td align="center">{{ optional($k->bukusharians)->buku }}</td>
                                             <td align=center>{{ $k->jml_buku }}</td>
                                             <td align=center>{{ $k->kodebuku }}</td>
                                             <td align=center>{{ $k->jam_pinjam }}</td>
@@ -99,7 +98,6 @@
                                         </tr>
                                     @empty
                                     @endforelse
-                                @endif
                             </tbody>
                         </table>
                     </div>

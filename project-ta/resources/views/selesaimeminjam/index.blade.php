@@ -53,7 +53,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                         <li class="breadcrumb-item active">Selesai Meminjam</li>
                     </ol>
                 </div><!-- /.col -->
@@ -78,13 +78,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if ($selesaimeminjam->count() > 0)
                             @forelse ($selesaimeminjam as $k)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ optional($k->siswas)->name }}</td>
                                     <td>{{ optional($k->siswas)->kelas }}</td>
-                                    <td>{{ $k->buku }}</td>
+                                    <td>{{ optional($k->bukusharians)->buku }}</td>
                                     <td>{{ $k->jml_buku }}</td>
                                     <td>{{ $k->kodebuku }}</td>
                                     <td>{{ $k->jam_pinjam }}</td>
@@ -101,7 +100,6 @@
                                     Data Kategori Repositori belum Tersedia.
                                 </div>
                             @endforelse
-                        @endif
                     </tbody>
                 </table>
                 

@@ -49,7 +49,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                                 <li class="breadcrumb-item active">Catatan</li>
                             </ol>
                         </div><!-- /.col -->
@@ -87,8 +87,8 @@
                         <th>No</th>
                         <th>Nama</th>
                         <th>Kelas</th>
-                        <th>Description</th>
-                        <th>Action</th>
+                        <th>Deskripsi</th>
+                        <th>Aksi</th>
                     </tr>
                     </thead>
                     <tbody>

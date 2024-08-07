@@ -17,7 +17,7 @@ class SiswaController extends Controller
         if ($request->has('search')) {
             $siswa = Siswa::where('name', 'LIKE', '%' .$request->search. '%')->paginate(5);
         } else {
-            $siswa = Siswa::orderBy('created_at', 'DESC')->paginate(10);
+            $siswa = Siswa::orderBy('created_at', 'DESC')->paginate(35);
         }
         return view('siswa.index', compact('siswa', 'profile'));
     }

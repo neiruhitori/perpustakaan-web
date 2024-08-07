@@ -53,7 +53,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                                 <li class="breadcrumb-item active">Peminjaman</li>
                             </ol>
                         </div><!-- /.col -->
@@ -79,7 +79,7 @@
                                     Apakah Anda yakin ingin menghapus semua data!
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal
                                     </button>
 
                                     <a href="{{ route('peminjaman.removeAll') }}" id="btn"
@@ -115,7 +115,7 @@
                         </div>
                     </form>
                     <div class="mb-3">
-                        <a href="{{ route('peminjaman.create') }}" class="btn btn-primary float-sm-right">Add
+                        <a href="{{ route('peminjaman.create') }}" class="btn btn-primary float-sm-right">Tambah
                             Peminjaman</a>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -132,25 +132,45 @@
                         <th>Kelas</th>
                         <th>Buku</th>
                         <th>Jumlah Buku</th>
-                        {{-- <th>Jam Pinjam</th> --}}
                         <th>Kode Buku</th>
                         <th>Jam Kembali</th>
-                        <th>Action</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
-                        {{-- @forelse ($peminjaman as $key => $p) --}}
                         @forelse ($peminjaman as $p)
                             @if ($peminjaman->count() > 0)
                                 <tr>
-                                    {{-- <td scope="row">{{ $peminjaman->firstItem() + $key }}</td> --}}
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ optional($p->siswas)->name }}</td>
                                     <td>{{ optional($p->siswas)->kelas }}</td>
-                                    <td>{{ $p->buku }}</td>
+                                    <td>{{ optional($p->bukusharians)->buku }}</td>
                                     <td>{{ $p->jml_buku }}</td>
                                     <td>{{ $p->kodebuku }}</td>
-                                    <td>{{ $p->jam_kembali }}</td>
+                                    @php
+                                        $isOverdue =
+                                            \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($p->jam_kembali)) &&
+                                            $p->status != 0;
+                                    @endphp
+                                    <td class="{{ $isOverdue ? 'text-red' : '' }}">
+                                        {{ $p->jam_kembali }}
+                                    </td>
+                                    <td>
+                                        <label
+                                            class="label 
+                                            @if ($p->status == 0) badge bg-success 
+                                            @elseif ($p->status == 1) badge bg-danger 
+                                            @else badge bg-warning @endif">
+                                            @if ($p->status == 0)
+                                                Selesai
+                                            @elseif ($p->status == 1)
+                                                Sedang Meminjam
+                                            @else
+                                                Butuh Diproses
+                                            @endif
+                                        </label>
+                                    </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('peminjaman.show', $p->id) }}" type="button"
@@ -176,18 +196,6 @@
                         @endforelse
                     </tbody>
                 </table>
-                {{-- <div class="float-sm-left">
-                    Showing
-                    {{ $peminjaman->firstItem() }}
-                    to
-                    {{ $peminjaman->lastItem() }}
-                    of
-                    {{ $peminjaman->total() }}
-                    entries
-                </div>
-                <div class="float-sm-right">
-                    {{ $peminjaman->links() }}
-                </div> --}}
             @endsection
         </div>
 

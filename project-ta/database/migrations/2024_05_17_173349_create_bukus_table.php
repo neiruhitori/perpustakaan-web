@@ -16,7 +16,8 @@ class CreateBukusTable extends Migration
         Schema::create('bukus', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('peminjamantahunan_id');
-            $table->string('buku');
+            // $table->string('buku');
+            $table->foreignId('bukucruds_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('jml_buku');
             $table->string('kodebuku')->nullable();
             $table->timestamps();

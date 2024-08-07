@@ -16,13 +16,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Create Buku</h1>
+                        <h1 class="m-0">Buat Buku</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
                             <li class="breadcrumb-item active"><a href="/bukuharian">Buku Harian</a></li>
-                            <li class="breadcrumb-item active">Create</li>
+                            <li class="breadcrumb-item active">Buat</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -35,17 +35,56 @@
                 <div class="col-md-12 border-right">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Create buku</h4>
+                            <h4 class="text-right">Buat buku</h4>
                         </div>
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
                             <div class="col-md-6">
-                                <label>Buku :</label>
+                                <label>Masukkan Sampul :</label>
+                                @error('foto')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <input type="file" class="form-control" name="foto" autocomplete="off" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Judul :</label>
                                 @error('buku')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                                 <input type="text" class="form-control" name="buku"
                                     placeholder=" Masukkan Nama Buku" autocomplete="off"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Penulis :</label>
+                                @error('penulis')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <input type="text" class="form-control" name="penulis" placeholder=" Masukkan Nama Penulis"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Penerbit :</label>
+                                @error('penerbit')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <input type="text" class="form-control" name="penerbit" placeholder=" Masukkan Nama Penerbit"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Stok :</label>
+                                @error('stok')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <input type="number" class="form-control" name="stok" placeholder=" Masukkan Stok Buku"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Deskripsi :</label>
+                                @error('description')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <textarea type="text" class="form-control" name="description"
+                                    autocomplete="off"></textarea>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <!-- Button trigger modal -->
@@ -69,7 +108,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close
+                                                    data-bs-dismiss="modal">Batal
                                                 </button>
 
                                                     <button id="btn" class="btn btn-primary profile-button" type="submit">
