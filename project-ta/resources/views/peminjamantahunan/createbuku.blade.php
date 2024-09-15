@@ -112,8 +112,17 @@
                                                 @endforeach
                                             </select>
                                         </td>
-                                        <td><input type="text" class="form-control" id="kodebuku" name="kodebuku[]"
-                                                placeholder=" Masukkan Kode Buku" autocomplete="off" /></td>
+                                        <td>
+                                            <select id="kodebuku" name="kodebuku[]" class="form-control">
+                                                <option selected disabled>Pilih Kode Buku</option>
+                                                @foreach ($bukucrud as $buku)
+                                                    @foreach ($buku->kodebukucruds as $kode)
+                                                        <option value="{{ $kode->kodebuku }}">{{ $buku->buku }} -
+                                                            {{ $kode->kodebuku }}</option>
+                                                    @endforeach
+                                                @endforeach
+                                            </select>
+                                        </td>
                                         <td><input type="text" class="form-control" id="jml_buku" name="jml_buku[]"
                                                 placeholder=" Masukkan Jumlah Buku yang di Pinjam" autocomplete="off" />
                                         </td>
@@ -189,7 +198,17 @@
                                         @endforeach
                                 </select>
                             </td>
-                            <td><input type="text" class="form-control" id="kodebuku" name="kodebuku[]" placeholder=" Masukkan Kode Buku" autocomplete="off"/></td>
+                            <td>
+                                <select id="kodebuku" name="kodebuku[]" class="form-control">
+                                    <option selected disabled>Pilih Kode Buku</option>
+                                    @foreach ($bukucrud as $buku)
+                                        @foreach ($buku->kodebukucruds as $kode)
+                                            <option value="{{ $kode->kodebuku }}">{{ $buku->buku }} -
+                                            {{ $kode->kodebuku }}</option>
+                                        @endforeach
+                                    @endforeach
+                                </select>
+                            </td>
                             <td><input type="text" class="form-control" id="jml_buku" name="jml_buku[]" placeholder=" Masukkan Jumlah Buku yang di Pinjam" autocomplete="off"/></td>
                             <td><button class="btn btn-danger remove_buku" type="button" name="add" id="add">Hapus</button></td>
                         </tr>`

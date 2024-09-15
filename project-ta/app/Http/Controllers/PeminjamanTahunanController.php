@@ -83,7 +83,7 @@ class PeminjamanTahunanController extends Controller
         $yourModel->description = $description;
         $yourModel->save();
 
-        return redirect('/peminjamantahunan')->with('success', 'Data Berhasil di Tambahkan');
+        return redirect()->route('peminjamantahunan.createbuku')->with('success', 'Data Berhasil di Tambahkan');
     }
 
     public function createbuku()
@@ -105,32 +105,32 @@ class PeminjamanTahunanController extends Controller
             'jml_buku' => 'required|array',
             'kodebuku' => 'required|array',
         ]);
-    
+
         $peminjamantahunan_id = $request->peminjamantahunan_id;
         $bukucruds_id = $request->bukucruds_id;
         $kodebuku = $request->kodebuku;
         $jml_buku = $request->jml_buku;
-    
+
         DB::beginTransaction();
-    
+
         try {
             foreach ($kodebuku as $i => $kode) {
                 $buku = Bukucrud::find($bukucruds_id[$i]);
-    
+
                 if (!$buku) {
                     DB::rollBack();
                     return redirect()->back()->with('error', 'Buku tidak ditemukan.');
                 }
-    
+
                 if ($buku->stok < $jml_buku[$i]) {
                     DB::rollBack();
                     return redirect()->back()->with('error', 'Stok buku tidak mencukupi.');
                 }
-    
+
                 // Kurangi stok
                 $buku->stok -= $jml_buku[$i];
                 $buku->save();
-    
+
                 Buku::create([
                     'peminjamantahunan_id' => $peminjamantahunan_id[$i],
                     'bukucruds_id' => $bukucruds_id[$i],
@@ -138,7 +138,7 @@ class PeminjamanTahunanController extends Controller
                     'jml_buku' => $jml_buku[$i],
                 ]);
             }
-    
+
             DB::commit();
             return redirect('/peminjamantahunan')->with('success', 'Data Berhasil di Tambahkan');
         } catch (\Exception $e) {
@@ -167,9 +167,12 @@ class PeminjamanTahunanController extends Controller
         $iduser = Auth::id();
         $profile = User::where('id', $iduser)->first();
 
-        $peminjamantahunan = PeminjamanTahunan::findOrFail($id);
-        $siswa = Siswa::all();
-        return view('peminjamantahunan.edit', compact('peminjamantahunan', 'siswa', 'profile'));
+        // Ambil data peminjamantahunan beserta buku dan relasi ke bukucrud
+        $peminjamantahunan = PeminjamanTahunan::with('bukus.bukucruds')->findOrFail($id);
+        $siswas = Siswa::all();
+        $bukucrud = Bukucrud::all();
+        $bukus = Buku::with('bukucruds')->get();
+        return view('peminjamantahunan.edit', compact('peminjamantahunan', 'bukucrud', 'siswas', 'bukus', 'profile'));
     }
 
     /**
@@ -181,8 +184,32 @@ class PeminjamanTahunanController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // $peminjamantahunan = PeminjamanTahunan::findOrFail($id);
+        // $peminjamantahunan->update($request->all());
+        // Validasi input
+        $request->validate([
+            'siswas_id' => 'required|exists:siswas,id',
+            'jam_kembali' => 'required|date',
+        ]);
+
+        // Update data peminjaman tahunan
         $peminjamantahunan = PeminjamanTahunan::findOrFail($id);
-        $peminjamantahunan->update($request->all());
+        $peminjamantahunan->siswas_id = $request->siswas_id;
+        $peminjamantahunan->kode_pinjam = $request->kode_pinjam;
+        $peminjamantahunan->jam_kembali = $request->jam_kembali;
+        $peminjamantahunan->save();
+
+        // Update data buku dan jumlah buku
+        foreach ($request->bukucruds_id as $buku_id => $buku_nama) {
+            $buku = Buku::findOrFail($buku_id);
+            $buku->bukucruds->buku = $buku_nama;
+            $buku->save();
+
+            // Update jumlah buku dan kode buku
+            $buku->jml_buku = $request->jml_buku[$buku_id];
+            $buku->kodebuku = $request->kodebuku[$buku_id];
+            $buku->save();
+        }
 
         return redirect()->route('peminjamantahunan')->with('success', 'Peminjaman updated successfully');
     }

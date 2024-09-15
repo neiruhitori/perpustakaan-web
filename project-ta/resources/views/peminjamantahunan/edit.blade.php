@@ -44,58 +44,108 @@
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label>Kode Pinjam :</label>
-                                <input type="text" class="form-control" id="kode_pinjam" name="kode_pinjam" value="{{ $peminjamantahunan->kode_pinjam }}" disabled/>
+                                <input type="text" class="form-control" id="kode_pinjam" name="kode_pinjam"
+                                    value="{{ $peminjamantahunan->kode_pinjam }}" autocomplete="off" />
                             </div>
+                            <!-- Nama dan Kelas -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="siswas_id">Nama:</label>
+                                    <select class="form-control" id="peminjamantahunan_name" name="siswas_id">
+                                        @foreach ($siswas as $siswa)
+                                            <option value="{{ $siswa->id }}"
+                                                {{ $peminjamantahunan->siswas_id == $siswa->id ? 'selected' : '' }}>
+                                                {{ $siswa->name }} - {{ $siswa->kelas }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Buku -->
                             {{-- <div class="col-md-6">
-                                <label>Nama :</label>
-                                <input type="text" class="form-control" name="name"
-                                    value="{{ $peminjamantahunan->name }}" /> --}}
-
-                                {{-- <select id="name" name="name" class="form-control">
-                                    <option selected disabled>{{ $peminjamantahunan->name }}</option>
-                                    @foreach ($siswa as $sw)
-                                        <option value="{{ $sw->name }}">{{ $sw->name }}</option>
+                                <div class="form-group">
+                                    <label>
+                                        <h5>Buku:</h5>
+                                    </label>
+                                    @foreach ($bukus as $stokTahunan)
+                                        <div class="form-group">
+                                            <label for="bukucruds_id{{ $stokTahunan->id }}">Buku
+                                                {{ $loop->iteration }}:</label>
+                                            <input type="text" class="form-control" id="bukucruds_id_{{ $stokTahunan->id }}"
+                                                name="bukucruds_id[{{ $stokTahunan->id }}]"
+                                                value="{{ $stokTahunan->bukucruds->buku }}" autocomplete="off">
+                                        </div>
                                     @endforeach
-                                </select> --}}
-                            {{-- </div> --}}
-                            {{-- <div class="col-md-6">
-                                <label for="inputStatus">Kelas :</label>
-                                @error('kelas')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                                <select id="kelas" name="kelas" class="form-control">
-                                    <option selected disabled>{{ $peminjamantahunan->kelas }}</option>
-                                    <option>VII A</option>
-                                    <option>VII B</option>
-                                    <option>VII C</option>
-                                    <option>VII D</option>
-                                    <option>VII E</option>
-                                    <option>VII F</option>
-                                    <option>VII G</option>
-                                    <option>VIII A</option>
-                                    <option>VIII B</option>
-                                    <option>VIII C</option>
-                                    <option>VIII D</option>
-                                    <option>VIII E</option>
-                                    <option>VIII F</option>
-                                    <option>VIII G</option>
-                                    <option>IX A</option>
-                                    <option>IX B</option>
-                                    <option>IX C</option>
-                                    <option>IX D</option>
-                                    <option>IX E</option>
-                                    <option>IX F</option>
-                                    <option>IX G</option>
-                                </select>
+                                </div>
                             </div> --}}
+                            <div class="col-md-6">
+                                @foreach ($peminjamantahunan->bukus as $selectedBuku)
+                                    <div class="form-group">
+                                        <label for="bukucruds_id{{ $selectedBuku->id }}">
+                                            <h5>Buku {{ $loop->iteration }} :</h5>
+                                        </label>
+
+                                        @error('buku')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+
+                                        <select id="bukucrud_id{{ $selectedBuku->id }}" name="bukucruds_id[]"
+                                            class="form-control">
+                                            @foreach ($bukucrud as $bc)
+                                                <option value="{{ $bc->id }}"
+                                                    {{-- Tandai yang dipilih sebelumnya --}}
+                                                    @if ($bc->id == $selectedBuku->bukucruds_id) selected @endif
+                                                    @if ($bc->stok <= 0) disabled @endif>
+                                                    {{ $bc->buku }} @if ($bc->stok <= 0)
+                                                        (Stok Habis)
+                                                    @endif{{-- tampilkan nama buku --}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <!-- Jumlah Buku -->
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>
+                                        <h5>Jumlah Buku:</h5>
+                                    </label>
+                                    @foreach ($bukus as $p)
+                                        <div class="form-group">
+                                            <label for="jml_buku_{{ $p->id }}">Jumlah Buku
+                                                {{ $loop->iteration }}:</label>
+                                            <input type="number" class="form-control" name="jml_buku[{{ $p->id }}]"
+                                                value="{{ $p->jml_buku }}" min="1">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <!-- Kode Buku -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>
+                                        <h5>Kode Buku:</h5>
+                                    </label>
+                                    @foreach ($bukus as $stokTahunan)
+                                        <div class="form-group">
+                                            <label for="kodebuku_{{ $stokTahunan->id }}">Kode Buku
+                                                {{ $loop->iteration }}:</label>
+                                            <input type="text" class="form-control" id="kodebuku_{{ $stokTahunan->id }}"
+                                                name="kodebuku[{{ $stokTahunan->id }}]"
+                                                value="{{ $stokTahunan->kodebuku }}" autocomplete="off">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                             <!-- Date and time -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tanggal Pinjam :</label>
                                     <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                         <input type="date" name="jam_pinjam" class="form-control datetimepicker-input"
-                                            data-target="#reservationdatetime"
-                                            value="{{ $peminjamantahunan->jam_pinjam }}" autocomplete="off"/>
+                                            data-target="#reservationdatetime" value="{{ $peminjamantahunan->jam_pinjam }}"
+                                            autocomplete="off" />
                                         <div class="input-group-append" data-target="#reservationdatetime"
                                             data-toggle="datetimepicker">
                                         </div>
@@ -110,7 +160,7 @@
                                     <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                         <input type="date" name="jam_kembali" class="form-control datetimepicker-input"
                                             data-target="#reservationdatetime"
-                                            value="{{ $peminjamantahunan->jam_kembali }}" autocomplete="off"/>
+                                            value="{{ $peminjamantahunan->jam_kembali }}" autocomplete="off" />
                                         <div class="input-group-append" data-target="#reservationdatetime"
                                             data-toggle="datetimepicker">
                                         </div>
@@ -149,7 +199,8 @@
                                                         data-bs-dismiss="modal">Batal
                                                     </button>
 
-                                                    <button type="submit" class="btn btn-primary waves-light waves-effect"
+                                                    <button type="submit"
+                                                        class="btn btn-primary waves-light waves-effect"
                                                         id="update-modal">
                                                         Ubah
                                                     </button>

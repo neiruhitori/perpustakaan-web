@@ -52,6 +52,13 @@
                                 <input type="text" class="form-control" value="{{ $bukuharian->penerbit }}" disabled />
                             </div>
                             <div class="col-md-6">
+                                <label>Kode Buku :</label>
+                                @foreach ($bukuharian->kodebukuharians()->get() as $b)
+                                    <input type="text" class="form-control"
+                                        value="{{ $b->kodebuku }}" disabled />
+                                @endforeach
+                            </div>
+                            <div class="col-md-6">
                                 <label>Stok :</label>
                                 <input type="number" class="form-control" value="{{ $bukuharian->stok }}" disabled />
                             </div>

@@ -18,6 +18,11 @@ class Bukucrud extends Model
         return $this->hasMany(Buku::class, 'bukucruds_id');
     }
 
+    public function kodebukucruds()
+    {
+        return $this->hasMany(KodebukuTahunan::class, 'bukucrud_id');
+    }
+
     // Method untuk meminjam buku
     public function pinjam()
     {

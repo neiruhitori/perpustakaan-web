@@ -12,7 +12,8 @@
             left: 55%;
             transform: translateX(-50%);
             z-index: 100;
-            width: 50%; /* Sesuaikan lebar pesan */
+            width: 50%;
+            /* Sesuaikan lebar pesan */
             text-align: center;
         }
     </style>
@@ -42,11 +43,11 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-            @if (Session::has('error'))
-                <div class="btn btn-danger swalDefaultSuccess message-center-top" role="alert">
-                    {{ Session::get('error') }}
-                </div>
-            @endif
+        @if (Session::has('error'))
+            <div class="btn btn-danger swalDefaultSuccess message-center-top" role="alert">
+                {{ Session::get('error') }}
+            </div>
+        @endif
         <!-- /.content-header -->
         <form method="post" enctype="multipart/form-data" id="profile_setup_frm" action="{{ route('peminjaman.store') }}">
             @csrf
@@ -87,14 +88,23 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
                                 @error('kodebuku')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                                <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    placeholder=" Masukkan Nama Kode Buku" autocomplete="off" />
+                                <select id="kodebuku" name="kodebuku" class="form-control">
+                                    <option selected disabled>Pilih Kode Buku</option>
+                                    @foreach ($bukuharian as $buku)
+                                        @foreach ($buku->kodebukuharians as $kode)
+                                            <option value="{{ $kode->kodebuku }}">{{ $buku->buku }} -
+                                                {{ $kode->kodebuku }}</option>
+                                        @endforeach
+                                    @endforeach
+                                </select>
                             </div>
+
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>
                                 @error('jml_buku')

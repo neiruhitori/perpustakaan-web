@@ -47,6 +47,12 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
+        $('#bukuharian_id').select2()
+
+    })
+</script>
+<script>
+    $(document).ready(function() {
         $('#peminjamantahunan_id').select2()
 
     })
@@ -77,7 +83,19 @@
 </script>
 <script>
     $(document).ready(function() {
+        $('#bukucrud_id').select2()
+
+    })
+</script>
+<script>
+    $(document).ready(function() {
         $('#bukuharian').select2()
+
+    })
+</script>
+<script>
+    $(document).ready(function() {
+        $('#kodebuku').select2()
 
     })
 </script>

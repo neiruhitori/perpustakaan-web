@@ -40,11 +40,15 @@
                         </div>
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
+                            @error('foto')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             <div class="col-md-6">
                                 <label>Sampul :</label>
                                 @if ($buku->foto)
                                     <div>
-                                        <img src="{{ asset('gambarbukutahunan/'.$buku->foto) }}" alt="" style="width:100">
+                                        <img src="{{ asset('gambarbukutahunan/' . $buku->foto) }}" alt=""
+                                            style="width:100">
                                     </div>
                                 @endif
                                 <input type="file" class="form-control" name="foto" value=""
@@ -64,6 +68,17 @@
                                 <label>Penerbit :</label>
                                 <input type="text" class="form-control" name="penerbit" value="{{ $buku->penerbit }}"
                                     autocomplete="off" />
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <h5>Kode Buku:</h5>
+                                @foreach ($buku->kodebukucruds as $stokTahunan)
+                                    <div class="form-group">
+                                        <label for="kodebuku_{{ $stokTahunan->id }}">Kode Buku
+                                            {{ $loop->iteration }}:</label>
+                                        <input type="text" class="form-control" id="kodebuku_{{ $stokTahunan->id }}"
+                                            name="kodebuku[{{ $stokTahunan->id }}]" value="{{ $stokTahunan->kodebuku }}">
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="col-md-6">
                                 <label>Stok :</label>

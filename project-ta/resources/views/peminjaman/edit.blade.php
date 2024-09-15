@@ -108,8 +108,18 @@
                             </div> --}}
                             <div class="col-md-6">
                                 <label>Kode Buku :</label>
-                                <input type="text" class="form-control" id="kodebuku" name="kodebuku"
-                                    value="{{ old('kodebuku', $peminjaman->kodebuku) }}" autocomplete="off" />
+                                @error('kodebuku')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <select id="kodebuku" name="kodebuku" class="form-control">
+                                    <option selected disabled>{{ $peminjaman->kodebuku }}</option>
+                                    @foreach ($bukuharian as $buku)
+                                        @foreach ($buku->kodebukuharians as $kode)
+                                            <option value="{{ $kode->kodebuku }}">{{ $buku->buku }} -
+                                                {{ $kode->kodebuku }}</option>
+                                        @endforeach
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-md-6">
                                 <label>Jumlah Buku :</label>

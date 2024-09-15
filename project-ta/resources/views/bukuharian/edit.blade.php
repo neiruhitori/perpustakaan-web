@@ -40,11 +40,15 @@
                         </div>
                         <div class="row" id="res"></div>
                         <div class="row mt-2">
+                            @error('foto')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             <div class="col-md-6">
                                 <label>Sampul :</label>
                                 @if ($bukuharian->foto)
                                     <div>
-                                        <img src="{{ asset('gambarbukuharian/'.$bukuharian->foto) }}" alt="" style="width:100">
+                                        <img src="{{ asset('gambarbukuharian/' . $bukuharian->foto) }}" alt=""
+                                            style="width:100">
                                     </div>
                                 @endif
                                 <input type="file" class="form-control" name="foto" value=""
@@ -52,8 +56,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label>Judul :</label>
-                                <input type="text" class="form-control" name="buku"
-                                    value="{{ $bukuharian->buku }}" autocomplete="off"/>
+                                <input type="text" class="form-control" name="buku" value="{{ $bukuharian->buku }}"
+                                    autocomplete="off" />
                             </div>
                             <div class="col-md-6">
                                 <label>Penulis :</label>
@@ -62,8 +66,19 @@
                             </div>
                             <div class="col-md-6">
                                 <label>Penerbit :</label>
-                                <input type="text" class="form-control" name="penerbit" value="{{ $bukuharian->penerbit }}"
-                                    autocomplete="off" />
+                                <input type="text" class="form-control" name="penerbit"
+                                    value="{{ $bukuharian->penerbit }}" autocomplete="off" />
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <h5>Kode Buku:</h5>
+                                @foreach ($bukuharian->kodebukuharians as $stokHarian)
+                                    <div class="form-group">
+                                        <label for="kodebuku_{{ $stokHarian->id }}">Kode Buku
+                                            {{ $loop->iteration }}:</label>
+                                        <input type="text" class="form-control" id="kodebuku_{{ $stokHarian->id }}"
+                                            name="kodebuku[{{ $stokHarian->id }}]" value="{{ $stokHarian->kodebuku }}">
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="col-md-6">
                                 <label>Stok :</label>
@@ -101,7 +116,8 @@
                                                         data-bs-dismiss="modal">Batal
                                                     </button>
 
-                                                    <button type="submit" class="btn btn-primary waves-light waves-effect" id="update-modal">
+                                                    <button type="submit" class="btn btn-primary waves-light waves-effect"
+                                                        id="update-modal">
                                                         Ubah
                                                     </button>
                                                 </div>

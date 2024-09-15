@@ -9,7 +9,7 @@ class Bukusharian extends Model
 {
     use HasFactory;
 
-    protected $table ='bukusharians';
+    protected $table = 'bukusharians';
     protected $primaryKey = 'id';
     protected $fillable = [];
     protected $guarded = [];
@@ -17,6 +17,11 @@ class Bukusharian extends Model
     public function peminjaman()
     {
         return $this->hasMany(Buku::class, 'bukusharianss_id');
+    }
+
+    public function kodebukuharians()
+    {
+        return $this->hasMany(KodebukuHarian::class, 'bukuharian_id');
     }
 
     // Method untuk meminjam buku

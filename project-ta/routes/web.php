@@ -123,6 +123,8 @@ Route::middleware('auth')->group(function () {
         Route::get('', 'index')->name('buku');
         Route::get('create', 'create')->name('buku.create');
         Route::post('store', 'store')->name('buku.store');
+        Route::get('createkodebukutahunan', 'createkodebukutahunan')->name('buku.createkodebukutahunan');
+        Route::post('createkodebukutahunanstore', 'createkodebukutahunanstore')->name('buku.createkodebukutahunanstore');
         Route::get('show/{id}', 'show')->name('buku.show');
         Route::get('edit/{id}', 'edit')->name('buku.edit');
         Route::put('edit/{id}', 'update')->name('buku.update');
@@ -136,6 +138,8 @@ Route::middleware('auth')->group(function () {
         Route::get('', 'index')->name('bukuharian');
         Route::get('create', 'create')->name('bukuharian.create');
         Route::post('store', 'store')->name('bukuharian.store');
+        Route::get('createkodebukuharian', 'createkodebukuharian')->name('bukuharian.createkodebukuharian');
+        Route::post('createkodebukuharianstore', 'createkodebukuharianstore')->name('bukuharian.createkodebukuharianstore');
         Route::get('show/{id}', 'show')->name('bukuharian.show');
         Route::get('edit/{id}', 'edit')->name('bukuharian.edit');
         Route::put('edit/{id}', 'update')->name('bukuharian.update');

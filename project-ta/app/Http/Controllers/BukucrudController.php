@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bukucrud;
+use App\Models\KodebukuTahunan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +55,7 @@ class BukucrudController extends Controller
             'penulis' => 'required|min:1|max:50',
             'penerbit' => 'required|min:1|max:50',
             'stok' => 'required:true',
+            'foto' => 'required|mimes:jpg,jpeg,png|max:2048', // Maksimal 2MB
         ]);
 
         $data = Bukucrud::create($request->all());
@@ -70,7 +72,39 @@ class BukucrudController extends Controller
         //     'penerbit' => $request->penerbit,
         //     'description' => $request->buku,
         // ]);
-        return redirect('/buku')->with('success', 'Data Berhasil di Tambahkan');
+        return redirect()->route('buku.createkodebukutahunan')->with('success', 'Data Berhasil di Tambahkan');
+    }
+
+    public function createkodebukutahunan()
+    {
+        $iduser = Auth::id();
+        $profile = User::where('id', $iduser)->first();
+
+        $kodebuku = KodebukuTahunan::all();
+        $buku = Bukucrud::all();
+        return view('buku.createkodebukutahunan', compact('kodebuku', 'buku', 'profile'));
+    }
+    public function createkodebukutahunanstore(Request $request)
+    {
+        $this->validate($request, [
+            'bukucrud_id' => 'required|array',
+            'bukucrud_id.*' => 'required|exists:bukucruds,id',
+            'kodebuku' => 'required|array',
+            'kodebuku.*' => 'required|string|distinct',
+        ]);
+
+        // Loop melalui input array untuk menyimpan setiap kode buku
+        foreach ($request->bukucrud_id as $index => $bukucrud_id) {
+            // Pastikan kodebuku sesuai dengan urutan bukucrud_id
+            $kodebuku = $request->kodebuku[$index];
+
+            KodebukuTahunan::create([
+                'bukucrud_id' => $bukucrud_id,
+                'kodebuku' => $kodebuku,
+            ]);
+        }
+
+        return redirect('/buku')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -112,25 +146,52 @@ class BukucrudController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validasi input
         $this->validate($request, [
             'buku' => 'required|min:1|max:50',
             'penulis' => 'required|min:1|max:50',
             'penerbit' => 'required|min:1|max:50',
+            'stok' => 'required|integer',
+            'kodebuku' => 'required|array',  // Memastikan kodebuku adalah array
+            'kodebuku.*' => 'string|distinct',  // Memastikan tiap kodebuku adalah string dan unik
+            'foto' => 'required|mimes:jpg,jpeg,png|max:2048', // Maksimal 2MB
         ]);
 
+        // Temukan data Bukusharian berdasarkan ID
         $data = Bukucrud::findOrFail($id);
-        $data->update($request->all());
 
+        // Hanya update kolom-kolom yang ada di tabel bukusharians
+        $data->update([
+            'buku' => $request->buku,
+            'penulis' => $request->penulis,
+            'penerbit' => $request->penerbit,
+            'stok' => $request->stok,
+            'description' => $request->description,
+            // kolom lain yang relevan dari tabel bukusharians
+        ]);
+
+        // Handle file upload untuk foto
         if ($request->hasFile('foto')) {
-            // Delete old photo if it exists
+            // Hapus foto lama jika ada
             if ($data->foto && file_exists(public_path('gambarbukutahunan/' . $data->foto))) {
                 unlink(public_path('gambarbukutahunan/' . $data->foto));
             }
 
-            // Store the new photo
-            $request->file('foto')->move('gambarbukutahunan/', $request->file('foto')->getClientOriginalName());
-            $data->foto = $request->file('foto')->getClientOriginalName();
-            $data->save();
+            // Simpan foto baru
+            $filename = $request->file('foto')->getClientOriginalName();
+            $request->file('foto')->move('gambarbukutahunan/', $filename);
+            $data->foto = $filename;
+        }
+
+        $data->save();
+
+        // Update kodebuku di KodebukuHarian
+        foreach ($request->kodebuku as $key => $kode) {
+            $kodebuku = KodebukuTahunan::where('bukucrud_id', $id)->where('id', $key)->first();
+            if ($kodebuku) {
+                $kodebuku->kodebuku = $kode;
+                $kodebuku->save();
+            }
         }
 
         return redirect('/buku')->with('success', 'Data Berhasil di Update');

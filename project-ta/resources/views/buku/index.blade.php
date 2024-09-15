@@ -116,9 +116,11 @@
                             </button>
                         </div>
                     </form>
-                    <div class="mb-3">
-                        <a href="{{ route('buku.create') }}" class="btn btn-primary float-sm-right">Tambah
+                    <div class="breadcrumb mb-3 float-sm-right" role="group" aria-label="Basic example">
+                        <a href="{{ route('buku.create') }}" class="btn btn-success float-sm-right">Tambah
                             Buku</a>
+                        <a href="{{ route('buku.createkodebukutahunan') }}" class="btn btn-primary float-sm-right">Tambah
+                            Kode Buku</a>
                     </div>
                 </div><!-- /.container-fluid -->
             </div>
@@ -134,6 +136,7 @@
                         <th>Judul</th>
                         <th>Penulis</th>
                         <th>Penerbit</th>
+                        <th>Kode Buku</th>
                         <th>Stok</th>
                         <th>Aksi</th>
                     </tr>
@@ -149,6 +152,13 @@
                                     <td>{{ $p->buku }}</td>
                                     <td>{{ $p->penulis }}</td>
                                     <td>{{ $p->penerbit }}</td>
+                                    <td>
+                                        <ul>
+                                            @foreach($p->kodebukucruds as $kd)
+                                                <li>{{ $kd->kodebuku }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
                                     <td>{{ $p->stok }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">

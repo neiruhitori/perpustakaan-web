@@ -15,6 +15,7 @@
         "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "maatwebsite/excel": "1.1",
         "mpdf/mpdf": "^8.2",
         "pusher/pusher-php-server": "^7.2"
     },
